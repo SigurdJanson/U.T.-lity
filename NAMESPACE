@@ -2,8 +2,7 @@
 
 export(.isAlive)
 export(bar.ci)
-export(ci_cont)
+export(ci.numeric)
 importFrom(graphics,barplot)
 importFrom(graphics,par)
-importFrom(graphics,pie)
 importFrom(stats,t.test)
