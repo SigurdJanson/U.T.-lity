@@ -7,6 +7,6 @@
 # * https://testthat.r-lib.org/reference/test_package.html#special-files
 
 library(testthat)
-library(Repo)
+library(U.T.lity)
 
-test_check("Repo")
+test_check("U.T.lity")
