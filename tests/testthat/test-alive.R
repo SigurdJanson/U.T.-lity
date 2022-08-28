@@ -81,3 +81,7 @@ test_that("alive is alive", {
   expect_true(.isAlive(c(FALSE, TRUE)))
   expect_true(.isAlive(c(FALSE)))
 })
+
+test_that("non-vectors are alive", {
+  expect_true(.isAlive(expression(a+b)))
+})
