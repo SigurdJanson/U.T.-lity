@@ -64,8 +64,4 @@ test_that("ci.numeric works with two vectors and varying 'mu'", {
 
 
 
-# PLOT CONFIDENCE ===================
 
-test_that("Base CI plot works", {
-  vdiffr::expect_doppelganger("ciplot", bar.ci(seq(0, 10, 10/3), seq(0, 10, 10/3)*2, names=LETTERS[1:4]))
-})
