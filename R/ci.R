@@ -52,7 +52,7 @@ ci.numeric <- function(x, mu, conf.level = 0.95, plot=TRUE) {
                        mu[i] >= test$conf.int[1] & mu[i] <= test$conf.int[2])
   }
   if (.isAlive(names(x)))
-    rownames(test) <- names(x)
+    rownames(result) <- names(x)
 
   # provide a graphical representation of the intervals
   if (plot)
