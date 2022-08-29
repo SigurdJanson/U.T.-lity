@@ -5,6 +5,71 @@
 ##
 
 
+#' Confidence intervals
+#'
+#' @param .est a vector of estimates.
+#' @param .lower a vector of the lower levels of the confidence intervals.
+#' @param .upper a vector of the upper levels.
+#' @param .lvl the `conf.level` argument (numeric, `.5 <= conf.level <= 1`).
+#' @param .alt the `alternative` argument for functions calculating confidence levels
+#' @param .dstr the probability distribution the interval is based on.
+#' @param .mthd a method to compute the interval.
+#' @param .call the function call used to create the interval.
+#' @param ... further vectors added to the data (same length as .est).
+#'
+#' @return A `ci` object derived from a data frame with the columns `est`, `lower`, `upper`,
+#' and further columns given through `...`.
+#' @export
+#'
+#' @examples
+#' ci_new(1:2, 0:1, 2:3, .alt="two-sided", .dstr="joke", .mthd="guessing", .call="none")
+ci_new <- function(.est, .lower, .upper, .lvl, .alt, .dstr, .mthd, .call, ...) {
+  if (!(.isAlive(.est) && .isAlive(.lower) && .isAlive(.upper)))
+    stop("Confidence intervals require an estimate, a lower and an upper boundary")
+  if (!all(.lower <= .upper))
+    stop("Lower boundaries of an interval must be less than upper boundaries")
+
+  result <- data.frame(est    = .est,
+                       lower  = .lower,
+                       upper  = .upper,
+                       ...,
+                       stringsAsFactors = FALSE)
+
+  if (.isAlive(.alt) && is.character(.alt))
+    attr(result, "alternative") <- .alt
+  if (.isAlive(.lvl) && is.character(.lvl))
+    attr(result, "conf.level") <- .lvl
+
+  if (.isAlive(.dstr) && is.character(.dstr))
+    attr(result, "distr") <- .dstr
+  if (.isAlive(.mthd) && is.character(.mthd))
+    attr(result, "method") <- .mthd
+  if (.isAlive(.call) && is.character(.call))
+    attr(result, "call") <- .call
+
+  class(result) <- c("U.T.lity", "ci", class(result))
+  return(result)
+}
+
+
+
+#' @describeIn ci_new Prints a ci-object
+#'
+#' @param x an object of class `ci`.
+#' @param ... further arguments passed on to `print.data.frame()`.
+#'
+#' @return Returns `x` invisibly.
+#' @export
+print.ci <- function(x, ...) {
+  if (!inherits(x, "U.T.lity"))
+    stop("x is not a ci-object from U.T.lity")
+
+  cat("Call:", attr(x, "call"), "\n")
+  print.data.frame(x, ...)
+
+  invisible(x)
+}
+
 
 
 #' ci.numeric
