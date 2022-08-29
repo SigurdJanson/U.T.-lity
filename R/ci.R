@@ -102,26 +102,32 @@ ci.numeric <- function(x, mu, conf.level = 0.95, plot=TRUE) {
   }
 
   # Create empty data frame - use length for efficiency
-  result <- data.frame(mean = numeric(length(x)),
-                       lower = numeric(length(x)),
-                       upper = numeric(length(x)),
-                       width = numeric(length(x)),
-                       inside = logical(length(x)),
-                       stringsAsFactors = FALSE)
+  means  <- numeric(length(x))
+  lower  <- numeric(length(x))
+  upper  <- numeric(length(x))
+  inside <- logical(length(x))
+
   for (i in seq_along(x)) {
-    test <- t.test(x[[i]], y = NULL, alternative = "two.sided", mu = mu[i], conf.level = conf.level)
-    result[i,] <- list(test$estimate,
-                       test$conf.int[1],
-                       test$conf.int[2],
-                       test$conf.int[2] - test$conf.int[1],
-                       mu[i] >= test$conf.int[1] & mu[i] <= test$conf.int[2])
+    test <- t.test(x[[i]], y = NULL, mu = mu[i], conf.level = conf.level, alternative = "two.sided")
+    means[i]  <- test$estimate
+    lower[i] <- test$conf.int[1]
+    upper[i] <- test$conf.int[2]
+    inside[i]<- mu[i] >= test$conf.int[1] & mu[i] <= test$conf.int[2]
   }
   if (.isAlive(names(x)))
-    rownames(result) <- names(x)
+    names(means) <- names(x) # TODO: restore this
+
+  result <- ci_new(means, lower, upper, inside=inside,
+                   .lvl = conf.level,
+                   .alt = test$alternative,
+                   .dstr = "t distribution",
+                   .mthd = test$method,
+                   .call = deparse(match.call()))
+  return(result)
 
   # provide a graphical representation of the intervals
   if (plot)
-    ciplot_default(result$lower, result$upper, names(x))
+    ciplot_default(result$lower, result$upper, names(means))
 
   result
 }

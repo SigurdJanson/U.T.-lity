@@ -44,15 +44,15 @@ test_that("ci.numeric works with specific example, conf.level=.95", {
   result <- ci.numeric(dt, 105, plot=FALSE)
 
   # Assert
-  expect_equal(result$mean[1], 102, tolerance = 0.005)
+  expect_equal(result$est[1], 102, tolerance = 0.005)
   expect_equal(result$lower[1], 96.07, tolerance = 0.005)
   expect_equal(result$upper[1], 107.93, tolerance = 0.005)
-  expect_equal(result$width[1], 107.93-96.07, tolerance = 0.005)
+  #expect_equal(result$width[1], 107.93-96.07, tolerance = 0.005)
   expect_true(result$inside[1])
 
   expect_s3_class(result, "data.frame")
   expect_identical(nrow(result), 1L)
-  expect_identical(ncol(result), 5L)
+  expect_identical(ncol(result), 4L)
 })
 
 
@@ -64,15 +64,15 @@ test_that("ci.numeric works with specific example, conf.level != .95", {
   result <- ci.numeric(dt, 105, conf.level = 0.98, plot=FALSE)
 
   # Assert
-  expect_equal(result$mean[1],  64.75, tolerance = 0.005)
+  expect_equal(result$est[1],  64.75, tolerance = 0.005)
   expect_equal(result$lower[1], 50.69, tolerance = 0.005)
   expect_equal(result$upper[1], 78.81, tolerance = 0.005)
-  expect_equal(result$width[1], 78.81-50.69, tolerance = 0.005)
+  #expect_equal(result$width[1], 78.81-50.69, tolerance = 0.005)
   expect_false(result$inside[1])
 
   expect_s3_class(result, "data.frame")
   expect_identical(nrow(result), 1L)
-  expect_identical(ncol(result), 5L)
+  expect_identical(ncol(result), 4L)
 })
 
 
