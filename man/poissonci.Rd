@@ -37,12 +37,13 @@ Several methods are implemented, see details.
 Tanusit (2012) recommends "Score" intervals for small sample \code{n}
 and "Wald" for large ones.
 }
+\examples{
+poissonci(0:5, 10)
+}
 \references{
 Patil & Kulkarni (2012).
-\link{"Comparison of Confidence Intervals for the Poisson Mean: Some New Aspects"}
-(https://www.ine.pt/revstat/pdf/rs120203.pdf).
+\href{https://www.ine.pt/revstat/pdf/rs120203.pdf}{"Comparison of Confidence Intervals for the Poisson Mean: Some New Aspects"}.
 REVSTAT - Statistical Journal, 10(2),  p. 211–227
-Tanusit, M. (2012). \link{"Two-Side Confidence Intervals for the Poisson Means"}
-(http://www.ijmo.org/papers/189-S083.pdf). International Journal of Modeling and Optimization,
-2 (5), p. 589-591
+Tanusit, M. (2012). \href{http://www.ijmo.org/papers/189-S083.pdf}{"Two-Side Confidence Intervals for the Poisson Means"}.
+International Journal of Modeling and Optimization, 2 (5), p. 589-591
 }

@@ -22,12 +22,13 @@
 #' @return A vector with 3 elements for estimate, lower confidence interval,
 #' and upper for the upper one.
 #' @references Patil & Kulkarni (2012).
-#' ["Comparison of Confidence Intervals for the Poisson Mean: Some New Aspects"]
-#' (https://www.ine.pt/revstat/pdf/rs120203.pdf).
+#' ["Comparison of Confidence Intervals for the Poisson Mean: Some New Aspects"](https://www.ine.pt/revstat/pdf/rs120203.pdf).
 #' REVSTAT - Statistical Journal, 10(2),  p. 211–227
-#' Tanusit, M. (2012). ["Two-Side Confidence Intervals for the Poisson Means"]
-#' (http://www.ijmo.org/papers/189-S083.pdf). International Journal of Modeling and Optimization,
-#' 2 (5), p. 589-591
+#' Tanusit, M. (2012). ["Two-Side Confidence Intervals for the Poisson Means"](http://www.ijmo.org/papers/189-S083.pdf).
+#' International Journal of Modeling and Optimization, 2 (5), p. 589-591
+#' @export
+#' @examples
+#' poissonci(0:5, 10)
 #' @importFrom stats poisson.test qnorm
 poissonci <- function(x, n = 1, conf.level = 0.95,
                      alternative = c("two.sided", "left", "right"),
