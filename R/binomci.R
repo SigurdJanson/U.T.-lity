@@ -20,12 +20,12 @@ binomci <- function(x, n, ...) {
   if ("conf.level" %in% ...names())
     conf.level <- .args[["conf.level"]]
   else
-    conf.level <- 0.95
+    conf.level <- .args[["conf.level"]] <- 0.95
 
   if ("method" %in% ...names()) {
     method <- .args[["method"]]
   } else {
-    method <- "wilson"
+    method <- .args[["method"]] <- "wilson"
   }
 
   if ("alternative" %in% ...names()) {
@@ -33,7 +33,7 @@ binomci <- function(x, n, ...) {
       stop("'binomci' only computes two-sided confidence intervals")
   }
 
-  ci <- binom.confint(x, n, methods = method, conf.level=conf.level, tol = 1e-8, ...)
+  ci <- do.call(binom.confint, args=c(x=x, n=n, tol=1e-8, .args))
 
   result <- ci_new(x, ci["lower"], ci["upper"],
                    .lvl = conf.level,
