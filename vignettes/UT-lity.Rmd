@@ -1,0 +1,31 @@
+---
+title: "UT-lity"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{UT-lity}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(U.T.lity)
+```
+
+
+
+# Q&A
+
+## Confidence of the Defect Frequency
+
+I have conducted a test with users. I want to use the frequency of the defects that I found in order to assess their severity. But - of course - the frequency in my study is just what my sample shows. What are the the confidence intervals of those defects? 
+
+
+
+
