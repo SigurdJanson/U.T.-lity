@@ -40,7 +40,10 @@
 #' @return Returns the grid as matrix.
 #' @export
 #'
-#' @note inspired by [barplot.default()]
+#' @note code inspired by [barplot.default()].
+#' @references
+#' Sauro, J. (2012) "Report Usability Issues in a User by Problem Matrix" \url{http://www.measuringusability.com/blog/problem-matrix.php}; retrieved at June 23rd, 2012
+#' Sauro, J., & Lewis, J. R. (2012). Quantifying the User Experience. Elsevier.
 #' @importFrom grDevices colors gray palette
 #' @importFrom graphics axis plot.new plot.window rect title
 #' @examples defectgrid( matrix(c(1,0,1,0, 0,1,0,1, 0,0,1,1), 3, 4), darkfigure=3, percentage=FALSE )

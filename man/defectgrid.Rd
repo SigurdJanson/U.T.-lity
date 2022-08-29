@@ -80,7 +80,7 @@ the axis is suppressed.}
 plot (default is \code{FALSE}).}
 
 \item{offset}{A vector indicating how much the tiles should be shifted relative
-to the x axis.}
+to the x-axis.}
 
 \item{...}{Additional parameters will be passed to the plotting function}
 }
@@ -88,15 +88,20 @@ to the x axis.}
 Returns the grid as matrix.
 }
 \description{
-A plot visualising the distribution of found defects by user.
+A plot visualising the distribution of found defects by user. The plot can
+visualise frequency of occurrence similar to a heat map.
 }
 \details{
 The plot will only count defect occurrences once. If a defect was
 evident more than once for a user this is not counted here.
 }
 \note{
-inspired by \code{\link[=barplot.default]{barplot.default()}}
+code inspired by \code{\link[=barplot.default]{barplot.default()}}.
 }
 \examples{
 defectgrid( matrix(c(1,0,1,0, 0,1,0,1, 0,0,1,1), 3, 4), darkfigure=3, percentage=FALSE )
+}
+\references{
+Sauro, J. (2012) "Report Usability Issues in a User by Problem Matrix" \url{http://www.measuringusability.com/blog/problem-matrix.php}; retrieved at June 23rd, 2012
+Sauro, J., & Lewis, J. R. (2012). Quantifying the User Experience. Elsevier.
 }
