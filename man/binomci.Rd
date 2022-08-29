@@ -25,5 +25,5 @@ Based on a recommendation by Brown, Cai, and DasGupta (2001)
 recommend the adjusted Wald).
 }
 \examples{
-poissonci(0:5, 10)
+binomci(0:5, 10)
 }

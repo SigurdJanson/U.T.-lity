@@ -12,7 +12,7 @@
 #' @export
 #' @importFrom binom binom.confint
 #' @examples
-#' poissonci(0:5, 10)
+#' binomci(0:5, 10)
 binomci <- function(x, n, conf.level = 0.95 ) { # returns ci
   #
   ci <- binom.confint(x, n, conf.level = conf.level, methods = "wilson", tol = 1e-8)
