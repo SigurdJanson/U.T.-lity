@@ -4,26 +4,43 @@
 #'
 #' @param x number of successes in the test.
 #' @param n number of independent trials in the test.
-#' @param conf.level confidence level of the interval.
+#' @param ... Further arguments passed on to the `ci`-generating function. these are foremost:
+#' `conf.level` and `method`. See `binom::binom.confint()`.
 #' @note Based on a recommendation by Brown, Cai, and DasGupta (2001)
-#' `binomci` uses the Wilson method (Wilson, 1927) (even if Sauro and Lewis, 2005,
+#' `binomci` uses the Wilson method (Wilson, 1927) by default (even if Sauro and Lewis, 2005,
 #' recommend the adjusted Wald).
-#' @return A data frame that lists the confidence intervals
+#' @return A `ci` object lists the confidence intervals.
 #' @export
 #' @importFrom binom binom.confint
 #' @examples
 #' binomci(0:5, 10)
-binomci <- function(x, n, conf.level = 0.95 ) { # returns ci
-  #
-  ci <- binom.confint(x, n, conf.level = conf.level, methods = "wilson", tol = 1e-8)
+binomci <- function(x, n, ...) {
+  .args <- list(...)
 
-  # add "width" of confidence interval to table
-  width <- ci["upper"] - ci["lower"]
-  dimnames(width)[[2]] <- "width"
-  ci2 <- cbind(ci, width)
+  if ("conf.level" %in% ...names())
+    conf.level <- .args[["conf.level"]]
+  else
+    conf.level <- 0.95
 
-  # provide a graphical representation of the intervals
-  ###.barplot.ci( ci2$lower, ci2$upper)
-  as.data.frame(ci2)
+  if ("method" %in% ...names()) {
+    method <- .args[["method"]]
+  } else {
+    method <- "wilson"
+  }
+
+  if ("alternative" %in% ...names()) {
+    if (.args[["alternative"]] != "two-sided")
+      stop("'binomci' only computes two-sided confidence intervals")
+  }
+
+  ci <- binom.confint(x, n, methods = method, conf.level=conf.level, tol = 1e-8, ...)
+
+  result <- ci_new(x, ci["lower"], ci["upper"],
+                   .lvl = conf.level,
+                   .alt = "",
+                   .dstr = "binomial",
+                   .mthd = method,
+                   .call = deparse(match.call()))
+  return(result)
 }
 

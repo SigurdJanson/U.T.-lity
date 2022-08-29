@@ -4,24 +4,25 @@
 \alias{binomci}
 \title{binomci}
 \usage{
-binomci(x, n, conf.level = 0.95)
+binomci(x, n, ...)
 }
 \arguments{
 \item{x}{number of successes in the test.}
 
 \item{n}{number of independent trials in the test.}
 
-\item{conf.level}{confidence level of the interval.}
+\item{...}{Further arguments passed on to the \code{ci}-generating function. these are foremost:
+\code{conf.level} and \code{method}. See \code{binom::binom.confint()}.}
 }
 \value{
-A data frame that lists the confidence intervals
+A \code{ci} object lists the confidence intervals.
 }
 \description{
 binomci
 }
 \note{
 Based on a recommendation by Brown, Cai, and DasGupta (2001)
-\code{binomci} uses the Wilson method (Wilson, 1927) (even if Sauro and Lewis, 2005,
+\code{binomci} uses the Wilson method (Wilson, 1927) by default (even if Sauro and Lewis, 2005,
 recommend the adjusted Wald).
 }
 \examples{
