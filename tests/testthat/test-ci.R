@@ -1,10 +1,39 @@
-
 dataset <- list(
   # source: https://de.wikipedia.org/w/index.php?title=Konfidenzintervall&oldid=222627063
   set1 = c(110, 112, 106, 90, 96, 118, 108, 114, 107, 90, 85, 84, 113, 105, 90, 104),
   # source: https://www.zippia.com/advice/how-to-calculate-confidence-interval-with-examples/
   set2 = c(40, 42, 49, 57, 61, 47, 66, 78, 90, 86, 81, 80)
 )
+
+# CI CLASS ========================
+test_that("ci_new() creates a valid object", {
+  # Act
+  result <- ci_new(1:2, 0:1, 2:3)
+
+  # Assert
+  expect_s3_class(result, c("U.T.lity", "ci", "data.frame"))
+  expect_identical(
+    result,
+    structure(
+      structure(list(est=1:2, lower=0:1, upper=2:3),
+                class="data.frame",
+                row.names=1:2),
+      class=c("U.T.lity", "ci", "data.frame")
+    ))
+})
+
+test_that("ci_new() creates a valid object", {
+  # Act
+  result <- ci_new(1:2, 0:1, 2:3,
+                   .alt="two-sided", .dstr="joke", .mthd="guessing", .call="none()")
+
+  # Assert
+  expect_identical(attr(result, "alternative"), "two-sided")
+  expect_identical(attr(result, "distr"), "joke")
+  expect_identical(attr(result, "method"), "guessing")
+  expect_identical(attr(result, "call"), "none()")
+})
+
 
 # CONFIDENCE NUMERIC ==============
 
