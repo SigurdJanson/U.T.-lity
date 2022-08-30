@@ -1,11 +1,17 @@
 ---
 title: "UT-lity"
+author: "Jan Seifert"
+citation_package: biblatex
+bibliography: UT-lity.bib
+link-citations: true
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{UT-lity}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
+
+
 
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
@@ -26,6 +32,26 @@ library(U.T.lity)
 
 I have conducted a test with users. I want to use the frequency of the defects that I found in order to assess their severity. But - of course - the frequency in my study is just what my sample shows. What are the the confidence intervals of those defects? 
 
+Call `defectci()`.
 
 
 
+## Visualising the Defects Found
+
+I want to visualise the usability defects found for each user in a matrix similar to those used by @Sauro2012a [, table 7.3]. 
+
+
+
+
+# Implementation
+
+## ci-Class for Confidence Intervals
+
+All confidence intervals are stored in an S3 class derived from a data frame. See `?ci_new`.
+
+
+
+
+# References
+
+<div id="refs"></div>
