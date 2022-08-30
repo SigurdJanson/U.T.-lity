@@ -19,6 +19,24 @@
 #'
 #' @return A `ci` object derived from a data frame with the columns `est`, `lower`, `upper`,
 #' and further columns given through `...`.
+#'
+#' @details
+#' Confidence intervals are stored in an S3 class derived from a data frame. In its basic form it has the following (mandatory) columns:
+#'
+#' * `est` - the estimate to which the confidence interval applies.
+#' * `lower` - the lower boundary
+#' * `upper` - the upper boundary
+#'
+#' Additional columns are allowed.
+#'
+#' Attributes are:
+#'
+#' * `alternative` - a character string describing the alternative hypothesis.
+#' * `conf.level` - confidence level of the interval.
+#' * `distr` - statistical distribution.
+#' * `method` - method used to construct the intervals.
+#' * `call` - a character representation of the original function call.
+#'
 #' @export
 #'
 #' @examples

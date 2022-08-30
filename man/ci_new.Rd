@@ -39,6 +39,25 @@ Returns \code{x} invisibly.
 \description{
 Confidence intervals
 }
+\details{
+Confidence intervals are stored in an S3 class derived from a data frame. In its basic form it has the following (mandatory) columns:
+\itemize{
+\item \code{est} - the estimate to which the confidence interval applies.
+\item \code{lower} - the lower boundary
+\item \code{upper} - the upper boundary
+}
+
+Additional columns are allowed.
+
+Attributes are:
+\itemize{
+\item \code{alternative} - a character string describing the alternative hypothesis.
+\item \code{conf.level} - confidence level of the interval.
+\item \code{distr} - statistical distribution.
+\item \code{method} - method used to construct the intervals.
+\item \code{call} - a character representation of the original function call.
+}
+}
 \section{Functions}{
 \itemize{
 \item \code{print(ci)}: Prints a ci-object
