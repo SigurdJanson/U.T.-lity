@@ -29,11 +29,11 @@ binomci <- function(x, n, ...) {
   }
 
   if ("alternative" %in% ...names()) {
-    if (.args[["alternative"]] != "two-sided")
+    if (.args[["alternative"]] != "two.sided")
       stop("'binomci' only computes two-sided confidence intervals")
   }
 
-  ci <- do.call(binom.confint, args=c(x=x, n=n, tol=1e-8, .args))
+  ci <- do.call(binom.confint, args=c(list(x=x, n=n, tol=1e-8), .args))
 
   result <- ci_new(x, ci["lower"], ci["upper"],
                    .lvl = conf.level,
