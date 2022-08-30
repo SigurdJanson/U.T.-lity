@@ -44,16 +44,18 @@ poissonci <- function(x, n = 1, conf.level = 0.95,
     # see also: pois.conf.int {epitools}
 
     sides <- match.arg(sides, choices = c("two.sided","left","right"), several.ok = FALSE)
-    if(sides!="two.sided")
+    if(sides != "two.sided")
       conf.level <- 1 - 2*(1-conf.level)
 
     if(missing(method)) method <- "score"
 
-    if(length(conf.level) != 1)  stop("'conf.level' has to be of length 1 (confidence level)")
-    if(conf.level < 0.5 | conf.level > 1)  stop("'conf.level' has to be in [0.5, 1]")
+    if(length(conf.level) != 1)
+      stop("'conf.level' has to be of length 1 (confidence level)")
+    if(conf.level < 0.5 | conf.level > 1)
+      stop("'conf.level' has to be in [0.5, 1]")
 
     alpha <- 1 - conf.level
-    z <- qnorm(1-alpha/2)
+    z <- qnorm(1 - alpha/2)
 
     lambda <- x/n
 
@@ -85,32 +87,24 @@ poissonci <- function(x, n = 1, conf.level = 0.95,
     ci <- c( est=lambda, lwr.ci=lwr.ci, upr.ci=upr.ci )
 
     if(sides=="left")
-      ci[3] <- Inf
+      ci[3] <- Inf # upr.ci
     else if(sides=="right")
-      ci[2] <- -Inf
+      ci[2] <- -Inf # lwr.ci
 
     return(ci)
   }
 
   # handle vectors
   # which parameter has the highest dimension
-  lst <- list(x=x, n=n, conf.level=conf.level, sides=alternative, method=method)
-  maxdim <- max(lengths(lst)) #max(unlist(lapply(lst, length)))
-  # recycle all params to maxdim
-  lgp <- lapply(lst, rep, length.out=maxdim)
+  lst <- list(x=x, n=n) #--, conf.level=conf.level, sides=alternative, method=method)
+  maxdim <- max(lengths(lst))
+  lgp <- lapply(lst, rep, length.out=maxdim) # recycle all params to maxdim
 
+  # Compute
   res <- sapply(1:maxdim, \(i) iPoissonCI(x=lgp$x[i], n=lgp$n[i],
-                                          conf.level=lgp$conf.level[i],
-                                          sides=lgp$sides[i],
-                                          method=lgp$method[i]))
-  rownames(res)[1] <- c("est")
-
-  lgn <- .recycle(x=if(is.null(names(x))) paste("x", seq_along(x), sep=".") else names(x),
-                  n=if(is.null(names(n))) paste("n", seq_along(n), sep=".") else names(n),
-                  conf.level=conf.level, sides=alternative, method=method)
-  xn <- apply(as.data.frame(lgn[sapply(lgn, \(x) length(unique(x)) != 1)]), 1, paste, collapse=":")
-
-  colnames(res) <- xn
-
-  return(t(res))
+                                          conf.level=conf.level,
+                                          sides=alternative,
+                                          method=method))
+  ci_new(res[1,], res[2,], res[3,],
+         conf.level, alternative, "poisson", method, deparse(match.call()))
 }
