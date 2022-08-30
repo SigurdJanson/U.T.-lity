@@ -34,7 +34,7 @@ poissonci <- function(x, n = 1, conf.level = 0.95,
                      alternative = c("two.sided", "left", "right"),
                      method = c("exact", "score", "wald","byar")) {
 
-  if(missing(method)) method <- "exact"
+  if(missing(method)) method <- "score"
   if(missing(alternative)) alternative <- "two.sided"
 
 
