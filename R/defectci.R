@@ -8,7 +8,7 @@
 #' @param distr the probability distribution used to estimate the confidence interval.
 #' Default is `binom`.
 #' @param ... Further arguments passed on to the `ci`-generating function. these are foremost:
-#' `conf.level`, `alternative`, and `method`. See `binomcii()` or `poissonci()`.
+#' `conf.level`, `alternative`, and `method`. See `binomci()` or `poissonci()`.
 #' @details
 #' Lewis (1992) suggests that the binomial distribution is sufficient to compute the statistics
 #' behind usability defects. Nielsen & Landauer (1993) suggest a poisson distribution.

@@ -15,7 +15,7 @@ defectci(freq, n, distr = c("binom", "poisson"), ...)
 Default is \code{binom}.}
 
 \item{...}{Further arguments passed on to the \code{ci}-generating function. these are foremost:
-\code{conf.level}, \code{alternative}, and \code{method}. See \code{binomcii()} or \code{poissonci()}.}
+\code{conf.level}, \code{alternative}, and \code{method}. See \code{binomci()} or \code{poissonci()}.}
 }
 \value{
 A \code{ci}object with the confidence intervals.

@@ -1,8 +1,3 @@
-##
-## the density function (dbinom) gives the probability (integral) from x1 to x2.
-## the distribution function (cdf, pbinom) gives the probability (integral) from -infinity to x.
-## the quantile function (qbinom) is the inverse of the distribution function.
-##
 
 
 #' Confidence intervals
