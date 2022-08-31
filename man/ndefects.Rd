@@ -7,16 +7,21 @@
 ndefects(p.occ = 0.31, d.total = 1L, n)
 }
 \arguments{
-\item{p.occ}{Probability of Occurrence: how big is the probability of the problems that shall be
-detected when testing a single user (Nielsen (2000) assumes p.occ = L = 31\%).}
+\item{p.occ}{Probability of Occurrence: how big is the probability of
+the problems that shall be detected when testing a single user
+(Nielsen, 2000, assumes p.occ = L = 31\%).}
 
-\item{d.total}{Total number of existing (usability) problems in the design}
+\item{d.total}{Total number of existing (usability) problems in the design.}
 
 \item{n}{Number of subjects}
 }
 \value{
-Use \code{d.total = 1} to get a percentage. Otherwise the function returns
-the number of defects you find with the given sample size.Note that this is
+Use \code{d.total = 1} to get a percentage. That is the "chance of observing" each
+defect at least once in the study.
+Otherwise the function returns
+the expected number of defects you find with the given sample size. Note that
+you will not find this exact number. It is simply an estimator and the exact
+number of found defects is a random result.
 }
 \description{
 Number of defects that can be found in a usability test given
