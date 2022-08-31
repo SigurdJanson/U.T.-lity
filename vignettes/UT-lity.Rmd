@@ -20,7 +20,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-```{r setup}
+```{r setup, include = FALSE}
 library(U.T.lity)
 ```
 
@@ -28,7 +28,31 @@ library(U.T.lity)
 
 # Q&A
 
-## Confidence of the Defect Frequency
+## Planning a Study
+
+### Expected Yield
+
+What is a realistic expectation for a "yield rate" of a usability study? How many problems can we find with different sample sizes?
+
+You can investigate that with the `ndefects()` function. Even better is `nDefectsPlot()` that visualises the results in a chart. It shows how many usability defects you may find with a given number of subjects. But first you need to decide on the visibility of usability defects. If you have prior knowledge from previous tests, use these data to estimate typical visibilities of your product.
+
+Note that the visibility of defects differs a lot. @Nielsen1993 reported visibility indices between 16% and 36%. The popular rumour that you can find 80% of the problems with 5 users is based on a visibility `p.occ` of 31%. Given the range reported by @Nielsen1993 31% seems rather optimistic. The chart shows the visibilities reported by the authors and how they affect the yield of a study. With a visibility of 16% we do not even find 60% of the defects.
+
+
+```{r}
+nDefectsPlot(p.occ = c(0.16, 0.28, 0.31, 0.36), subjects = 0:15)
+```
+
+
+
+### Sample Size to Detect n% of Usability Defects
+
+**... TBD ...**
+
+
+## Understand Test Results
+
+### Confidence of the Defect Frequency
 
 I have conducted a test with users. I want to use the frequency of the defects that I found in order to assess their severity. But - of course - the frequency in my study is just what my sample shows. What are the the confidence intervals of those defects? 
 
@@ -36,9 +60,29 @@ Call `defectci()`.
 
 
 
-## Visualising the Defects Found
+### Visualising the Defects Found
 
 I want to visualise the usability defects found for each user in a matrix similar to those used by @Sauro2012a [, table 7.3]. 
+
+Call `defectgrid(...)`.
+
+
+### Dark Figures
+
+Estimate the dark figure.
+
+
+
+## Long-Term Learning
+
+### Defect Visibility
+
+We did several studies in the past. Now we want to identify typical defect visibility indices for our product so that ...
+
+1. We get a better understanding of the impact our usability tests have.
+1. Once we do that we can exercise more control over the quality of our work.
+
+**... TBD ...**
 
 
 
