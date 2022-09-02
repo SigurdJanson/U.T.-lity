@@ -1,7 +1,7 @@
 test_that("4 regular columns work", {
 
   # Act
-  result <- defectgrid( matrix(c(1,0,1,0, 0,1,0,1, 0,0,1,1), 3, 4), percentage=TRUE )
+  result <- pxpplot.matrix( matrix(c(1,0,1,0, 0,1,0,1, 0,0,1,1), 3, 4), percentage=TRUE )
 
   # Assert
   expect_identical(
@@ -15,7 +15,7 @@ test_that("4 regular columns work", {
 test_that("...adding 3 columns of darkfigures works", {
 
   # Act
-  result <- defectgrid( matrix(c(1,0,1,0, 0,1,0,1, 0,0,1,1), 3, 4), darkfigure=3, percentage=TRUE )
+  result <- pxpplot.matrix( matrix(c(1,0,1,0, 0,1,0,1, 0,0,1,1), 3, 4), darkfigure=3, percentage=TRUE )
 
   # Assert
   expect_identical(

@@ -1,10 +1,25 @@
+#' Defect Grid
+#'
+#' The defect grid is a  class to store a PROBLEM-BY-PARTICIPANT matrix.
+#'
+#' @param x a numeric or logical matrix with subjects in rows and defects
+#' in columns.
+#' @return A defect grid object.
+defectgrid_new <- function(x) {
+  Type <- c("count", "exists")
+  class(x) <- "defectgrid"
+  return(x)
+}
 
-#' Defect Grid Plot
+
+
+
+#' pxpplot.matrix
 #'
 #' A plot visualising the distribution of found defects by user. The plot can
 #' visualise frequency of occurrence similar to a heat map.
 #'
-#' @param m Matrix containing usability problems and their frequency
+#' @param x Matrix containing usability problems and their frequency
 #' @param darkfigure Add columns (rows) with zero probability that represent hidden problems.
 #' @param percentage Show the total percentage of each defect.
 #' @param names.arg A vector of names to be plotted below each tile.
@@ -46,8 +61,8 @@
 #' Sauro, J., & Lewis, J. R. (2012). Quantifying the User Experience. Elsevier.
 #' @importFrom grDevices colors gray palette
 #' @importFrom graphics axis plot.new plot.window rect title
-#' @examples defectgrid( matrix(c(1,0,1,0, 0,1,0,1, 0,0,1,1), 3, 4), darkfigure=3, percentage=FALSE )
-defectgrid <- function (m, darkfigure = NULL,
+#' @examples pxpplot.matrix( matrix(c(1,0,1,0, 0,1,0,1, 0,0,1,1), 3, 4), darkfigure=3, percentage=FALSE )
+pxpplot.matrix <- function (x, darkfigure = NULL,
                         percentage = TRUE, names.arg = NULL,
                         horiz = FALSE,
                         density = NULL, angle = 45, col = NULL, col.opt = TRUE,
@@ -56,10 +71,9 @@ defectgrid <- function (m, darkfigure = NULL,
                         xpd = TRUE,
                         axes = TRUE, cex.axis = par("cex.axis"), cex.names = par("cex.axis"),
                         axis.lty = 0,
-                        plot = TRUE, add = FALSE, offset = 0,
-                        ...)
+                        plot = TRUE, add = FALSE, offset = 0, ...)
 {
-  if (!is.matrix(m)) stop("'m' must be a matrix")
+  if (!is.matrix(x)) stop("'m' must be a matrix")
   if(plot && is.null(col))
   {
     col <- colors()[seq(from=253L, to=153L, by=-5L)]
@@ -68,12 +82,12 @@ defectgrid <- function (m, darkfigure = NULL,
     if(darkfigure < 0)
       stop("The dark figure cannot be less than zero")
 
-  NR <- nrow(m)
-  NC <- ncol(m)
+  NR <- nrow(x)
+  NC <- ncol(x)
 
   if(!is.null(darkfigure)) {	# extend matrix by a number of zeroed columns
-    m <- cbind(m, matrix(rep(0, length.out = NR*darkfigure), nrow = NR))
-    NC <- ncol(m)
+    x <- cbind(x, matrix(rep(0, length.out = NR*darkfigure), nrow = NR))
+    NC <- ncol(x)
   }
 
   #    if (is.logical(legend.text))
@@ -104,7 +118,7 @@ defectgrid <- function (m, darkfigure = NULL,
   y.l <- y.m - delta   # y coordinate, left corner
 
   ## determine color value of all squares
-  squares <- (m > 0) * 1 # count observations only once, ignore repetitions
+  squares <- (x > 0) * 1 # count observations only once, ignore repetitions
   .colsum <- colSums(squares)
   squares <- squares[order(NR:1),] # reverse order for Ss Nr.1 shall be on top
   squares <- squares[,order(.colsum, decreasing=TRUE)] # sort cols by frequency
@@ -186,7 +200,7 @@ defectgrid <- function (m, darkfigure = NULL,
     #CONTENT/>
     ## Defect axis
     if (axes) {
-      if(is.null(names.arg)) names.arg <- colnames(m)
+      if(is.null(names.arg)) names.arg <- colnames(x)
       if(is.null(names.arg)) names.arg <- colnames(squares) #1:NC
       if(length(names.arg) != NC) stop( "Incorrect number of axis names" )
       if(horiz)
