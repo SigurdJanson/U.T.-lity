@@ -2,19 +2,34 @@
 % Please edit documentation in R/estimatePOcc.R
 \name{estimatePOcc}
 \alias{estimatePOcc}
+\alias{adjustPOcc}
 \title{estimatePOcc}
 \usage{
 estimatePOcc(x, method = c("binom"), adj = c("none", "GT", "defl", "both"))
+
+adjustPOcc(p, nSample, Ntotal, N1, adj = c("GT", "defl", "both"))
 }
 \arguments{
 \item{x}{A problem by participant matrix (e.g. a defect grid object).}
 
 \item{method}{Currently only "binom".}
 
-\item{adj}{An adjustment method for small sample sizes.}
+\item{adj}{the adjustment technique. Either "GT" for a Good-Turing correction,
+"defl" for the deflated adjustment, or "both" to return the average of both
+correction methods (as recommended by Turner, 2006; Sauro & Lewis, 2012).}
+
+\item{p}{an non-adjusted estimate of the visibility of an event.}
+
+\item{nSample}{the sample size.}
+
+\item{Ntotal}{the total number of events (e.g. usability defects).}
+
+\item{N1}{the number of events occurring only once.}
 }
 \value{
 An estimate of the visibility
+
+Returns corrected values of \code{p}.
 }
 \description{
 estimatePOcc
@@ -29,3 +44,16 @@ from a small sample because small sample estimates of p
 (from fewer than 20 participants) have a bias that can result in
 substantial overestimation of its value .
 }
+\section{Functions}{
+\itemize{
+\item \code{adjustPOcc()}: Estimating the visibility of events from a
+sample may considerably overestimate it's value when samples are small.
+Small samples 20 participants have a bias that can result in substantial
+overestimation of its value.
+
+}}
+\references{
+Sauro, J., & Lewis, J. R. (2012). Quantifying the User Experience. Elsevier.
+Turner, C. W., Lewis, J. R., & Nielsen, J. (2006). Determining Usability Test Sample Size. In W. Karwowski & B. Raton, International Encyclopedia of Ergonomics and Human Factors (2 ed., Vol. 3, pp. 3084–3088). CRC Press.
+}
+\keyword{internal}
