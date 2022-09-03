@@ -36,3 +36,6 @@ It contains the simulation results and recommended sample size.
 \description{
 nSample_sim
 }
+\examples{
+nSample_sim_binom()
+}

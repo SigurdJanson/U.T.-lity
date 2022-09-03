@@ -4,13 +4,16 @@
 \alias{new_samplesim}
 \title{samplesize}
 \usage{
-new_samplesim(simresult, conf.level, srange, .call, ...)
+new_samplesim(simresult, conf.level, desired.events, srange, .call, ...)
 }
 \arguments{
 \item{simresult}{a vector containing the confidences per sample size.
 The length of the vector must match the range of \code{srange}.}
 
 \item{conf.level}{the targeted confidence level.}
+
+\item{desired.events}{the targeted proportion of evens/defects that need to
+be found with the given confidence.}
 
 \item{srange}{two-element vector with the lower and upper value the simulation
 was made.}
@@ -20,7 +23,7 @@ was made.}
 \item{...}{further arguments passed on to other methods.}
 }
 \value{
-a samplesize object.
+a \code{samplesize} object.
 }
 \description{
 Constructor function to create sample size objects created by simulation.

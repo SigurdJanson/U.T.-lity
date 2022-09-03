@@ -6,6 +6,8 @@
 #' @param simresult a vector containing the confidences per sample size.
 #' The length of the vector must match the range of `srange`.
 #' @param conf.level the targeted confidence level.
+#' @param desired.events the targeted proportion of evens/defects that need to
+#' be found with the given confidence.
 #' @param srange two-element vector with the lower and upper value the simulation
 #' was made.
 #' @param .call the original function call.
@@ -15,7 +17,7 @@
 #' @export
 #'
 #' @examples
-new_samplesim <- function(simresult, conf.level, srange, .call, ...) {
+new_samplesim <- function(simresult, conf.level, desired.events, srange, .call, ...) {
   matched <- simresult >= conf.level
 
   runs <- rle(matched)
@@ -27,6 +29,7 @@ new_samplesim <- function(simresult, conf.level, srange, .call, ...) {
   class(x) <- c("samplesize", "simulation")
   attr(x, "result") <- simresult
   attr(x, "conf.level") <- conf.level
+  attr(x, "desired") <- desired.events
   attr(x, "converged") <- !is.infinite(nhigh)
   attr(x, "search.range") <- c(min(srange), max(srange))
   attr(x, "call") <- .call
@@ -126,6 +129,6 @@ nSample_sim_binom <- function(p.occ = 0.31, threshold=0.8, conf.level=0.95,
   # plot(nmin:nmax, confidence)
 
   return(
-    new_samplesim(confidence, conf.level, search.range, .call=deparse(match.call()))
+    new_samplesim(confidence, conf.level, threshold, search.range, .call=deparse(match.call()))
   )
 }
