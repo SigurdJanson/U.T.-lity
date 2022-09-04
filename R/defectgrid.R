@@ -7,14 +7,23 @@
 #' @return A defect grid object.
 defectgrid_new <- function(x) {
   Type <- c("count", "exists")
-  class(x) <- "defectgrid"
+
+  class(x) <- c("U.T.lity", "defectgrid", class(x))
   return(x)
 }
 
+#' is.defectgrid
+#'
+#' Functions to check if an object is a defect grid.
+#' @param any R object.
+#' @return TRUE/FALSE
+#' @export
+is.defectgrid <- function(x)
+  !any(inherits(x, c("U.T.lity", "defectgrid"), which=TRUE) == 0)
 
 
 
-#' pxpplot.matrix
+#' pxpplot
 #'
 #' A plot visualising the distribution of found defects by user. The plot can
 #' visualise frequency of occurrence similar to a heat map.
