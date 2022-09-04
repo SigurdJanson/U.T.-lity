@@ -3,7 +3,9 @@
 \name{ciplot}
 \alias{ciplot}
 \alias{ciplot.default}
+\alias{ciplot.ci}
 \alias{ciplot_default}
+\alias{ciplot_gr}
 \alias{ciplot_gg}
 \alias{ciplot.htest}
 \alias{ciplot.cidf}
@@ -13,7 +15,11 @@ ciplot(x, ...)
 
 \method{ciplot}{default}(x, ...)
 
-ciplot_default(lower, upper, names = NA, ...)
+\method{ciplot}{ci}(x, ...)
+
+ciplot_default(lower, upper, names = NA, lib = c("ggplot", "graphics"), ...)
+
+ciplot_gr(lower, upper, names = NA, ...)
 
 ciplot_gg(lower, upper, names = NA, ...)
 
@@ -24,18 +30,22 @@ ciplot_gg(lower, upper, names = NA, ...)
 \arguments{
 \item{x}{An object containing the confidence intervals}
 
-\item{...}{arguments to be passed to/from other methods.}
+\item{...}{further arguments to be passed on to other methods}
 
 \item{lower}{numeric vector with the lower limits of the confidence intervals.}
 
 \item{upper}{numeric vector with the upper limits of the confidence intervals.}
 
-\item{names}{A vector of names applied to each pair of \code{lower}/\code{upper}}
+\item{names}{A vector of names applied to each pair of \code{lower}/\code{upper}.}
+
+\item{lib}{draws the plot either with \code{ggplot2} or \code{graphics}.}
 }
 \value{
 A chart visualising confidence intervals
 
 A chart visualising confidence intervals
+
+Returns a \code{ggplot}
 }
 \description{
 Draws an illustration of the confidence interval as horizontal chart. To easily verify
@@ -45,6 +55,8 @@ overlaps.
 \itemize{
 \item \code{ciplot(default)}: ...
 
+\item \code{ciplot(ci)}: ...
+
 \item \code{ciplot(htest)}: Plot the result of a call to \code{\link[=t.test]{t.test()}}.
 
 \item \code{ciplot(cidf)}: Plot the result of a call to \code{\link[=ci.numeric]{ci.numeric()}}.
@@ -53,6 +65,8 @@ overlaps.
 \section{Functions}{
 \itemize{
 \item \code{ciplot_default()}: Simplified base version to draw confidence limit plots.
+
+\item \code{ciplot_gr()}: Create a \code{ciplot} with the core \code{graphics} library
 
 \item \code{ciplot_gg()}: Create a \code{ciplot} with the \code{ggplot2} library
 
