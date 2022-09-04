@@ -10,12 +10,18 @@ simplot(x, ...)
 
 \method{simplot}{simulation}(x, ...)
 
-\method{simplot}{samplesize}(x, ...)
+\method{simplot}{samplesize}(x, x0 = FALSE, y0 = FALSE, ...)
 }
 \arguments{
 \item{x}{A \code{samplesize} object}
 
 \item{...}{further arguments passed on to other methods.}
+
+\item{x0}{if \code{TRUE} the x-axis is extended to show \code{x=0}. The default \code{FALSE}
+optimises it to the data range.}
+
+\item{y0}{if \code{TRUE} the y-axis is extended to show \code{y=0}. The default \code{FALSE}
+optimises it to the data range.}
 }
 \value{
 prints \code{x} and returns it invisibly.
