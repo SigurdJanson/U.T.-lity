@@ -7,7 +7,7 @@
 defectgrid_new(x)
 }
 \arguments{
-\item{x}{a numeric or logical matrix with subjects in rows and defects
+\item{x}{a numeric or logical matrix with participants in rows and defects
 in columns.}
 }
 \value{
@@ -15,4 +15,13 @@ A defect grid object.
 }
 \description{
 The defect grid is a  class to store a PROBLEM-BY-PARTICIPANT matrix.
+}
+\details{
+the \code{defectgrid} object has an attribute \code{type} that can be either
+\code{exists} or \code{count}. \code{exist} indicates that each cell contains only information
+about the existence of the defect but not it's frequency (contrary to \code{count}).
+
+A second class "U.T.lity" indicates that this object is from this package.
+
+If \code{x} is a vector it will be coerced to a matrix with one row (i.e. participant).
 }

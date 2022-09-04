@@ -9,6 +9,9 @@ is.defectgrid(x)
 \arguments{
 \item{any}{R object.}
 }
+\value{
+TRUE/FALSE
+}
 \description{
 Functions to check if an object is a defect grid.
 }
