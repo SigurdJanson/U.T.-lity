@@ -4,6 +4,7 @@
 \alias{ciplot}
 \alias{ciplot.default}
 \alias{ciplot_default}
+\alias{ciplot_gg}
 \alias{ciplot.htest}
 \alias{ciplot.cidf}
 \title{Confidence Plots}
@@ -13,6 +14,8 @@ ciplot(x, ...)
 \method{ciplot}{default}(x, ...)
 
 ciplot_default(lower, upper, names = NA, ...)
+
+ciplot_gg(lower, upper, names = NA, ...)
 
 \method{ciplot}{htest}(x, ...)
 
@@ -50,5 +53,7 @@ overlaps.
 \section{Functions}{
 \itemize{
 \item \code{ciplot_default()}: Simplified base version to draw confidence limit plots.
+
+\item \code{ciplot_gg()}: Create a \code{ciplot} with the \code{ggplot2} library
 
 }}
