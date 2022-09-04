@@ -1,19 +1,3 @@
-# Confidence
-#
-# Draws an illustration of the confidence interval as pie chart.
-#
-# @param lower vector with the lower limits of the confidence intervals.
-# @param upper vector with the upper limits of the confidence intervals.
-#
-# @return A chart visualising confidence intervals
-# @importFrom graphics pie
-# pie.ci <- function( lower, upper ) {
-#   width <- upper - lower
-#   pie(c(width, 1-width), labels = NA, edges = 200, radius = 1.6, clockwise = TRUE,
-#       init.angle = 360*lower+90, col = c("#000000","#FFFFFF") )
-# }
-
-
 
 #' Confidence Plots
 #'
