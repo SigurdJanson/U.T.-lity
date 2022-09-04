@@ -25,6 +25,39 @@ library(U.T.lity)
 ```
 
 
+# Essential Concepts
+
+## Visibility of Usability Defects
+
+The visibility is defined as the probability for a usability defect to show itself at least once in a test session.
+
+> probability of occurrence: `p.occ`
+
+
+
+## Defect Discovery Rate {#ddr}
+
+The defect discovery rate (DDR) is the **chance of observing** a defect in a study at least once. This "chance of observing" is closely related to the visibility. You can say it is the cumulative visibility across test participants. If a study has only one participant, visibility and DDR are identical. But with each additional participant the chances to find a defect increase. What increases is the DDR. The visibility is related to each single participant.
+
+> chance of observing: `p.obs`
+
+
+## Found Defects
+
+A common misconception is the confusion of the **chance of observing** with the **percentage of defects found**. Just because we can find each defect with a chance of 80% (at least once) does not necessarily mean that each study will meet that level [@Faulkner2003]. It means that we get 80% across many studies. It means we get 80% *on average*. A single study may yield a lot fewer defects or a lot more.
+
+The U.T.-lity package can illustrate how many defects you may really observe. 
+
+
+## Dark Figure
+
+A researcher can only observe a certain percentage of all the usability defects that users may suffer from. If this number is - let us say - 75%, then this also implies that 25% of the problems are still concealed. That is your **dark figure**.
+
+There is a difference between the dark figure before and after the test. Before a test you may plan your sample size to satisfy a desired [defect discovery rate](#ddr). That is not necessarily what you get. The best planning does not nullify a random process. It makes sense to compute your dark figure after the test to get a better understanding of quality.
+
+
+
+
 
 # Q&A
 
@@ -36,7 +69,7 @@ What is a realistic expectation for a "yield rate" of a usability study? How man
 
 You can investigate that with the `ndefects()` function. Even better is `nDefectsPlot()` that visualises the results in a chart. It shows how many usability defects you may find with a given number of subjects. But first you need to decide on the visibility of usability defects. If you have prior knowledge from previous tests, use these data to estimate typical visibilities of your product.
 
-Note that the visibility of defects differs a lot. @Nielsen1993 reported visibility indices between 16% and 36%. The popular rumour that you can find 80% of the problems with 5 users is based on a visibility `p.occ` of 31%. Given the range reported by @Nielsen1993 31% seems rather optimistic. The chart shows the visibilities reported by the authors and how they affect the yield of a study. With a visibility of 16% we do not even find 60% of the defects.
+Note that the visibility of defects differs a lot. @Nielsen1993 reported visibility indices between 16% and 36%. @Sauro2012a [p. 149] reviewed several published papers and found a range from 3% to 46%. The popular rumour that you can find 80% of the problems with 5 users is based on a visibility `p.occ` of 31%. Given the range reported by @Nielsen1993 31% seems rather optimistic. The chart shows the visibilities reported by the authors and how they affect the yield of a study. With a visibility of 16% we do not even find 60% of the defects.
 
 
 ```{r}
@@ -46,6 +79,10 @@ nDefectsPlot(p.occ = c(0.16, 0.28, 0.31, 0.36), subjects = 0:15)
 
 
 ### Sample Size to Detect n% of Usability Defects
+
+@Sauro2012a: "To use this equation to compute n, we need to have values for p and P(x ≥ 1). The most practical approach is to set p to the lowest value that you realistically expect to be able to find with the available resources (especially the time and money required to run participants in the formative usability study). Set P(x ≥ 1) to the desired goal of the study with respect to p."
+
+Call `nSample_binom()`.
 
 **... TBD ...**
 
@@ -58,13 +95,16 @@ I have conducted a test with users. I want to use the frequency of the defects t
 
 Call `defectci()`.
 
+Unfortunately, the confidence intervals are usually extremely wide. In small samples the frequency of a defect is an insufficient measure for severity.
+
+
 
 
 ### Visualising the Defects Found
 
 I want to visualise the usability defects found for each user in a matrix similar to those used by @Sauro2012a [, table 7.3]. 
 
-Call `defectgrid(...)`.
+Call `pxpplot(...)`.
 
 
 ### Dark Figures
