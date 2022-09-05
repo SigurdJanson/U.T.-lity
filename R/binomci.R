@@ -29,7 +29,7 @@ binomci <- function(x, n, ...) {
   }
 
   if ("alternative" %in% ...names()) {
-    if (.args[["alternative"]] != "two.sided")
+    if (.args[["alternative"]] != .alternative["two.sided"])
       stop("'binomci' only computes two-sided confidence intervals")
   }
 
@@ -37,7 +37,7 @@ binomci <- function(x, n, ...) {
 
   result <- ci_new(x, ci["lower"], ci["upper"],
                    .lvl = conf.level,
-                   .alt = "",
+                   .alt = .alternative["two.sided"],
                    .dstr = "binomial",
                    .mthd = method,
                    .call = deparse(match.call()))

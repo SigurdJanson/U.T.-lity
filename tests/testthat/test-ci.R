@@ -25,10 +25,10 @@ test_that("ci_new() creates a valid object", {
 test_that("ci_new() creates a valid object", {
   # Act
   result <- ci_new(1:2, 0:1, 2:3,
-                   .alt="two-sided", .dstr="joke", .mthd="guessing", .call="none()")
+                   .alt="two.sided", .dstr="joke", .mthd="guessing", .call="none()")
 
   # Assert
-  expect_identical(attr(result, "alternative"), "two-sided")
+  expect_identical(attr(result, "alternative"), "two.sided")
   expect_identical(attr(result, "distr"), "joke")
   expect_identical(attr(result, "method"), "guessing")
   expect_identical(attr(result, "call"), "none()")

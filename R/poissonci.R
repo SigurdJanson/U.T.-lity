@@ -31,20 +31,20 @@
 #' poissonci(0:5, 10)
 #' @importFrom stats poisson.test qnorm
 poissonci <- function(x, n = 1, conf.level = 0.95,
-                     alternative = c("two.sided", "left", "right"),
+                     alternative = c("two.sided", "less", "greater"),
                      method = c("exact", "score", "wald","byar")) {
 
   if(missing(method)) method <- "score"
-  if(missing(alternative)) alternative <- "two.sided"
+  if(missing(alternative)) alternative <- .alternative["two.sided"]
 
 
-  iPoissonCI <- function(x, n = 1, conf.level = 0.95, sides = c("two.sided","left","right"),
+  iPoissonCI <- function(x, n = 1, conf.level = 0.95, sides = c("two.sided", "less", "greater"),
                          method = c("exact","score", "wald","byar")) {
 
     # see also: pois.conf.int {epitools}
 
-    sides <- match.arg(sides, choices = c("two.sided","left","right"), several.ok = FALSE)
-    if(sides != "two.sided")
+    sides <- match.arg(sides, choices = c("two.sided", "less", "greater"), several.ok = FALSE)
+    if(sides != .alternative["two.sided"])
       conf.level <- 1 - 2*(1-conf.level)
 
     if(missing(method)) method <- "score"

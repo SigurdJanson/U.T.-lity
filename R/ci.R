@@ -48,8 +48,10 @@ ci_new <- function(.est, .lower, .upper, .lvl, .alt, .dstr, .mthd, .call, ...) {
                        ...,
                        stringsAsFactors = FALSE)
 
-  if (.isAlive(.alt) && is.character(.alt))
+  if (.isAlive(.alt) && is.character(.alt)) {
+    .alt <- match.arg(.alt, setNames(.alternative, NULL))
     attr(result, "alternative") <- .alt
+  }
   if (.isAlive(.lvl) && is.numeric(.lvl))
     attr(result, "conf.level") <- .lvl
 

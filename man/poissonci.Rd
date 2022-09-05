@@ -8,7 +8,7 @@ poissonci(
   x,
   n = 1,
   conf.level = 0.95,
-  alternative = c("two.sided", "left", "right"),
+  alternative = c("two.sided", "less", "greater"),
   method = c("exact", "score", "wald", "byar")
 )
 }
