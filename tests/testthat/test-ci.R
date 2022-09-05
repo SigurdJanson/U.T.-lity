@@ -94,3 +94,44 @@ test_that("ci.numeric works with two vectors and varying 'mu'", {
 
 
 
+# is.ci( ) ================
+
+test_that("`is.ci()` works on `new_ci()` objects", {
+  # Act
+  result <- ci_new(1:2, 0:1, 2:3)
+
+  # Assert
+  expect_s3_class(result, c("U.T.lity", "ci", "data.frame"))
+  expect_true(is.ci(result))
+})
+
+test_that("`is.ci()` works on `new_ci()` objects", {
+  # Act
+  result <- structure(
+    structure(list(est=1:2, lower=0:1, upper=2:3),
+              class="data.frame",
+              row.names=1:2),
+    class=c("U.T.lity", "ci", "data.frame")
+  )
+
+  # Assert
+  expect_true(is.ci(result))
+})
+
+
+test_that("`is.ci()` fails if either `ci` or `U.T.lity` is removed", {
+  # Act
+  result <- ci_new(1:2, 0:1, 2:3)
+  # ... remove class "ci"
+  class(result) <- class(result)[class(result) != "ci"]
+  # Assert
+  expect_false(is.ci(result))
+
+  # Act
+  result <- ci_new(1:2, 0:1, 2:3)
+  # ... remove class "U.T.lity"
+  class(result) <- class(result)[class(result) != "U.T.lity"]
+  # Assert
+  expect_false(is.ci(result))
+})
+

@@ -66,6 +66,16 @@ ci_new <- function(.est, .lower, .upper, .lvl, .alt, .dstr, .mthd, .call, ...) {
 
 
 
+#' @describeIn confidence-intervals Function to check if an object is a `ci` object.
+#'
+#' @param x any R object.
+#' @return TRUE/FALSE
+#' @export
+is.ci <- function(x)
+  !any(inherits(x, c("U.T.lity", "ci"), which=TRUE) == 0)
+
+
+
 #' @describeIn ci_new Prints a ci-object
 #'
 #' @param x an object of class `ci`.
