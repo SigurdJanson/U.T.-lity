@@ -1,6 +1,6 @@
 
 
-#' Confidence intervals
+#' confidence-intervals
 #'
 #' @param .est a vector of estimates.
 #' @param .lower a vector of the lower levels of the confidence intervals.
@@ -35,7 +35,7 @@
 #' @export
 #'
 #' @examples
-#' ci_new(1:2, 0:1, 2:3, .alt="two-sided", .dstr="joke", .mthd="guessing", .call="none")
+#' ci_new(1:2, 0:1, 2:3, .alt="two.sided", .dstr="joke", .mthd="guessing", .call="none")
 ci_new <- function(.est, .lower, .upper, .lvl, .alt, .dstr, .mthd, .call, ...) {
   if (!(.isAlive(.est) && .isAlive(.lower) && .isAlive(.upper)))
     stop("Confidence intervals require an estimate, a lower and an upper boundary")
@@ -50,7 +50,7 @@ ci_new <- function(.est, .lower, .upper, .lvl, .alt, .dstr, .mthd, .call, ...) {
 
   if (.isAlive(.alt) && is.character(.alt))
     attr(result, "alternative") <- .alt
-  if (.isAlive(.lvl) && is.character(.lvl))
+  if (.isAlive(.lvl) && is.numeric(.lvl))
     attr(result, "conf.level") <- .lvl
 
   if (.isAlive(.dstr) && is.character(.dstr))
@@ -76,19 +76,62 @@ is.ci <- function(x)
 
 
 
+
 #' @describeIn ci_new Prints a ci-object
 #'
 #' @param x an object of class `ci`.
+#' @param dropInf drops upper/lower columns with `Inf` values for one-sided
+#' intervals. Ignored when alternative hypothesis is two-sided.
 #' @param ... further arguments passed on to `print.data.frame()`.
 #'
 #' @return Returns `x` invisibly.
 #' @export
-print.ci <- function(x, ...) {
-  if (!inherits(x, "U.T.lity"))
+print.ci <- function(x, dropInf = TRUE, ...) {
+  .prettyPerc <- function(x)
+    paste0(format(x*100, digits=3, drop0trailing=TRUE), "%")
+
+  if (!is.ci(x))
     stop("x is not a ci-object from U.T.lity")
 
+  .cl <- attr(x, "conf.level")
+  .alt <- attr(x, "alternative")
+
+  px <- x # px == x to print
+
+  # Ensure well ordered columns
+  neworder <- c("lower", "est", "upper")
+  # intersect: keep only those elements in 'neworder' that exist in 'px'
+  # setdiff:   add the elements that 'px' has in addition to 'neworder'
+  neworder <- c(intersect(neworder, names(px)), setdiff(names(px), neworder))
+  px <- px[neworder] # finally: order it
+
+  # Drop upper/lower limit for one-sided confidence intervals
+  if (dropInf && .alt != .alternative["two.sided"]) {
+    if (.alt == .alternative["less"]) {
+      px[names(px) == "lower"] <- NULL
+    } else if (.alt == .alternative["greater"]) {
+      px[names(px) == "upper"] <- NULL
+    }
+  }
+
+  # Use numeric labels for confidence limits instead of "upper"/"lower"
+  if (.isAlive(.cl)) {
+    if (.alt == .alternative["two.sided"]) {
+      names(px)[names(px) == "lower"] <- .prettyPerc((1-.cl) / 2)
+      names(px)[names(px) == "upper"] <- .prettyPerc(1-((1-.cl) / 2))
+    } else if (.alt == .alternative["less"]) {
+      if (!dropInf)
+        names(px)[names(px) == "lower"] <- .prettyPerc(0.0) #"0.0"
+      names(px)[names(px) == "upper"] <- .prettyPerc(.cl)
+    } else if (.alt == .alternative["greater"]) {
+      names(px)[names(px) == "lower"] <- .prettyPerc(.cl)
+      if (!dropInf)
+        names(px)[names(px) == "upper"] <- .prettyPerc(1.0) #"1.0"
+    }
+  }
+
   cat("Call:", attr(x, "call"), "\n")
-  print.data.frame(x, ...)
+  print.data.frame(px, ...)
 
   invisible(x)
 }

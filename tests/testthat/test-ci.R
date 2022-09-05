@@ -135,3 +135,61 @@ test_that("`is.ci()` fails if either `ci` or `U.T.lity` is removed", {
   expect_false(is.ci(result))
 })
 
+
+
+# print.ci() ==================
+
+test_that("function call is the first element", {
+  x <- ci_new(1:2, 0:1, 2:3,
+              .alt="two.sided", .dstr="joke", .mthd="guessing", .call="bigfatfish()", .lvl=0.95)
+  expect_output(print(x), r"{^Call: bigfatfish\()}")
+})
+
+
+test_that("headers fit the alternative hypothesis", {
+  # conf.level = 0.95 -> [0.25, 0.975]
+  x <- ci_new(c(0.01, 0.02), c(1.01, 1.02), c(3.01, 3.02),
+              .dstr="joke", .mthd="guessing", .call="bigfatfish()", .lvl=0.95)
+
+  attr(x, "alternative") <- .alternative["two.sided"]
+  expect_output(print(x, dropInf=TRUE),  r"{\s+2\.5%\s+est\s+97\.5%}")
+  expect_output(print(x, dropInf=FALSE), r"{\s+2\.5%\s+est\s+97\.5%}")
+
+  attr(x, "alternative") <- .alternative["less"]
+  expect_output(print(x, dropInf=TRUE),  r"{\s+est\s+95%}")
+  expect_output(print(x, dropInf=FALSE), r"{\s+0%\s+est\s+95%}")
+
+  attr(x, "alternative") <- .alternative["greater"]
+  expect_output(print(x, dropInf=TRUE),  r"{\s+95%\s+est\s*}")
+  expect_output(print(x, dropInf=FALSE), r"{\s+95%\s+est\s+100%}")
+
+  # variation: conf.level = 0.94 -> [0.3, 0.97]
+  x <- ci_new(c(0.01, 0.02), c(1.01, 1.02), c(3.01, 3.02),
+              .dstr="joke", .mthd="guessing", .call="bigfatfish()", .lvl=0.94)
+
+  attr(x, "alternative") <- .alternative["two.sided"]
+  expect_output(print(x, dropInf=TRUE),  r"{\s+3%\s+est\s+97%}")
+  expect_output(print(x, dropInf=FALSE), r"{\s+3%\s+est\s+97%}")
+
+  attr(x, "alternative") <- .alternative["less"]
+  expect_output(print(x, dropInf=TRUE),  r"{\s+est\s+94%}")
+  expect_output(print(x, dropInf=FALSE), r"{\s+0%\s+est\s+94%}")
+
+  attr(x, "alternative") <- .alternative["greater"]
+  expect_output(print(x, dropInf=TRUE),  r"{\s+94%\s+est\s*}")
+  expect_output(print(x, dropInf=FALSE), r"{\s+94%\s+est\s+100%}")
+
+})
+
+
+# run `snapshot_accept("default arguments are used")`
+# run `snapshot_review()` to inspect the differences
+test_that("default arguments are used", {
+  x <- ci_new(c(0.01, 0.02), c(1.01, 1.02), c(3.01, 3.02),
+              .alt="two.sided", .dstr="joke", .mthd="guessing", .call="bigfatfish()", .lvl=0.95)
+
+  result.defaults <- capture.output(print(x))
+  result.explicit <- capture.output(print(x, dropInf=TRUE))
+  expect_identical(result.defaults, result.explicit)
+})
+

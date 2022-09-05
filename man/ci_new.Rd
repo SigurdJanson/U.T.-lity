@@ -3,11 +3,11 @@
 \name{ci_new}
 \alias{ci_new}
 \alias{print.ci}
-\title{Confidence intervals}
+\title{confidence-intervals}
 \usage{
 ci_new(.est, .lower, .upper, .lvl, .alt, .dstr, .mthd, .call, ...)
 
-\method{print}{ci}(x, ...)
+\method{print}{ci}(x, dropInf = TRUE, ...)
 }
 \arguments{
 \item{.est}{a vector of estimates.}
@@ -29,6 +29,9 @@ ci_new(.est, .lower, .upper, .lvl, .alt, .dstr, .mthd, .call, ...)
 \item{...}{further arguments passed on to \code{print.data.frame()}.}
 
 \item{x}{an object of class \code{ci}.}
+
+\item{dropInf}{drops upper/lower columns with \code{Inf} values for one-sided
+intervals. Ignored when alternative hypothesis is two-sided.}
 }
 \value{
 A \code{ci} object derived from a data frame with the columns \code{est}, \code{lower}, \code{upper},
@@ -37,7 +40,7 @@ and further columns given through \code{...}.
 Returns \code{x} invisibly.
 }
 \description{
-Confidence intervals
+confidence-intervals
 }
 \details{
 Confidence intervals are stored in an S3 class derived from a data frame. In its basic form it has the following (mandatory) columns:
@@ -64,5 +67,5 @@ Attributes are:
 
 }}
 \examples{
-ci_new(1:2, 0:1, 2:3, .alt="two-sided", .dstr="joke", .mthd="guessing", .call="none")
+ci_new(1:2, 0:1, 2:3, .alt="two.sided", .dstr="joke", .mthd="guessing", .call="none")
 }
