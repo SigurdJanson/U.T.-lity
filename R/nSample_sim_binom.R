@@ -15,8 +15,6 @@
 #'
 #' @return a `samplesize` object.
 #' @export
-#'
-#' @examples
 new_samplesim <- function(simresult, conf.level, desired.events, srange, .call, ...) {
   matched <- simresult >= conf.level
 
@@ -120,11 +118,6 @@ nSample_sim_binom <- function(p.occ = 0.31, threshold=0.8, conf.level=0.95,
       break
     }
   }
-
-  # matched <- confidence >= conf.level
-  # runs <- rle(matched)
-  # nlowest <- nmin + ifelse(runs$values[1], 0L, runs$lengths[1])
-  # nhigh   <- nmax - ifelse(runs$values[length(runs$values)], runs$lengths[length(runs$values)]-1, -Inf)
 
   # plot(nmin:nmax, confidence)
 

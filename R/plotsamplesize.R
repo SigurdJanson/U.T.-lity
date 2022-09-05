@@ -37,8 +37,6 @@ simplot.samplesize <- function(x, x0 = FALSE, y0 = FALSE, ...) {
   else
     pdim.y <- c(min(attr(x, "result")) * (2-ypad), 1 * ypad)
 
-  #-nafill <- max(srange[1] - pdim.x[1] - 1, 0)
-
   dt <- data.frame(
     sample=seq(srange[1], nmax),
     confidence = attr(x, "result")
