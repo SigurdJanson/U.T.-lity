@@ -2,10 +2,13 @@
 % Please edit documentation in R/ci.R
 \name{ci_new}
 \alias{ci_new}
+\alias{is.ci}
 \alias{print.ci}
-\title{confidence-intervals}
+\title{Confidence Intervals}
 \usage{
 ci_new(.est, .lower, .upper, .lvl, .alt, .dstr, .mthd, .call, ...)
+
+is.ci(x)
 
 \method{print}{ci}(x, dropInf = TRUE, ...)
 }
@@ -37,10 +40,12 @@ intervals. Ignored when alternative hypothesis is two-sided.}
 A \code{ci} object derived from a data frame with the columns \code{est}, \code{lower}, \code{upper},
 and further columns given through \code{...}.
 
+TRUE/FALSE
+
 Returns \code{x} invisibly.
 }
 \description{
-confidence-intervals
+Confidence Intervals
 }
 \details{
 Confidence intervals are stored in an S3 class derived from a data frame. In its basic form it has the following (mandatory) columns:
@@ -63,6 +68,8 @@ Attributes are:
 }
 \section{Functions}{
 \itemize{
+\item \code{is.ci()}: Function to check if an object is a \code{ci} object.
+
 \item \code{print(ci)}: Prints a ci-object
 
 }}

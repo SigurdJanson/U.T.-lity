@@ -1,6 +1,6 @@
 
 
-#' confidence-intervals
+#' Confidence Intervals
 #'
 #' @param .est a vector of estimates.
 #' @param .lower a vector of the lower levels of the confidence intervals.
@@ -68,7 +68,7 @@ ci_new <- function(.est, .lower, .upper, .lvl, .alt, .dstr, .mthd, .call, ...) {
 
 
 
-#' @describeIn confidence-intervals Function to check if an object is a `ci` object.
+#' @describeIn ci_new Function to check if an object is a `ci` object.
 #'
 #' @param x any R object.
 #' @return TRUE/FALSE

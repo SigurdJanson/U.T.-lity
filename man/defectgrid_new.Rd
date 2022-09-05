@@ -2,16 +2,20 @@
 % Please edit documentation in R/defectgrid.R
 \name{defectgrid_new}
 \alias{defectgrid_new}
+\alias{is.defectgrid}
 \title{Defect Grid}
 \usage{
 defectgrid_new(x)
+
+is.defectgrid(x)
 }
 \arguments{
-\item{x}{a numeric or logical matrix with participants in rows and defects
-in columns.}
+\item{x}{any R object.}
 }
 \value{
 A defect grid object.
+
+TRUE/FALSE
 }
 \description{
 The defect grid is a  class to store a PROBLEM-BY-PARTICIPANT matrix.
@@ -25,3 +29,8 @@ A second class "U.T.lity" indicates that this object is from this package.
 
 If \code{x} is a vector it will be coerced to a matrix with one row (i.e. participant).
 }
+\section{Functions}{
+\itemize{
+\item \code{is.defectgrid()}: Function to check if an object is a defect grid.
+
+}}
