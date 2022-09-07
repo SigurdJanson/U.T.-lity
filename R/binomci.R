@@ -9,7 +9,8 @@
 #' @note Based on a recommendation by Brown, Cai, and DasGupta (2001)
 #' `binomci` uses the Wilson method (Wilson, 1927) by default (even if Sauro and Lewis, 2005,
 #' recommend the adjusted Wald).
-#' @return A `ci` object lists the confidence intervals.
+#' @return A `ci` object containing the observed proportions
+#' and the lower and upper bounds of the confidence interval.
 #' @export
 #' @importFrom binom binom.confint
 #' @examples
@@ -22,22 +23,29 @@ binomci <- function(x, n, ...) {
   else
     conf.level <- .args[["conf.level"]] <- 0.95
 
+  if ("alternative" %in% ...names()) {
+    alternative <- .args[["alternative"]]
+  } else {
+    alternative <- .alternative["two.sided"]
+  }
+
   if ("method" %in% ...names()) {
     method <- .args[["method"]]
   } else {
     method <- .args[["method"]] <- "wilson"
   }
 
-  if ("alternative" %in% ...names()) {
-    if (.args[["alternative"]] != .alternative["two.sided"])
-      stop("'binomci' only computes two-sided confidence intervals")
-  }
+  # if 1-sided, convert 1-sided confidence to 2-sided by doubling it
+  if (alternative != .alternative["two.sided"])
+    conf.level <- 1 - ((1 - conf.level) * 2)
 
   ci <- do.call(binom.confint, args=c(list(x=x, n=n, tol=1e-8), .args))
 
-  result <- ci_new(x, ci["lower"], ci["upper"],
+  result <- ci_new(x,
+                   if (alternative == .alternative["less"]) 0 else ci["lower"],
+                   if (alternative == .alternative["less"]) 1 else ci["upper"],
                    .lvl = conf.level,
-                   .alt = .alternative["two.sided"],
+                   .alt = alternative,
                    .dstr = "binomial",
                    .mthd = method,
                    .call = deparse(match.call()))

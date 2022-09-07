@@ -15,7 +15,8 @@ binomci(x, n, ...)
 \code{conf.level} and \code{method}. See \code{binom::binom.confint()}.}
 }
 \value{
-A \code{ci} object lists the confidence intervals.
+A \code{ci} object containing the observed proportions
+and the lower and upper bounds of the confidence interval.
 }
 \description{
 binomci
