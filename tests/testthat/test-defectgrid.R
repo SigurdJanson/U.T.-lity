@@ -26,11 +26,17 @@ test_that("'defectgrid_new()' sets correct type attributes", {
   expect_identical(attr(x, "type"), "exists")
 })
 
+
+
+#
 # is.defectgrid ==============
+
 test_that("'defectgrid_new()' creates an object detected by 'is.defectgrid()'", {
   x <- defectgrid_new(matrix(c(1,0,1,0, 0,1,0,1, 0,0,1,1), 3, 4))
   expect_true(is.defectgrid(x))
 })
+
+
 
 test_that("'defectgrid_new()' creates an object detected by 'is.defectgrid()'", {
   x <- matrix(c(1,0,1,0, 0,1,0,1, 0,0,1,1), 3, 4)
@@ -40,13 +46,32 @@ test_that("'defectgrid_new()' creates an object detected by 'is.defectgrid()'", 
 
 
 
+test_that("`is.defectgrid()` fails if either `defectgrid` or `U.T.lity` is removed", {
+  # Act
+  result <- defectgrid_new(matrix(c(1,0,1,0, 0,1,0,1, 0,0,1,1), 3, 4))
+  # ... remove class "ci"
+  class(result) <- class(result)[class(result) != "defectgrid"]
+  # Assert
+  expect_false(is.ci(result))
+
+  # Act
+  result <- defectgrid_new(matrix(c(1,0,1,0, 0,1,0,1, 0,0,1,1), 3, 4))
+  # ... remove class "U.T.lity"
+  class(result) <- class(result)[class(result) != "U.T.lity"]
+  # Assert
+  expect_false(is.ci(result))
+})
+
+
 test_that("matrix is not denied by 'is.defectgrid()'", {
   x <- matrix(c(1,0,1,0, 0,1,0,1, 0,0,1,1), 3, 4)
   expect_false(is.defectgrid(x))
 })
 
 
+#
 # pxpplot_default ===========
+
 test_that("4 regular columns work", {
 
   # Act
@@ -60,6 +85,7 @@ test_that("4 regular columns work", {
            nrow=3L, dimnames = list(NULL, c(1, 4, 2, 3)))
   )
 })
+
 
 
 test_that("...adding 3 columns of darkfigures works", {
