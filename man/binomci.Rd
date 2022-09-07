@@ -12,7 +12,7 @@ binomci(x, n, ...)
 \item{n}{number of independent trials in the test.}
 
 \item{...}{Further arguments passed on to the \code{ci}-generating function. these are foremost:
-\code{conf.level} and \code{method}. See \code{binom::binom.confint()}.}
+\code{conf.level}, \code{alternative}, and \code{method}. See \code{binom::binom.confint()}.}
 }
 \value{
 A \code{ci} object containing the observed proportions

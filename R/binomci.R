@@ -5,7 +5,7 @@
 #' @param x number of successes in the test.
 #' @param n number of independent trials in the test.
 #' @param ... Further arguments passed on to the `ci`-generating function. these are foremost:
-#' `conf.level` and `method`. See `binom::binom.confint()`.
+#' `conf.level`, `alternative`, and `method`. See `binom::binom.confint()`.
 #' @note Based on a recommendation by Brown, Cai, and DasGupta (2001)
 #' `binomci` uses the Wilson method (Wilson, 1927) by default (even if Sauro and Lewis, 2005,
 #' recommend the adjusted Wald).
