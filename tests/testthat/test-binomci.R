@@ -27,29 +27,32 @@ test_that("sample cases work", {
 
 
 
-
+# use samples takes fomr the `MKinfer` library
+# using https://rdrr.io/snippets/
+# This test could be improved - it is not very precise
 test_that("one-sided intervals are correct", {
-  #
-  sle <- binom.test(682, 682+243, p = 0.75, alternative="less", conf.level=0.75)
-  less <- c(sle$conf.int, sle$conf.int[2])
+  expected <- data.frame(
+    conf.level  = c(rep(0.95, 6L)),
+    x           = rep(c(42, 16, 23), 2L),
+    n           = rep(c(43, 112, 256), 2L),
+    alternative = factor(c(rep("less", 3L), rep("greater", 3L))),
+    lower       = c(rep(0.00, 3L), c(0.902252, 0.09688296, 0.06457696)),
+    upper       = c(c(0.9947946, 0.2056791, 0.1236894), rep(1.00, 3L))
+  )
 
-  # Act
-  result <- binomci(682, 682+243, conf.level=0.75, alternative="less")
-
-  # Assert
-  expect_equal(c(result$lower[1], result$upper[1]), less)
-
-
-  #
-  sgr <- binom.test(682, 682+243, p = 0.75, alternative="greater", conf.level=0.75)
-  greater <- c(sgr$conf.int[1], sgr$conf.int[2])
-
-  # Act
-  result <- binomci(682, 682+243, conf.level=0.75, alternative="greater")
-
-  # Assert
-  expect_equal(c(result$lower[1], result$upper[1]), greater)
+  for (testrow in 1:6) {
+    .cl  <- expected$conf.level[testrow]
+    .alt <- expected$alternative[testrow]
+    .x   <- expected$x[testrow]
+    .n   <- expected$n[testrow]
+    .exp <- c(expected$lower[testrow], expected$upper[testrow])
+    # Act
+    result <- binomci(x = .x, n = .n, conf.level = .cl, alternative=as.character(.alt))
+    # Assert
+    expect_equal(c(result$lower[1], result$upper[1]), .exp, tolerance=0.075)
+  }
 })
+
 
 
 

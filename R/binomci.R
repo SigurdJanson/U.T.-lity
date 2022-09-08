@@ -10,7 +10,7 @@
 #' `binomci` uses the Wilson method (Wilson, 1927) by default (even if Sauro and Lewis, 2005,
 #' recommend the adjusted Wald).
 #' @return A `ci` object containing the observed proportions
-#' and the lower and upper bounds of the confidence interval.
+#' and the lower and upper bounds of the confidence interval around them.
 #' @export
 #' @importFrom binom binom.confint
 #' @examples
@@ -43,7 +43,7 @@ binomci <- function(x, n, ...) {
 
   result <- ci_new(x,
                    if (alternative == .alternative["less"]) 0 else ci["lower"],
-                   if (alternative == .alternative["less"]) 1 else ci["upper"],
+                   if (alternative == .alternative["greater"]) 1 else ci["upper"],
                    .lvl = conf.level,
                    .alt = alternative,
                    .dstr = "binomial",
