@@ -16,7 +16,7 @@ binomci(x, n, ...)
 }
 \value{
 A \code{ci} object containing the observed proportions
-and the lower and upper bounds of the confidence interval.
+and the lower and upper bounds of the confidence interval around them.
 }
 \description{
 binomci
