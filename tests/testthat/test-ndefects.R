@@ -4,7 +4,7 @@
 #
 # Numbers by Sauro & Lewis, quant. the UX
 test_that("", {
-  expect_equal(ndefects(0.5, 1, 5), 0.969, tolerance = 0.001)
+  expect_equal(ndefects(0.5, 5), 0.969, tolerance = 0.001)
 })
 
 
@@ -23,10 +23,10 @@ test_that("sample cases from Jeff Sauro yield roughly the same result", {
 
   for(.r in rownames(SauroNumbers))
     for (.c in colnames(SauroNumbers)) {
-      result <- ndefects(as.numeric(.r), 1, SauroNumbers[.r, .c])
+      result <- ndefects(as.numeric(.r), SauroNumbers[.r, .c])
       expect_gte(result, as.numeric(.c)) #, tolerance=0.01, info=paste("p =", .r, "n =", SauroNumbers[.r, .c]))
 
-      lowerresult <- ndefects(as.numeric(.r), 1, SauroNumbers[.r, .c]-1L)
+      lowerresult <- ndefects(as.numeric(.r), SauroNumbers[.r, .c]-1L)
       expect_lt(lowerresult, as.numeric(.c))
     }
 })
@@ -45,7 +45,7 @@ test_that("sample cases from Jeff Sauro yield the same result", {
 
   for(.r in rownames(SauroNumbers))
     for (.c in colnames(SauroNumbers)) {
-      result <- ndefects(as.numeric(.r), 1, as.numeric(.c))
+      result <- ndefects(as.numeric(.r), as.numeric(.c))
       result <- round(result, 2) # numbers in the book are rounded to 2 digits
       expect_equal(result, SauroNumbers[.r, .c], info=paste("p =", .r, "n =", as.numeric(.c)))
     }
@@ -53,14 +53,14 @@ test_that("sample cases from Jeff Sauro yield the same result", {
 
 
 
-test_that("the percentage (d.total==1) is multiplied by d.total", {
-  totals <- c(10, 20, 50, 1000, 5000)
-
-  for (size in runif(5)*10+1) # different sample sizes
-    for (p in runif(10L)) { # different p's
-      percentage <- ndefects(p.occ=0, d.total = rep(1L, length(totals)), size)
-      count <- ndefects(p.occ=0, d.total = totals, size)
-      # Assert
-      expect_equal(count, percentage*totals, info=paste("p =", p, "n =", size))
-    }
-})
+# test_that("the percentage (d.total==1) is multiplied by d.total", {
+#   totals <- c(10, 20, 50, 1000, 5000)
+#
+#   for (size in runif(5)*10+1) # different sample sizes
+#     for (p in runif(10L)) { # different p's
+#       percentage <- ndefects(p.occ=0, d.total = rep(1L, length(totals)), size)
+#       count <- ndefects(p.occ=0, d.total = totals, size)
+#       # Assert
+#       expect_equal(count, percentage*totals, info=paste("p =", p, "n =", size))
+#     }
+# })
