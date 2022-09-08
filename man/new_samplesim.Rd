@@ -2,9 +2,15 @@
 % Please edit documentation in R/nSample_sim_binom.R
 \name{new_samplesim}
 \alias{new_samplesim}
+\alias{print.simulation}
+\alias{print.samplesize}
 \title{samplesize}
 \usage{
 new_samplesim(simresult, conf.level, desired.events, srange, .call, ...)
+
+\method{print}{simulation}(x, ...)
+
+\method{print}{samplesize}(x, ...)
 }
 \arguments{
 \item{simresult}{a vector containing the confidences per sample size.
@@ -21,10 +27,21 @@ was made.}
 \item{.call}{the original function call.}
 
 \item{...}{further arguments passed on to other methods.}
+
+\item{x}{A \code{samplesize} object}
 }
 \value{
 a \code{samplesize} object.
+
+prints \code{x} and returns it invisibly.
 }
 \description{
 Constructor function to create sample size objects created by simulation.
 }
+\section{Functions}{
+\itemize{
+\item \code{print(simulation)}: method for sample sizes estimated by simulation
+
+\item \code{print(samplesize)}: 
+
+}}

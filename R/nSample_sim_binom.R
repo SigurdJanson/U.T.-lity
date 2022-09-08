@@ -36,12 +36,12 @@ new_samplesim <- function(simresult, conf.level, desired.events, srange, .call, 
 }
 
 
-#' @describeIn samplesize method for sample sizes estimated by simulation
+#' @describeIn new_samplesim method for sample sizes estimated by simulation
 #' @export
 print.simulation <- function(x, ...) NextMethod("print")
 
 
-#' @describeIn samplesize
+#' @describeIn new_samplesim
 #'
 #' @param x A `samplesize` object
 #' @param ... further arguments passed on to other methods.
@@ -53,19 +53,19 @@ print.samplesize <- function(x, ...) {
     print("Sample size simulation has not converged")
   }
 
-  cat(paste0("Recommended sample size: ", as.integer(x)), "\n") #", quote = FALSE)
+  cat(paste0(gettext("Recommended sample size: "), as.integer(x)), "\n") #", quote = FALSE)
 
   matched <- attr(x, "result") >= attr(x, "conf.level")
   runs <- rle(matched)
   nlowest <- attr(x, "search.range")[1]
   nhigh   <- x
 
-  cat("Smallest sample size meeting the conf. level:", nlowest, "\n")
-  cat("Lowest before saturation:", nhigh, "\n")
+  cat(gettext("Smallest sample size meeting the conf. level:"), nlowest, "\n")
+  cat(gettext("Lowest before saturation:"), nhigh, "\n")
   cat("\n")
-  cat("Summarized simulation results (in runs)\n")
-  cat("Count           ", format(runs$lengths, width=6L), "\n")
-  cat("Meets confidence", format(runs$values, width=6L), "\n")
+  cat(gettext("Summarized simulation results (in runs)"), "\n")
+  cat(gettext("Count"), format(runs$lengths, width=6L), "\n")
+  cat(gettext("Meets confidence"), format(runs$values, width=6L), "\n")
 
   invisible(x)
 }
