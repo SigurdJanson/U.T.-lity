@@ -2,6 +2,8 @@
 % Please edit documentation in R/nDefectsPlot.R
 \name{nDefectsPlot}
 \alias{nDefectsPlot}
+\alias{nDefectsPlot_gr}
+\alias{nDefectsPlot_gg}
 \title{nDefectsPlot}
 \usage{
 nDefectsPlot(
@@ -9,13 +11,20 @@ nDefectsPlot(
   subjects = 0:15,
   growth = FALSE,
   col = NULL,
-  pch = 20,
-  las = 1,
-  xlim = NULL,
-  ylim = NULL,
-  axes = TRUE,
+  lib = c("ggplot", "graphics"),
   ...
 )
+
+nDefectsPlot_gr(
+  p.occ = 0.31,
+  subjects = 0:15,
+  growth = FALSE,
+  col = NULL,
+  las = 1,
+  ...
+)
+
+nDefectsPlot_gg(p.occ = 0.31, subjects = 0:15, growth = FALSE, col = NULL, ...)
 }
 \arguments{
 \item{p.occ}{Probability of Occurrence: how big is the probability of the
@@ -27,24 +36,26 @@ assumed by Nielsen, 2000).}
 \item{growth}{if \code{TRUE} the plot shows an additional curve for each visibility
 that shows the growth from one sample size to the next.}
 
-\item{col}{see \code{\link[graphics:par]{graphics::par()}}.}
+\item{col}{see \code{\link[graphics:par]{graphics::par()}}. Must be as long as there are lines to draw.}
 
-\item{pch}{see \code{\link[graphics:par]{graphics::par()}}.}
+\item{...}{Further arguments handed over to the plotting function. For \code{plot()} this
+could be e.g. \code{las = 1}.}
 
 \item{las}{style of axis labels, see \code{\link[graphics:par]{graphics::par()}}.}
-
-\item{xlim, ylim}{the x and y limits of the plot, see \code{\link[graphics:plot.default]{graphics::plot()}}.}
-
-\item{axes}{show axes (\code{TRUE}/\code{FALSE}).}
-
-\item{...}{Further arguments handed over to \code{plot()}.}
 }
 \description{
-Returns a plot that shows the number of detected usability defects as a function of
-the number of test participants. This chart is well-known from Nielsens AlertBox
-"Why You Only Need to Test with 5 Users" (2000).
+Returns a plot that shows the probability to detect each usability
+defect as a function of the number of test participants. This chart
+is well-known from Nielsens AlertBox "Why You Only Need to Test with 5 Users" (2000).
 }
 \details{
 Without any arguments the function provides the chart from Nielsens AlertBox
-(Nielsen, 2000)
+(Nielsen, 2000).
 }
+\section{Functions}{
+\itemize{
+\item \code{nDefectsPlot_gr()}: Variant to plot with the \code{graphics} library.
+
+\item \code{nDefectsPlot_gg()}: Variant to plot with the \code{ggplot2} library.
+
+}}
