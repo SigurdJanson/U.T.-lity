@@ -56,11 +56,12 @@ simplot.samplesize <- function(x, x0 = FALSE, y0 = FALSE, ...) {
     #scale_x_continuous(expand = c(0, 0))+ #, limits = pdim.x) + #
     scale_y_continuous(expand = c(0, 0), limits = pdim.y) +
     labs(
-      x = paste0("Sample Size (", srange[1], " - ", nmax, ")"),
-      y = "Confidence",
-      title = paste("Confidence Depending on Sample Size"),
-      caption = paste0("Sample size required to find ", attr(x, "desired")*100,
-                      "% of defects with a confidence of ", attr(x, "conf.level"))
+      x = paste0(gettext("Sample Size"), " (", srange[1], " - ", nmax, ")"),
+      y = gettext("Confidence"),
+      title = gettext("Confidence Depending on Sample Size"),
+      #TRANSLATE: as one sentence
+      caption = paste0(gettext("Sample size required to find "), attr(x, "desired")*100,
+                       gettext("% of defects with a confidence of "), attr(x, "conf.level"))
     ) +
     geom_rect(data=rects, inherit.aes=FALSE, #data is needed for transparency (weirdly so)
               aes(xmin=srange[1], xmax=pdim.x[2],

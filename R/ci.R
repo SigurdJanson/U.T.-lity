@@ -132,7 +132,7 @@ print.ci <- function(x, dropInf = TRUE, ...) {
     }
   }
 
-  cat("Call:", attr(x, "call"), "\n")
+  cat(gettext("Call:"), attr(x, "call"), "\n")
   print.data.frame(px, ...)
 
   invisible(x)
@@ -169,7 +169,7 @@ ci.numeric <- function(x, mu, conf.level = 0.95, plot=TRUE) {
     mu <- rep_len(mu, length(x))
   }
 
-  # Create empty data frame - use length for efficiency
+  # Create empty data - use length for efficiency
   means  <- numeric(length(x))
   lower  <- numeric(length(x))
   upper  <- numeric(length(x))

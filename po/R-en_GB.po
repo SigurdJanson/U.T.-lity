@@ -1,0 +1,129 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: U.T.lity 0.0.0.9000\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-09-08 19:47\n"
+"PO-Revision-Date: 2022-09-08 19:10+0200\n"
+"Last-Translator: Dr. Jan Seifert <github@sigurdjanson.anonaddy.com>\n"
+"Language-Team: en_GB\n"
+"Language: en_GB\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.1.1\n"
+
+msgid "Confidence intervals require an estimate, a lower and an upper boundary"
+msgstr ""
+"Confidence intervals require an estimate, a lower and an upper boundary"
+
+msgid "Lower boundaries of an interval must be less than upper boundaries"
+msgstr "Lower boundaries of an interval must be less than upper boundaries"
+
+msgid "x is not a ci-object from U.T.lity"
+msgstr "x is not a ci-object from U.T.lity"
+
+msgid "Call:"
+msgstr ""
+
+msgid "Unknown format of argument 'x'"
+msgstr "Unknown format of argument 'x'"
+
+msgid "Not able to determine the type of 'x'"
+msgstr "Not able to determine the type of 'x'"
+
+msgid "not yet implemented"
+msgstr "not yet implemented"
+
+msgid "Upper limits must be greater than the lower ones"
+msgstr "Upper limits must be greater than the lower ones"
+
+msgid "Provide a frequency with which the defect occurred"
+msgstr "Provide a frequency with which the defect occurred"
+
+msgid "Provide a sample size"
+msgstr "Provide a sample size"
+
+msgid "Objects must bei either numeric or logical to become a defect grid"
+msgstr "Objects must bei either numeric or logical to become a defect grid"
+
+msgid "Other methods than binomial have not been implemented"
+msgstr "Other methods than binomial have not been implemented"
+
+msgid "Number of colors does not match number of lines"
+msgstr "Number of colors does not match number of lines"
+
+msgid "Visibility must be 0 <= p.occ <= 1"
+msgstr "Visibility must be 0 <= p.occ <= 1"
+
+msgid "Visibility must be 0 <= p.obs <= 1"
+msgstr "Visibility must be 0 <= p.obs <= 1"
+
+#, fuzzy
+msgid "Recommended sample size:"
+msgstr "Provide a sample size"
+
+msgid "Smallest sample size meeting the conf. level:"
+msgstr ""
+
+msgid "Lowest before saturation:"
+msgstr ""
+
+msgid "Summarized simulation results (in runs)"
+msgstr ""
+
+msgid "Count"
+msgstr ""
+
+msgid "Meets confidence"
+msgstr ""
+
+msgid "Number of test subjects must be specified and >= 0"
+msgstr "Number of test subjects must be specified and >= 0"
+
+msgid "Probability 'p.occ' must be 0 <= p.occ <= 1"
+msgstr "Probability 'p.occ' must be 0 <= p.occ <= 1"
+
+msgid "Sample size simulation has not converged"
+msgstr "Sample size simulation has not converged"
+
+msgid "Sample Size"
+msgstr ""
+
+msgid "Confidence"
+msgstr ""
+
+msgid "Confidence Depending on Sample Size"
+msgstr ""
+
+msgid "Sample size required to find"
+msgstr ""
+
+msgid "% of defects with a confidence of"
+msgstr ""
+
+msgid "'conf.level' has to be of length 1 (confidence level)"
+msgstr "'conf.level' has to be of length 1 (confidence level)"
+
+msgid "'conf.level' has to be in [0.5, 1]"
+msgstr "'conf.level' has to be in [0.5, 1]"
+
+msgid "Object cannot be shown as Participant X Problem Plot"
+msgstr "Object cannot be shown as Participant X Problem Plot"
+
+msgid "'m' must be a defect grid"
+msgstr "'m' must be a defect grid"
+
+msgid "The dark figure cannot be less than zero"
+msgstr "The dark figure cannot be less than zero"
+
+msgid "Incorrect number of axis names"
+msgstr "Incorrect number of axis names"
+
+msgid "Missing columns in data frame 'x'"
+msgstr "Missing columns in data frame 'x'"
+
+msgid "Cannot process object 'x' of class '%s'"
+msgstr "Cannot process object 'x' of class '%s'"
+
+msgid ","
+msgstr ","
