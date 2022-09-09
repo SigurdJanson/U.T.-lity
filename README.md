@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# U.T.lity
+# U.T.lity <img src="man/figures/logo_ut-lity.svg" align="right" height="139" />
 
 <!-- badges: start -->
 
