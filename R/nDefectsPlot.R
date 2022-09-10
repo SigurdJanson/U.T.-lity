@@ -12,10 +12,12 @@
 #' @param growth if `TRUE` the plot shows an additional curve for each visibility
 #' that shows the growth from one sample size to the next.
 #' @param col see [graphics::par()]. Must be as long as there are lines to draw.
+#' @param lib draws the plot either with `ggplot2` or `graphics`.
 #' @param ... Further arguments handed over to the plotting function. For `plot()` this
 #' could be e.g. `las = 1`.
 #' @details Without any arguments the function provides the chart from Nielsens AlertBox
 #' (Nielsen, 2000).
+#' @export
 nDefectsPlot <- function (p.occ = 0.31, subjects = 0:15, growth = FALSE,
                              col = NULL, lib = c("ggplot", "graphics"),
                              ...) {
@@ -99,6 +101,8 @@ nDefectsPlot_gr <- function (p.occ = 0.31, subjects = 0:15, growth = FALSE,
 
 #' @describeIn nDefectsPlot Variant to plot with the `ggplot2` library.
 #' @export
+#' @importFrom ggplot2 scale_colour_manual
+#' @importFrom scales percent
 nDefectsPlot_gg <- function(p.occ = 0.31, subjects = 0:15, growth=FALSE,
                             col = NULL, ...) {
   .args <- list(...)
@@ -110,7 +114,9 @@ nDefectsPlot_gg <- function(p.occ = 0.31, subjects = 0:15, growth=FALSE,
     p.occ = rep(p.occ, each=length(subjects))
   )
 
-  p <- ggplot(dt, aes(x = subjects, y = p.obs, group = as.factor(p.occ), color = as.factor(p.occ))) +
+  p <- ggplot(dt, aes(x = .data$subjects, y = .data$p.obs,
+                      group = as.factor(.data$p.occ),
+                      color = as.factor(.data$p.occ))) +
          geom_line(aes(color=p.occ)) + geom_point(aes(color=p.occ), size=1) +
          scale_y_continuous(labels = scales::percent) +
          labs(

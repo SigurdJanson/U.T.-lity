@@ -14,7 +14,7 @@ RoxygenNote: 7.2.1
 Imports:
     stats,
     binom,
-    ggplot2
+    ggplot2, scales
 Suggests: 
     knitr,
     rmarkdown,

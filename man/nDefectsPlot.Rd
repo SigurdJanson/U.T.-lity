@@ -38,6 +38,8 @@ that shows the growth from one sample size to the next.}
 
 \item{col}{see \code{\link[graphics:par]{graphics::par()}}. Must be as long as there are lines to draw.}
 
+\item{lib}{draws the plot either with \code{ggplot2} or \code{graphics}.}
+
 \item{...}{Further arguments handed over to the plotting function. For \code{plot()} this
 could be e.g. \code{las = 1}.}
 
