@@ -59,8 +59,8 @@ ciplot.cidf <- function(x, ...) {
 #' @export
 ciplot_default <- function(lower, upper, names=NA, lib = c("ggplot", "graphics"), ...) {
   lib <- match.arg(lib)
-  if (lib == "ggplot" && !require(ggplot2, quietly = TRUE) )
-    lib <- "graphics"
+  # if (lib == "ggplot" && !require(ggplot2, quietly = TRUE) )
+  #   lib <- "graphics"
 
   if (lib == "ggplot")
     ciplot_gg(lower, upper, names, ...)
@@ -91,7 +91,7 @@ ciplot_gr <- function(lower, upper, names=NA, ...) {
   barplot(h, width = 1,
           names.arg = names, legend.text = FALSE, beside = FALSE,
           horiz = TRUE, density = NULL,
-          col = c("#FFFFFF","#000000", "#FFFFFF"),
+          col = c("#FFFFFF", "#000000", "#FFFFFF"),
           border = par("fg"),
           xlim = c(min(bottom), max(top)), xpd = FALSE,
           axisnames = .isAlive(names),
@@ -123,9 +123,9 @@ ciplot_gg <- function(lower, upper, names=NA, ...) {
     geom_crossbar(aes(xmin = lower, xmax = upper, fill = 1), fatten=1) +
     scale_fill_gradient(low = "black", high = "black") +
     labs(
-      x = "Value",
-      y = "Category",
-      title = "Compare Confidence Intervals",
+      x = gettext("Value"),
+      y = gettext("Category"),
+      title = gettext("Compare Confidence Intervals"),
       caption = NULL)
 }
 

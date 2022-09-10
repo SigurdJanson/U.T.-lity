@@ -4,11 +4,11 @@
 \alias{ciplot}
 \alias{ciplot.default}
 \alias{ciplot.ci}
+\alias{ciplot.htest}
+\alias{ciplot.cidf}
 \alias{ciplot_default}
 \alias{ciplot_gr}
 \alias{ciplot_gg}
-\alias{ciplot.htest}
-\alias{ciplot.cidf}
 \title{Confidence Plots}
 \usage{
 ciplot(x, ...)
@@ -17,15 +17,15 @@ ciplot(x, ...)
 
 \method{ciplot}{ci}(x, ...)
 
+\method{ciplot}{htest}(x, ...)
+
+\method{ciplot}{cidf}(x, ...)
+
 ciplot_default(lower, upper, names = NA, lib = c("ggplot", "graphics"), ...)
 
 ciplot_gr(lower, upper, names = NA, ...)
 
 ciplot_gg(lower, upper, names = NA, ...)
-
-\method{ciplot}{htest}(x, ...)
-
-\method{ciplot}{cidf}(x, ...)
 }
 \arguments{
 \item{x}{An object containing the confidence intervals}
