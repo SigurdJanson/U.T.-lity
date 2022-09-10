@@ -82,8 +82,8 @@ pxpplot.defectgrid <- function(x, darkfigure = NULL, percentage = TRUE,
 #' @importFrom graphics axis plot.new plot.window rect title
 #' @examples
 #' x <- defectgrid_new(matrix(c(1,0,1,0, 0,1,0,1, 0,0,1,1), 3, 4))
-#' pxpplot_default(x, darkfigure = 3, percentage = FALSE)
-pxpplot_default <- function (x, darkfigure = NULL,
+#' pxpplot_gr(x, darkfigure = 3, percentage = FALSE)
+pxpplot_gr <- function (x, darkfigure = NULL,
                              percentage = TRUE, names.arg = NULL,
                              horiz = FALSE,
                              density = NULL, angle = 45, col = NULL, col.opt = TRUE,
@@ -275,14 +275,14 @@ pxpplot_default <- function (x, darkfigure = NULL,
     #        }
 
     ## Main title and axis titles
-    if(is.null(main)) main <- "Defect by User Matrix"
+    if(is.null(main)) main <- gettext("Defect by User Matrix")
     if(is.null(xlab)) {
-      if(!horiz) xlab <- "Defect"
-      else xlab <- "User"
+      if(!horiz) xlab <- gettext("Defect")
+      else xlab <- gettext("User")
     }
     if(is.null(ylab)) {
-      if(!horiz) ylab <- "User"
-      else ylab <- "Defect"
+      if(!horiz) ylab <- gettext("User")
+      else ylab <- gettext("Defect")
     }
     title(main = main, sub = sub, xlab = xlab, ylab = ylab, ...)
 
@@ -315,7 +315,7 @@ pxpplot_gg <- function(x, darkfigure = NULL, percentage = TRUE, ...) {
       dimnames(x) <- list(paste0("part", 1:nrow(x)), paste0("d.", 1:ncol(x)))
       x <- reshape(x, idvar="id", direction = "long")
       x$partid <- row.names(x)
-      names(x)[names(x) == "time"] <- "defect"
+      names(x)[names(x) == "time"] <- gettext("Defect")
       names(x)[names(x) == "d"] <- "occurence"
     }
   } else if (is.data.frame(x)) {
@@ -323,7 +323,7 @@ pxpplot_gg <- function(x, darkfigure = NULL, percentage = TRUE, ...) {
     if (anyNA(match(c("cc", "a", "0", "f"), n)))
       stop("Missing columns in data frame 'x'")
   } else {
-    stop(sprintf("Cannot process object 'x' of class '%s'",
+    stop(gettextf("Cannot process object 'x' of class '%s'",
                  paste0(class(x), collapse=", ")))
   }
 

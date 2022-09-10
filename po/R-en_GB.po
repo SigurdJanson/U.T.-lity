@@ -2,9 +2,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: U.T.lity 0.0.0.9000\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-09-08 19:47\n"
-"PO-Revision-Date: 2022-09-08 19:10+0200\n"
-"Last-Translator: Dr. Jan Seifert <github@sigurdjanson.anonaddy.com>\n"
+"POT-Creation-Date: 2022-09-10 12:03\n"
+"PO-Revision-Date: 2022-09-10 12:10+0200\n"
+"Last-Translator: Jan Seifert <github@sigurdjanson.anonaddy.com>\n"
 "Language-Team: en_GB\n"
 "Language: en_GB\n"
 "MIME-Version: 1.0\n"
@@ -13,8 +13,7 @@ msgstr ""
 "X-Generator: Poedit 3.1.1\n"
 
 msgid "Confidence intervals require an estimate, a lower and an upper boundary"
-msgstr ""
-"Confidence intervals require an estimate, a lower and an upper boundary"
+msgstr "Confidence intervals require an estimate, a lower and an upper boundary"
 
 msgid "Lower boundaries of an interval must be less than upper boundaries"
 msgstr "Lower boundaries of an interval must be less than upper boundaries"
@@ -23,7 +22,7 @@ msgid "x is not a ci-object from U.T.lity"
 msgstr "x is not a ci-object from U.T.lity"
 
 msgid "Call:"
-msgstr ""
+msgstr "Call:"
 
 msgid "Unknown format of argument 'x'"
 msgstr "Unknown format of argument 'x'"
@@ -37,6 +36,15 @@ msgstr "not yet implemented"
 msgid "Upper limits must be greater than the lower ones"
 msgstr "Upper limits must be greater than the lower ones"
 
+msgid "Value"
+msgstr "Value"
+
+msgid "Category"
+msgstr "Category"
+
+msgid "Compare Confidence Intervals"
+msgstr "Compare Confidence Intervals"
+
 msgid "Provide a frequency with which the defect occurred"
 msgstr "Provide a frequency with which the defect occurred"
 
@@ -49,8 +57,23 @@ msgstr "Objects must bei either numeric or logical to become a defect grid"
 msgid "Other methods than binomial have not been implemented"
 msgstr "Other methods than binomial have not been implemented"
 
+msgid "Number of Subjects"
+msgstr "Number of Participants"
+
+msgid "Chance of Observing"
+msgstr "Chance of Observing"
+
 msgid "Number of colors does not match number of lines"
 msgstr "Number of colors does not match number of lines"
+
+msgid "Detection Rate for Usability Problems"
+msgstr "Detection Rate for Usability Problems"
+
+msgid "as outlined by Nielsen & Landauer (1993)"
+msgstr "as outlined by Nielsen & Landauer (1993)"
+
+msgid "Probability"
+msgstr "Probability"
 
 msgid "Visibility must be 0 <= p.occ <= 1"
 msgstr "Visibility must be 0 <= p.occ <= 1"
@@ -58,24 +81,23 @@ msgstr "Visibility must be 0 <= p.occ <= 1"
 msgid "Visibility must be 0 <= p.obs <= 1"
 msgstr "Visibility must be 0 <= p.obs <= 1"
 
-#, fuzzy
 msgid "Recommended sample size:"
 msgstr "Provide a sample size"
 
 msgid "Smallest sample size meeting the conf. level:"
-msgstr ""
+msgstr "Smallest sample size meeting the conf. level:"
 
 msgid "Lowest before saturation:"
-msgstr ""
+msgstr "Lowest before saturation:"
 
 msgid "Summarized simulation results (in runs)"
-msgstr ""
+msgstr "Summarized simulation results (in runs)"
 
 msgid "Count"
-msgstr ""
+msgstr "Count"
 
 msgid "Meets confidence"
-msgstr ""
+msgstr "Meets confidence"
 
 msgid "Number of test subjects must be specified and >= 0"
 msgstr "Number of test subjects must be specified and >= 0"
@@ -87,19 +109,19 @@ msgid "Sample size simulation has not converged"
 msgstr "Sample size simulation has not converged"
 
 msgid "Sample Size"
-msgstr ""
+msgstr "Sample Size"
 
 msgid "Confidence"
-msgstr ""
+msgstr "Confidence"
 
 msgid "Confidence Depending on Sample Size"
-msgstr ""
+msgstr "Confidence Depending on Sample Size"
 
 msgid "Sample size required to find"
-msgstr ""
+msgstr "Sample size required to find"
 
 msgid "% of defects with a confidence of"
-msgstr ""
+msgstr "% of defects with a confidence of"
 
 msgid "'conf.level' has to be of length 1 (confidence level)"
 msgstr "'conf.level' has to be of length 1 (confidence level)"
@@ -119,11 +141,17 @@ msgstr "The dark figure cannot be less than zero"
 msgid "Incorrect number of axis names"
 msgstr "Incorrect number of axis names"
 
+msgid "Defect by User Matrix"
+msgstr "Defect by Participant Matrix"
+
+msgid "Defect"
+msgstr "Defect"
+
+msgid "User"
+msgstr "Participant"
+
 msgid "Missing columns in data frame 'x'"
 msgstr "Missing columns in data frame 'x'"
 
 msgid "Cannot process object 'x' of class '%s'"
 msgstr "Cannot process object 'x' of class '%s'"
-
-msgid ","
-msgstr ","

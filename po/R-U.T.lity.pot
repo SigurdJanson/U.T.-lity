@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: U.T.lity 0.0.0.9000\n"
-"POT-Creation-Date: 2022-09-08 19:47\n"
+"POT-Creation-Date: 2022-09-10 12:03\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -34,6 +34,15 @@ msgstr ""
 msgid "Upper limits must be greater than the lower ones"
 msgstr ""
 
+msgid "Value"
+msgstr ""
+
+msgid "Category"
+msgstr ""
+
+msgid "Compare Confidence Intervals"
+msgstr ""
+
 msgid "Provide a frequency with which the defect occurred"
 msgstr ""
 
@@ -46,7 +55,22 @@ msgstr ""
 msgid "Other methods than binomial have not been implemented"
 msgstr ""
 
+msgid "Number of Subjects"
+msgstr ""
+
+msgid "Chance of Observing"
+msgstr ""
+
 msgid "Number of colors does not match number of lines"
+msgstr ""
+
+msgid "Detection Rate for Usability Problems"
+msgstr ""
+
+msgid "as outlined by Nielsen & Landauer (1993)"
+msgstr ""
+
+msgid "Probability"
 msgstr ""
 
 msgid "Visibility must be 0 <= p.occ <= 1"
@@ -115,11 +139,17 @@ msgstr ""
 msgid "Incorrect number of axis names"
 msgstr ""
 
+msgid "Defect by User Matrix"
+msgstr ""
+
+msgid "Defect"
+msgstr ""
+
+msgid "User"
+msgstr ""
+
 msgid "Missing columns in data frame 'x'"
 msgstr ""
 
 msgid "Cannot process object 'x' of class '%s'"
-msgstr ""
-
-msgid ","
 msgstr ""

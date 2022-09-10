@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: U.T.lity 0.0.0.9000\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-09-08 19:47\n"
-"PO-Revision-Date: 2022-09-08 19:53+0200\n"
+"POT-Creation-Date: 2022-09-10 12:03\n"
+"PO-Revision-Date: 2022-09-10 12:10+0200\n"
 "Last-Translator: Jan Seifert <github@sigurdjanson.anonaddy.com>\n"
 "Language-Team: de_DE\n"
 "Language: de_DE\n"
@@ -38,6 +38,15 @@ msgstr "Noch nicht implementiert"
 msgid "Upper limits must be greater than the lower ones"
 msgstr "Obergrenzen müssen größer sein als Untergrenzen"
 
+msgid "Value"
+msgstr "Wert"
+
+msgid "Category"
+msgstr "Kategorie"
+
+msgid "Compare Confidence Intervals"
+msgstr "Vergleich von Konfidenzintervallen"
+
 msgid "Provide a frequency with which the defect occurred"
 msgstr "Gib die Häufigkeit des Problems an"
 
@@ -52,8 +61,23 @@ msgstr ""
 msgid "Other methods than binomial have not been implemented"
 msgstr "Andere Methoden als binomiale wurden nicht implementiert"
 
+msgid "Number of Subjects"
+msgstr "Anzahl Teilnehmer"
+
+msgid "Chance of Observing"
+msgstr ""
+
 msgid "Number of colors does not match number of lines"
 msgstr "Anzahl der Farben und Anzahl Linien stimmen nicht überein"
+
+msgid "Detection Rate for Usability Problems"
+msgstr "Erkennungsrate für Bedienprobleme"
+
+msgid "as outlined by Nielsen & Landauer (1993)"
+msgstr "nach Nielsen & Landauer (1993)"
+
+msgid "Probability"
+msgstr "Wahrscheinlichkeit"
 
 msgid "Visibility must be 0 <= p.occ <= 1"
 msgstr "Sichtbarkeit muss zwischen 0 <= p.occ <= 1"
@@ -122,11 +146,21 @@ msgstr "Die Dunkelziffer muss größer Null sein"
 msgid "Incorrect number of axis names"
 msgstr "Ungültige Anzahl Achsen"
 
+msgid "Defect by User Matrix"
+msgstr "Matrix Probleme pro Teilnehmer"
+
+msgid "Defect"
+msgstr "Problem"
+
+msgid "User"
+msgstr "Teilnehmer"
+
 msgid "Missing columns in data frame 'x'"
 msgstr "Im data frame 'x' fehlen Spalten"
 
 msgid "Cannot process object 'x' of class '%s'"
 msgstr "Kann Objekt 'x' vom Typ '%s' nicht verarbeiten"
 
-msgid ","
-msgstr ","
+#, fuzzy
+#~ msgid ","
+#~ msgstr ","

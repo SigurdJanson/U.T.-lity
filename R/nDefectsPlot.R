@@ -45,9 +45,9 @@ nDefectsPlot_gr <- function (p.occ = 0.31, subjects = 0:15, growth = FALSE,
 
   # set up the plot
   xlab <- .args[["xlab"]]
-  if (!.isAlive(xlab)) xlab <- "Number of Subjects"
+  if (!.isAlive(xlab)) xlab <- gettext("Number of Subjects")
   ylab <- .args[["ylab"]]
-  if(!.isAlive(ylab)) ylab <- "Chance of Observing (%)"
+  if(!.isAlive(ylab)) ylab <- paste(gettext("Chance of Observing"), "(%)")
 
   plot(xrange, yrange, type="n", xlab=xlab, ylab=ylab, axes=FALSE ) # add axes later
 
@@ -78,16 +78,16 @@ nDefectsPlot_gr <- function (p.occ = 0.31, subjects = 0:15, growth = FALSE,
 
   # add a title and subtitle
   main <- .args[["main"]]
-  if(!.isAlive(main)) main <- "Detection Rate for Usability Problems"
+  if(!.isAlive(main)) main <- gettext("Detection Rate for Usability Problems")
   sub <- .args[["sub"]]
-  if(!.isAlive(sub)) sub <- "as outlined by Nielsen & Landauer (1993)"
+  if(!.isAlive(sub)) sub <- gettext("as outlined by Nielsen & Landauer (1993)")
   title(main)
   mtext(sub)
 
   # add a legend (if there is more than one curve)
   if(length(p.occ) > 1) {
     legend(max(xrange)*0.9, max(yrange)*0.5, p.occ, cex=0.8, col=colors,
-           pch=plotchar, lty=linetype, title="Probability")
+           pch=plotchar, lty=linetype, title=gettext("Probability"))
   }
 
   axis(1, at=seq(0, max(subjects), 5), labels=seq(0, max(subjects), 5))
@@ -114,10 +114,10 @@ nDefectsPlot_gg <- function(p.occ = 0.31, subjects = 0:15, growth=FALSE,
          geom_line(aes(color=p.occ)) + geom_point(aes(color=p.occ), size=1) +
          scale_y_continuous(labels = scales::percent) +
          labs(
-           x = "Number of Subjects",
-           y = "Chance of Observing (%)",
-           title = paste("Detection Rate for Usability Problems"),
-           caption = "as outlined by Nielsen & Landauer (1993)")
+           x = gettext("Number of Subjects"),
+           y = paste(gettext("Chance of Observing"), "(%)"),
+           title = gettext("Detection Rate for Usability Problems"),
+           caption = gettext("as outlined by Nielsen & Landauer (1993)"))
   if (.isAlive(col))
     p <- p + scale_colour_manual(values=col)
   # else
