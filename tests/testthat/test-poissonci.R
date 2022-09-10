@@ -19,7 +19,7 @@ test_that("comparison with original function gives same results", {
                           0.384145882069412, 0.566493426575897, 0.729298668243655,
                           0.88211880923298, 1.02859369369772, 1.17057576831207),
                         .Dim = c(6L, 3L),
-                        .Dimnames = list(NULL, c("est", "lwr.ci","upr.ci")))
+                        .Dimnames = list(NULL, c("est", "lwr.ci", "upr.ci")))
                         # row names removed: c("x.1", "x.2", "x.3", "x.4", "x.5", "x.6")
   # Act
   result_default <- poissonci(0:5, 10) # method="score" is default

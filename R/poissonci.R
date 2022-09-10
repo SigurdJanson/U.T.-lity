@@ -32,14 +32,14 @@
 #' @importFrom stats poisson.test qnorm
 poissonci <- function(x, n = 1, conf.level = 0.95,
                      alternative = c("two.sided", "less", "greater"),
-                     method = c("exact", "score", "wald","byar")) {
+                     method = c("exact", "score", "wald", "byar")) {
 
   if(missing(method)) method <- "score"
   if(missing(alternative)) alternative <- .alternative["two.sided"]
 
 
   iPoissonCI <- function(x, n = 1, conf.level = 0.95, sides = c("two.sided", "less", "greater"),
-                         method = c("exact","score", "wald","byar")) {
+                         method = c("exact", "score", "wald", "byar")) {
 
     # see also: pois.conf.int {epitools}
 
@@ -59,7 +59,7 @@ poissonci <- function(x, n = 1, conf.level = 0.95,
 
     lambda <- x/n
 
-    switch( match.arg(arg=method, choices=c("exact","score", "wald", "byar")),
+    switch( match.arg(arg=method, choices=c("exact", "score", "wald", "byar")),
             "exact" = {
               ci <- poisson.test(x, n, conf.level = conf.level)$conf.int
               lwr.ci <- ci[1]

@@ -135,7 +135,7 @@ msgstr "'conf.level' muss zwischen 0.5 <= conf.level <= 1"
 
 msgid "Object cannot be shown as Participant X Problem Plot"
 msgstr ""
-"Das Objekt kann nicht als Teilnehmer X Problem Schuabild dargestellt werden"
+"Das Objekt kann nicht als Teilnehmer X Problem Schaubild dargestellt werden"
 
 msgid "'m' must be a defect grid"
 msgstr "'m' muss ein Objekt vom Typ 'defect grid' sein"
