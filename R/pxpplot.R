@@ -14,19 +14,25 @@
 #'
 #' @return Returns the grid as matrix.
 #' @export
-pxpplot <- function(x, darkfigure = NULL, percentage = TRUE, ...)
-  UseMethod("pxplot")
+pxpplot <- function(x, darkfigure = 0L, percentage = TRUE, ...)
+  UseMethod("pxpplot")
 
 
 
 #' @describeIn pxpplot Throws an error because there are no methods for other objects
 #' than data frames and matrices.
 #' @export
-pxpplot.default <- function(x, darkfigure = NULL, percentage = TRUE, ...)
+pxpplot.default <- function(x, darkfigure = 0L, percentage = TRUE, ...)
   stop("Object cannot be shown as Participant X Problem Plot")
 
 
-pxpplot.defectgrid <- function(x, darkfigure = NULL, percentage = TRUE,
+
+
+#' @describeIn pxpplot Method for class `defectgrid`
+#'
+#' @param lib draws the plot either with `ggplot2` or `graphics`.
+#' @export
+pxpplot.defectgrid <- function(x, darkfigure = 0L, percentage = TRUE,
                                lib = c("ggplot", "graphics"), ...) {
   lib <- match.arg(lib)
   # if (lib == "ggplot" && !require(ggplot2) )
@@ -35,9 +41,9 @@ pxpplot.defectgrid <- function(x, darkfigure = NULL, percentage = TRUE,
   #   "ggplot2"
 
   if (lib == "ggplot" || missing(lib))
-    ciplot_gg(lower, upper, names, ...)
+    pxpplot_gg(x, darkfigure = darkfigure, percentage = percentage, ...)
   else
-    ciplot_gr(lower, upper, names, ...)
+    pxpplot_gr(x, darkfigure = darkfigure, percentage = percentage, ...)
 }
 
 
@@ -83,30 +89,32 @@ pxpplot.defectgrid <- function(x, darkfigure = NULL, percentage = TRUE,
 #' @examples
 #' x <- defectgrid_new(matrix(c(1,0,1,0, 0,1,0,1, 0,0,1,1), 3, 4))
 #' pxpplot_gr(x, darkfigure = 3, percentage = FALSE)
-pxpplot_gr <- function (x, darkfigure = NULL,
-                             percentage = TRUE, names.arg = NULL,
-                             horiz = FALSE,
-                             density = NULL, angle = 45, col = NULL, col.opt = TRUE,
-                             border = par("fg"),
-                             main = NULL, sub = NULL, xlab = NULL, ylab = NULL,
-                             xpd = TRUE,
-                             axes = TRUE, cex.axis = par("cex.axis"), cex.names = par("cex.axis"),
-                             axis.lty = 0,
-                             plot = TRUE, add = FALSE, offset = 0, ...)
+pxpplot_gr <- function (x, darkfigure = 0L, percentage = TRUE,
+                        names.arg = NULL,
+                        horiz = FALSE,
+                        density = NULL, angle = 45, col = NULL, col.opt = TRUE,
+                        border = par("fg"),
+                        main = NULL, sub = NULL, xlab = NULL, ylab = NULL,
+                        xpd = TRUE,
+                        axes = TRUE, cex.axis = par("cex.axis"), cex.names = par("cex.axis"),
+                        axis.lty = 0,
+                        plot = TRUE, add = FALSE, offset = 0, ...)
 {
   if (!is.defectgrid(x)) stop("'m' must be a defect grid")
   if(plot && is.null(col)) {
     col <- colors()[seq(from=253L, to=153L, by=-5L)]
   }
-  if(!is.null(darkfigure))
-    if(darkfigure < 0)
-      stop("The dark figure cannot be less than zero")
+  suppressWarnings(
+    darkfigure <- as.integer(darkfigure)
+  )
+  if (!.isAlive(darkfigure) || length(darkfigure) > 1L || darkfigure[1L] < 0L)
+    stop("The dark figure must be a single positive integer")
 
   NR <- nrow(x)
   NC <- ncol(x)
 
-  if(!is.null(darkfigure)) {	# extend matrix by a number of zeroed columns
-    x <- cbind(x, matrix(rep(0, length.out = NR*darkfigure), nrow = NR))
+  if (darkfigure[1] > 0L) {	# extend matrix by a number of zeroed columns
+    x <- cbind(x, matrix(rep(0L, length.out = NR*darkfigure), nrow = NR))
     NC <- ncol(x)
   }
 
@@ -275,13 +283,13 @@ pxpplot_gr <- function (x, darkfigure = NULL,
     #        }
 
     ## Main title and axis titles
-    if(is.null(main)) main <- gettext("Defect by User Matrix")
+    if(is.null(main)) main <- gettext("Matrix Participant \U1F7AA Defect")
     if(is.null(xlab)) {
       if(!horiz) xlab <- gettext("Defect")
       else xlab <- gettext("User")
     }
     if(is.null(ylab)) {
-      if(!horiz) ylab <- gettext("User")
+      if(!horiz) ylab <- gettext("Participant")
       else ylab <- gettext("Defect")
     }
     title(main = main, sub = sub, xlab = xlab, ylab = ylab, ...)
@@ -305,30 +313,85 @@ pxpplot_gr <- function (x, darkfigure = NULL,
 #' @return A `ggplot` graph
 #' @export
 #' @importFrom stats reshape setNames
-pxpplot_gg <- function(x, darkfigure = NULL, percentage = TRUE, ...) {
-  if (is.matrix(x)) {
-    y <- as.data.frame(x)
-    y$partid <- row.names(y)
+#' @importFrom ggplot2 geom_tile scale_fill_gradient scale_color_manual
+#' coord_fixed guides guide_legend guide_colourbar
+pxpplot_gg <- function(x, darkfigure = 0L, percentage = TRUE, ...) {
+  exp.colnames <- c("partid", "defect", "d", "id")
 
-    # give it proper names if necessary
-    if (any(lengths(dimnames(x)) != dim(x))) {
-      dimnames(x) <- list(paste0("part", 1:nrow(x)), paste0("d.", 1:ncol(x)))
-      x <- reshape(x, idvar="id", direction = "long")
-      x$partid <- row.names(x)
-      names(x)[names(x) == "time"] <- gettext("Defect")
-      names(x)[names(x) == "d"] <- "occurence"
-    }
+  if (is.matrix(x)) {
+    nD <- ncol(x) # number of defects
+    nSample <- nrow(x)
+
+    # give it proper names that we can understand later
+    dimnames(x) <- list(paste0("part", 1:nrow(x)), paste0("d.", 1:nD))
+
+    x <- as.data.frame(x)
+    x$partid <- row.names(x)
+
+    x <- reshape(x, idvar="id", varying = paste0("d.", 1:nD), direction = "long")
+    names(x)[names(x) == "time"] <- "defect"
   } else if (is.data.frame(x)) {
     n <- colnames(x)
-    if (anyNA(match(c("cc", "a", "0", "f"), n)))
+    if (anyNA(match(exp.colnames, n)))
       stop("Missing columns in data frame 'x'")
+    if (nrow(x) < 1L)
+      stop("Data frame is empty")
   } else {
     stop(gettextf("Cannot process object 'x' of class '%s'",
                  paste0(class(x), collapse=", ")))
   }
 
+  # Handle argument `darkfigure`
+  suppressWarnings(
+    darkfigure <- as.integer(darkfigure)
+  )
+  if (!.isAlive(darkfigure) || length(darkfigure) > 1L || darkfigure[1L] < 0L)
+      stop("The dark figure must be a single positive integer")
 
-  ggplot(data = x, aes(x=defect, y=partid, fill=d)) +
-    geom_tile() +
-    scale_fill_gradient(low = "white")
+  if (darkfigure > 0L) {
+    toAdd <- nSample * darkfigure
+    Rows2Add <- data.frame(
+      partid = rep(unique(x$partid), darkfigure),
+      defect = rep(1:darkfigure, each=nSample) + max(x$defect),
+      d = rep(0, toAdd),
+      id = rep(unique(x$id), darkfigure)
+    )
+    x <- rbind(x, Rows2Add)
+    #index1 <- nrow(x)+1
+    #x[index1:(index1+darkfigure-1),] <- NA
+  }
+
+  # Handle argument `percentage`
+  if (!percentage) {
+    x$d <- x$d > 0L
+    .colours <- c("FALSE" = "white", "TRUE" = "black")
+  } else {
+    # Currently not used - needed probably as soon as the scale is converted into
+    # discrete steps:
+    #.colours <- seq(0, 1, length.out = nSample+1) # + zero
+    #names(.colours) <- seq(0, 1, length.out = nSample+1)
+  }
+
+  # Create plot and return
+  p <- ggplot(data = x, aes(x=.data$defect, y=.data$id, fill=.data$d)) +
+          geom_tile(linejoin = "bevel", color = "gray", lwd = 0.5, linetype = 1) +
+          coord_fixed() +
+          labs(
+            x = gettext("Defect"),
+            y = gettext("Participant"),
+            title = gettext("Matrix Participant \U1F7AA Defect"))
+
+  if (!percentage)
+    p <- p + scale_color_manual(values = .colours,
+                                labels = c("FALSE" = gettext("Missed"),
+                                           "TRUE" = gettext("Found")),
+                                aesthetics = c("colour", "fill")) +
+             guides(fill = guide_legend(title = gettext("$Found")))
+  else
+    p <- p + scale_fill_gradient(low = "white", high = "black") +
+             guides(fill = guide_colourbar(title = gettext("Frequency")))
+    # + scale_color_manual(values = .colours, aesthetics = c("colour", "fill"))
+    # throws an error "colours encodes as numbers must be positive"
+
+  return(p)
 }

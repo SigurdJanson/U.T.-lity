@@ -70,13 +70,13 @@ test_that("matrix is not denied by 'is.defectgrid()'", {
 
 
 #
-# pxpplot_default ===========
+# pxpplot_gr ===========
 
 test_that("4 regular columns work", {
 
   # Act
   dg <- defectgrid_new(matrix(c(1,0,1,0, 0,1,0,1, 0,0,1,1), 3, 4))
-  result <- pxpplot_default(dg, percentage=TRUE )
+  result <- pxpplot_gr(dg, percentage=TRUE )
 
   # Assert
   expect_identical(
@@ -92,7 +92,7 @@ test_that("...adding 3 columns of darkfigures works", {
 
   # Act
   dg <- defectgrid_new(matrix(c(1,0,1,0, 0,1,0,1, 0,0,1,1), 3, 4))
-  result <- pxpplot_default( dg, darkfigure=3, percentage=TRUE )
+  result <- pxpplot_gr( dg, darkfigure=3, percentage=TRUE )
 
   # Assert
   expect_identical(

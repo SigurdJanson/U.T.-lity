@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: U.T.lity 0.0.0.9000\n"
-"POT-Creation-Date: 2022-09-10 12:03\n"
+"POT-Creation-Date: 2022-09-11 21:54\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -133,13 +133,13 @@ msgstr ""
 msgid "'m' must be a defect grid"
 msgstr ""
 
-msgid "The dark figure cannot be less than zero"
+msgid "The dark figure must be a single positive integer"
 msgstr ""
 
 msgid "Incorrect number of axis names"
 msgstr ""
 
-msgid "Defect by User Matrix"
+msgid "Matrix Participant 🞪 Defect"
 msgstr ""
 
 msgid "Defect"
@@ -148,8 +148,26 @@ msgstr ""
 msgid "User"
 msgstr ""
 
+msgid "Participant"
+msgstr ""
+
 msgid "Missing columns in data frame 'x'"
 msgstr ""
 
+msgid "Data frame is empty"
+msgstr ""
+
 msgid "Cannot process object 'x' of class '%s'"
+msgstr ""
+
+msgid "Missed"
+msgstr ""
+
+msgid "Found"
+msgstr ""
+
+msgid "$Found"
+msgstr ""
+
+msgid "Frequency"
 msgstr ""

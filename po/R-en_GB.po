@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: U.T.lity 0.0.0.9000\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-09-10 12:03\n"
-"PO-Revision-Date: 2022-09-10 12:10+0200\n"
+"POT-Creation-Date: 2022-09-11 21:54\n"
+"PO-Revision-Date: 2022-09-11 21:55+0200\n"
 "Last-Translator: Jan Seifert <github@sigurdjanson.anonaddy.com>\n"
 "Language-Team: en_GB\n"
 "Language: en_GB\n"
@@ -135,14 +135,14 @@ msgstr "Object cannot be shown as Participant X Problem Plot"
 msgid "'m' must be a defect grid"
 msgstr "'m' must be a defect grid"
 
-msgid "The dark figure cannot be less than zero"
-msgstr "The dark figure cannot be less than zero"
+msgid "The dark figure must be a single positive integer"
+msgstr "The dark figure must be a single positive integer"
 
 msgid "Incorrect number of axis names"
 msgstr "Incorrect number of axis names"
 
-msgid "Defect by User Matrix"
-msgstr "Defect by Participant Matrix"
+msgid "Matrix Participant 🞪 Defect"
+msgstr "Matrix Participant 🞪 Defect"
 
 msgid "Defect"
 msgstr "Defect"
@@ -150,8 +150,29 @@ msgstr "Defect"
 msgid "User"
 msgstr "Participant"
 
+msgid "Participant"
+msgstr "Participant"
+
 msgid "Missing columns in data frame 'x'"
 msgstr "Missing columns in data frame 'x'"
 
+msgid "Data frame is empty"
+msgstr "Data frame is empty"
+
 msgid "Cannot process object 'x' of class '%s'"
 msgstr "Cannot process object 'x' of class '%s'"
+
+msgid "Missed"
+msgstr "Missed"
+
+msgid "Found"
+msgstr "Found"
+
+msgid "$Found"
+msgstr "Found"
+
+msgid "Frequency"
+msgstr "Frequency"
+
+#~ msgid "Defect by User Matrix"
+#~ msgstr "Defect by Participant Matrix"

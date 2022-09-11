@@ -3,17 +3,26 @@
 \name{pxpplot}
 \alias{pxpplot}
 \alias{pxpplot.default}
-\alias{pxpplot_default}
+\alias{pxpplot.defectgrid}
+\alias{pxpplot_gr}
 \alias{pxpplot_gg}
 \title{pxpplot}
 \usage{
-pxpplot(x, darkfigure = NULL, percentage = TRUE, ...)
+pxpplot(x, darkfigure = 0L, percentage = TRUE, ...)
 
-\method{pxpplot}{default}(x, darkfigure = NULL, percentage = TRUE, ...)
+\method{pxpplot}{default}(x, darkfigure = 0L, percentage = TRUE, ...)
 
-pxpplot_default(
+\method{pxpplot}{defectgrid}(
   x,
-  darkfigure = NULL,
+  darkfigure = 0L,
+  percentage = TRUE,
+  lib = c("ggplot", "graphics"),
+  ...
+)
+
+pxpplot_gr(
+  x,
+  darkfigure = 0L,
   percentage = TRUE,
   names.arg = NULL,
   horiz = FALSE,
@@ -37,7 +46,7 @@ pxpplot_default(
   ...
 )
 
-pxpplot_gg(x, darkfigure = NULL, percentage = TRUE, ...)
+pxpplot_gg(x, darkfigure = 0L, percentage = TRUE, ...)
 }
 \arguments{
 \item{x}{matrix containing usability problems and their frequency}
@@ -47,6 +56,8 @@ pxpplot_gg(x, darkfigure = NULL, percentage = TRUE, ...)
 \item{percentage}{show the total percentage of each defect.}
 
 \item{...}{Additional parameters will be passed to the plotting function}
+
+\item{lib}{draws the plot either with \code{ggplot2} or \code{graphics}.}
 
 \item{names.arg}{A vector of names to be plotted below each tile.}
 
@@ -116,10 +127,12 @@ instead.
 \item \code{pxpplot(default)}: Throws an error because there are no methods for other objects
 than data frames and matrices.
 
+\item \code{pxpplot(defectgrid)}: Method for class \code{defectgrid}
+
 }}
 \section{Functions}{
 \itemize{
-\item \code{pxpplot_default()}: Accepts a matrix as input with participants in rows and
+\item \code{pxpplot_gr()}: Accepts a matrix as input with participants in rows and
 defects/problems in columns.
 
 \item \code{pxpplot_gg()}: Creates a plot using \code{ggplot2}.
@@ -130,7 +143,7 @@ code inspired by \code{\link[=barplot.default]{barplot.default()}}.
 }
 \examples{
 x <- defectgrid_new(matrix(c(1,0,1,0, 0,1,0,1, 0,0,1,1), 3, 4))
-pxpplot_default(x, darkfigure = 3, percentage = FALSE)
+pxpplot_gr(x, darkfigure = 3, percentage = FALSE)
 }
 \references{
 Sauro, J. (2012) "Report Usability Issues in a User by Problem Matrix" \url{http://www.measuringusability.com/blog/problem-matrix.php}; retrieved at June 23rd, 2012

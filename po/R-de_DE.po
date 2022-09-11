@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: U.T.lity 0.0.0.9000\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-09-10 12:03\n"
-"PO-Revision-Date: 2022-09-10 12:10+0200\n"
+"POT-Creation-Date: 2022-09-11 21:54\n"
+"PO-Revision-Date: 2022-09-11 21:55+0200\n"
 "Last-Translator: Jan Seifert <github@sigurdjanson.anonaddy.com>\n"
 "Language-Team: de_DE\n"
 "Language: de_DE\n"
@@ -140,14 +140,14 @@ msgstr ""
 msgid "'m' must be a defect grid"
 msgstr "'m' muss ein Objekt vom Typ 'defect grid' sein"
 
-msgid "The dark figure cannot be less than zero"
-msgstr "Die Dunkelziffer muss größer Null sein"
+msgid "The dark figure must be a single positive integer"
+msgstr "Die Dunkelziffer muss eine ganze Zahl größer Null sein"
 
 msgid "Incorrect number of axis names"
 msgstr "Ungültige Anzahl Achsen"
 
-msgid "Defect by User Matrix"
-msgstr "Matrix Probleme pro Teilnehmer"
+msgid "Matrix Participant 🞪 Defect"
+msgstr "Matrix Teilnehmer 🞪Problem"
 
 msgid "Defect"
 msgstr "Problem"
@@ -155,11 +155,32 @@ msgstr "Problem"
 msgid "User"
 msgstr "Teilnehmer"
 
+msgid "Participant"
+msgstr "Teilnehmer"
+
 msgid "Missing columns in data frame 'x'"
 msgstr "Im data frame 'x' fehlen Spalten"
 
+msgid "Data frame is empty"
+msgstr "'Data Frame' ist leer"
+
 msgid "Cannot process object 'x' of class '%s'"
 msgstr "Kann Objekt 'x' vom Typ '%s' nicht verarbeiten"
+
+msgid "Missed"
+msgstr "Nein"
+
+msgid "Found"
+msgstr "Ja"
+
+msgid "$Found"
+msgstr "Gefunden"
+
+msgid "Frequency"
+msgstr "Häufigkeit"
+
+#~ msgid "Defect by User Matrix"
+#~ msgstr "Matrix Probleme pro Teilnehmer"
 
 #, fuzzy
 #~ msgid ","
