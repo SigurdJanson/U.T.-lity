@@ -31,7 +31,7 @@ simplot
 }
 \section{Methods (by class)}{
 \itemize{
-\item \code{simplot(simulation)}: method for sample sizes estimated by simulation
+\item \code{simplot(simulation)}: Method for sample sizes estimated by simulation
 
 \item \code{simplot(samplesize)}: ...
 

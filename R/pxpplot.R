@@ -4,10 +4,10 @@
 #' A plot visualising the distribution of found defects by user. The plot can
 #' visualise frequency of occurrence similar to a heat map.
 #'
-#' @param x matrix containing usability problems and their frequency
+#' @param x object containing usability problems and their frequency
 #' @param darkfigure add columns (rows) with zero probability that represent hidden problems.
 #' @param percentage show the total percentage of each defect.
-#' @param ... Additional parameters will be passed to the plotting function
+#' @param ... Additional parameters will be passed to the plotting function.
 #'
 #' @details The plot will only count defect occurrences once. If a defect was
 #' evident more than once for a user this is not counted here.
@@ -28,7 +28,7 @@ pxpplot.default <- function(x, darkfigure = 0L, percentage = TRUE, ...)
 
 
 
-#' @describeIn pxpplot Method for class `defectgrid`
+#' @describeIn pxpplot Method for class `defectgrid`.
 #'
 #' @param lib draws the plot either with `ggplot2` or `graphics`.
 #' @export
@@ -48,9 +48,12 @@ pxpplot.defectgrid <- function(x, darkfigure = 0L, percentage = TRUE,
 
 
 
-#' @describeIn  pxpplot Accepts a matrix as input with participants in rows and
-#' defects/problems in columns.
+#' pxpplot_gr
 #'
+#' Creates a `pxpplot` using the default graphics device. It is usually
+#' not necessary to call `pxpplot_gg` directly. Call `pxpplot()` instead.
+#'
+#' @inheritParams pxpplot
 #' @param names.arg A vector of names to be plotted below each tile.
 #' @param horiz If true users will be plotted on the horizontal axis (default is  \code{FALSE})
 #' @param density A vector giving the density of shading lines (in lines per inch) for the tiles.
@@ -77,8 +80,6 @@ pxpplot.defectgrid <- function(x, darkfigure = 0L, percentage = TRUE,
 #' plot (default is \code{FALSE}).
 #' @param offset A vector indicating how much the tiles should be shifted relative
 #' to the x-axis.
-#'
-#' @export
 #'
 #' @note code inspired by [barplot.default()].
 #' @references
@@ -303,15 +304,16 @@ pxpplot_gr <- function (x, darkfigure = 0L, percentage = TRUE,
 
 
 
-#' @describeIn pxpplot Creates a plot using `ggplot2`.
+#' pxpplot_gg
 #'
-#' @details
-#' Dimension names of a matrix must be complete or will be overwritten.
+#' Creates a `pxpplot` using `ggplot2`. It is usually
+#' not necessary to call `pxpplot_gg` directly. Call `pxpplot()` instead.
+#' @inheritParams pxpplot
+#' @details Dimension names of a matrix must be complete or will be
+#' overwritten.
 #'
-#' It is usually not necessary to call `pxpplot_gg` directly. Call `pxpplot()`
-#' instead.
 #' @return A `ggplot` graph
-#' @export
+#'
 #' @importFrom stats reshape setNames
 #' @importFrom ggplot2 geom_tile scale_fill_gradient scale_color_manual
 #' coord_fixed guides guide_legend guide_colourbar

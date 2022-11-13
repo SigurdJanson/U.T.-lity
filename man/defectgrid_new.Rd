@@ -18,7 +18,7 @@ A defect grid object.
 TRUE/FALSE
 }
 \description{
-The defect grid is a  class to store a PROBLEM-BY-PARTICIPANT matrix.
+The defect grid is a class to store a PROBLEM-BY-PARTICIPANT matrix.
 }
 \details{
 the \code{defectgrid} object has an attribute \code{type} that can be either

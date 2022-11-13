@@ -4,8 +4,6 @@
 \alias{pxpplot}
 \alias{pxpplot.default}
 \alias{pxpplot.defectgrid}
-\alias{pxpplot_gr}
-\alias{pxpplot_gg}
 \title{pxpplot}
 \usage{
 pxpplot(x, darkfigure = 0L, percentage = TRUE, ...)
@@ -19,95 +17,20 @@ pxpplot(x, darkfigure = 0L, percentage = TRUE, ...)
   lib = c("ggplot", "graphics"),
   ...
 )
-
-pxpplot_gr(
-  x,
-  darkfigure = 0L,
-  percentage = TRUE,
-  names.arg = NULL,
-  horiz = FALSE,
-  density = NULL,
-  angle = 45,
-  col = NULL,
-  col.opt = TRUE,
-  border = par("fg"),
-  main = NULL,
-  sub = NULL,
-  xlab = NULL,
-  ylab = NULL,
-  xpd = TRUE,
-  axes = TRUE,
-  cex.axis = par("cex.axis"),
-  cex.names = par("cex.axis"),
-  axis.lty = 0,
-  plot = TRUE,
-  add = FALSE,
-  offset = 0,
-  ...
-)
-
-pxpplot_gg(x, darkfigure = 0L, percentage = TRUE, ...)
 }
 \arguments{
-\item{x}{matrix containing usability problems and their frequency}
+\item{x}{object containing usability problems and their frequency}
 
 \item{darkfigure}{add columns (rows) with zero probability that represent hidden problems.}
 
 \item{percentage}{show the total percentage of each defect.}
 
-\item{...}{Additional parameters will be passed to the plotting function}
+\item{...}{Additional parameters will be passed to the plotting function.}
 
 \item{lib}{draws the plot either with \code{ggplot2} or \code{graphics}.}
-
-\item{names.arg}{A vector of names to be plotted below each tile.}
-
-\item{horiz}{If true users will be plotted on the horizontal axis (default is  \code{FALSE})}
-
-\item{density}{A vector giving the density of shading lines (in lines per inch) for the tiles.}
-
-\item{angle}{Slope of shading lines, given as an angle in degrees (counter-clockwise),
-for the tiles.}
-
-\item{col}{A vector giving the colors to be used to show defect frequencies}
-
-\item{col.opt}{if TRUE, colors will be optimised with equal distances.}
-
-\item{border}{The color to be used for the border of the tiles.
-Use \code{border = NA} to omit borders. If there are shading lines,
-\code{border = TRUE} means use the same colour for the border as for the shading lines.}
-
-\item{main}{An overall title for the plot.}
-
-\item{sub}{A sub title for the plot.}
-
-\item{xlab}{Label for the horizontal axis.}
-
-\item{ylab}{Label for the vertical axis.}
-
-\item{xpd}{Logical. Should tiles be allowed to go outside region?}
-
-\item{axes}{Logical. Indicated whether both axes should be drawn on the plot.}
-
-\item{cex.axis}{Expansion factor for numeric axis labels.}
-
-\item{cex.names}{Expansion factor for axis names (tile labels).}
-
-\item{axis.lty}{The graphics parameter \code{lty} applied to the axis and
-tick marks of the 'defect' (default horizontal) axis. Note that by default
-the axis is suppressed.}
-
-\item{plot}{Logical. If  \code{FALSE}, nothing is plotted.}
-
-\item{add}{Logical. Specifies if grid should be added to an already existing
-plot (default is \code{FALSE}).}
-
-\item{offset}{A vector indicating how much the tiles should be shifted relative
-to the x-axis.}
 }
 \value{
 Returns the grid as matrix.
-
-A \code{ggplot} graph
 }
 \description{
 A plot visualising the distribution of found defects by user. The plot can
@@ -116,36 +39,12 @@ visualise frequency of occurrence similar to a heat map.
 \details{
 The plot will only count defect occurrences once. If a defect was
 evident more than once for a user this is not counted here.
-
-Dimension names of a matrix must be complete or will be overwritten.
-
-It is usually not necessary to call \code{pxpplot_gg} directly. Call \code{pxpplot()}
-instead.
 }
 \section{Methods (by class)}{
 \itemize{
 \item \code{pxpplot(default)}: Throws an error because there are no methods for other objects
 than data frames and matrices.
 
-\item \code{pxpplot(defectgrid)}: Method for class \code{defectgrid}
+\item \code{pxpplot(defectgrid)}: Method for class \code{defectgrid}.
 
 }}
-\section{Functions}{
-\itemize{
-\item \code{pxpplot_gr()}: Accepts a matrix as input with participants in rows and
-defects/problems in columns.
-
-\item \code{pxpplot_gg()}: Creates a plot using \code{ggplot2}.
-
-}}
-\note{
-code inspired by \code{\link[=barplot.default]{barplot.default()}}.
-}
-\examples{
-x <- defectgrid_new(matrix(c(1,0,1,0, 0,1,0,1, 0,0,1,1), 3, 4))
-pxpplot_gr(x, darkfigure = 3, percentage = FALSE)
-}
-\references{
-Sauro, J. (2012) "Report Usability Issues in a User by Problem Matrix" \url{http://www.measuringusability.com/blog/problem-matrix.php}; retrieved at June 23rd, 2012
-Sauro, J., & Lewis, J. R. (2012). Quantifying the User Experience. Elsevier.
-}

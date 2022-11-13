@@ -1,6 +1,6 @@
 #' Defect Grid
 #'
-#' The defect grid is a  class to store a PROBLEM-BY-PARTICIPANT matrix.
+#' The defect grid is a class to store a PROBLEM-BY-PARTICIPANT matrix.
 #'
 #' @param x a numeric or logical matrix with participants in rows and defects
 #' in columns.

@@ -63,7 +63,9 @@ estimatePOcc <- function(x, method = c("binom"), adj = c("none", "GT", "defl", "
 #' @return Returns corrected values of `p`.
 #' @references
 #' Sauro, J., & Lewis, J. R. (2012). Quantifying the User Experience. Elsevier.
-#' Turner, C. W., Lewis, J. R., & Nielsen, J. (2006). Determining Usability Test Sample Size. In W. Karwowski & B. Raton, International Encyclopedia of Ergonomics and Human Factors (2 ed., Vol. 3, pp. 3084–3088). CRC Press.
+#' Turner, C. W., Lewis, J. R., & Nielsen, J. (2006). Determining Usability Test
+#' Sample Size. In W. Karwowski & B. Raton, International Encyclopedia of Ergonomics
+#' and Human Factors (2 ed., Vol. 3, pp. 3084–3088). CRC Press.
 #' @export
 #' @keywords internal
 adjustPOcc <- function(p, nSample, Ntotal, N1, adj = c("GT", "defl", "both")) {

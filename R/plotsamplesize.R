@@ -1,16 +1,16 @@
 
 #' simplot
+#' @param x A `samplesize` object
 #' @export
 simplot <- function(x, ...) UseMethod("simplot")
 
-#' @describeIn simplot method for sample sizes estimated by simulation
+#' @describeIn simplot Method for sample sizes estimated by simulation
 #' @export
 simplot.simulation <- function(x, ...) NextMethod("print")
 
 
 #' @describeIn simplot ...
 #'
-#' @param x A `samplesize` object
 #' @param ... further arguments passed on to other methods.
 #' @param x0 if `TRUE` the x-axis is extended to show `x=0`. The default `FALSE`
 #' optimises it to the data range.
