@@ -32,6 +32,9 @@ defectgrid_new <- function(x) {
   return(x)
 }
 
+
+
+
 #' @describeIn defectgrid_new Function to check if an object is a defect grid.
 #'
 #' @param x any R object.
