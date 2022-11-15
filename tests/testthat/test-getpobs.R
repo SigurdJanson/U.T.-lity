@@ -4,14 +4,14 @@
 #
 # Numbers by Sauro & Lewis, quant. the UX
 test_that("", {
-  expect_equal(ndefects(0.5, 5), 0.969, tolerance = 0.001)
+  expect_equal(getPObs(0.5, 5), 0.969, tolerance = 0.001)
 })
 
 
 #
 # Numbers by Sauro & Lewis, quant. the UX
 # This test is rough because the sample sizes are rounded up to the next integer.
-# Because of that, for each given value P must be `P >= ndefects(...)`.
+# Because of that, for each given value P must be `P >= getPObs(...)`.
 #
 test_that("sample cases from Jeff Sauro yield roughly the same result", {
   # See table 7.1
@@ -23,10 +23,10 @@ test_that("sample cases from Jeff Sauro yield roughly the same result", {
 
   for(.r in rownames(SauroNumbers))
     for (.c in colnames(SauroNumbers)) {
-      result <- ndefects(as.numeric(.r), SauroNumbers[.r, .c])
+      result <- getPObs(as.numeric(.r), SauroNumbers[.r, .c])
       expect_gte(result, as.numeric(.c)) #, tolerance=0.01, info=paste("p =", .r, "n =", SauroNumbers[.r, .c]))
 
-      lowerresult <- ndefects(as.numeric(.r), SauroNumbers[.r, .c]-1L)
+      lowerresult <- getPObs(as.numeric(.r), SauroNumbers[.r, .c]-1L)
       expect_lt(lowerresult, as.numeric(.c))
     }
 })
@@ -45,7 +45,7 @@ test_that("sample cases from Jeff Sauro yield the same result", {
 
   for(.r in rownames(SauroNumbers))
     for (.c in colnames(SauroNumbers)) {
-      result <- ndefects(as.numeric(.r), as.numeric(.c))
+      result <- getPObs(as.numeric(.r), as.numeric(.c))
       result <- round(result, 2) # numbers in the book are rounded to 2 digits
       expect_equal(result, SauroNumbers[.r, .c], info=paste("p =", .r, "n =", as.numeric(.c)))
     }
@@ -58,8 +58,8 @@ test_that("sample cases from Jeff Sauro yield the same result", {
 #
 #   for (size in runif(5)*10+1) # different sample sizes
 #     for (p in runif(10L)) { # different p's
-#       percentage <- ndefects(p.occ=0, d.total = rep(1L, length(totals)), size)
-#       count <- ndefects(p.occ=0, d.total = totals, size)
+#       percentage <- getPObs(p.occ=0, d.total = rep(1L, length(totals)), size)
+#       count <- getPObs(p.occ=0, d.total = totals, size)
 #       # Assert
 #       expect_equal(count, percentage*totals, info=paste("p =", p, "n =", size))
 #     }

@@ -63,14 +63,14 @@ nDefectsPlot_gr <- function (p.occ = 0.31, subjects = 0:15, growth = FALSE,
   linetype <- c(1:nlines)
   plotchar <- seq(18L, 18L + nlines,1) # 18 is the base character (diamond)
   for (i in 1:nlines) {
-    lines(subjects, ndefects(p.occ[i], subjects)*100,
+    lines(subjects, getPObs(p.occ[i], subjects)*100,
           type="b", lwd=1.5, lty=linetype[i], col=colors[i], pch=plotchar[i])
   }
 
   if(growth && length(subjects) > 1) {
     for (i in 1:nlines) {
       nsubject <- length(subjects)
-      values <- ndefects(p.occ[i], subjects)*100
+      values <- getPObs(p.occ[i], subjects)*100
       diff <- c(NaN, values[2:nsubject] - values[1:(nsubject-1)])
       colors <- rainbow(nlines, alpha=0.5)
       lines(subjects, diff,
@@ -110,7 +110,7 @@ nDefectsPlot_gg <- function(p.occ = 0.31, subjects = 0:15, growth=FALSE,
 
   dt <- data.frame(
     subjects = rep(subjects, length(p.occ)),
-    p.obs = as.vector(sapply(p.occ, \(x) ndefects(p.occ=x, subjects))),
+    p.obs = as.vector(sapply(p.occ, \(x) getPObs(p.occ=x, subjects))),
     p.occ = rep(p.occ, each=length(subjects))
   )
 

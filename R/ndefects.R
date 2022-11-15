@@ -1,14 +1,10 @@
 
 
-#' ndefects
+#' getPObs
 #'
-#' Get the probability to see each defect in a sample at least once.
+#' Calculate the probability to see each defect in a sample at least once.
 #'
-#' Number of defects that can be found in a usability test given
-#' the visibility `p.occ` (probability of occurrence) and
-#' the sample size `n`.
-#'
-#' @param p.occ Probability of Occurrence: how big is the probability of
+#' @param p.occ Probability of OCCurrence: how big is the probability of
 #' the problems that shall be detected when testing a single user
 #' (Nielsen, 2000, assumes p.occ = L = 31%). Numeric scalar between 0 and 1.
 #' @param n Number of participants of the sample.
@@ -18,7 +14,11 @@
 #'
 #' That is not the number of defects you will find. It is merely an estimate
 #' and the exact number of found defects is a random result.
-ndefects <- function(p.occ = 0.31, n) {
+#' @references
+#' Nielsen, J. (2000). Why You Only Need to Test with 5 Users.
+#' https://www.nngroup.com/articles/why-you-only-need-to-test-with-5-users/
+#' @export
+getPObs <- function(p.occ = 0.31, n) {
   # PRECONDITIONS
   if (!.isAlive(n) || any(n < 0))
     stop("Number of test subjects must be specified and >= 0")
