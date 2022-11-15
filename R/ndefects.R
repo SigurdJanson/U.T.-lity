@@ -43,8 +43,49 @@ getPObs <- function(p.occ = 0.31, n) {
 #' @export
 ndefects <- function(dg) sum(marginSums(dg, 2L) > 0L)
 
-#'
-#' @return A scalar with the number of found defects.
-#' @export
-ndefects <- function(dg) {sum(marginSums(dg, 2L) > 0L)}
 
+
+#' @describeIn ndark
+#'
+#' Estimates the number of unobserved (usability) defects.
+#' @param d.obs The observed number of defects.
+#' @param p.obs The chance of observing each defect at least once in the study.
+#'
+#' @return The dark figure (i.e. the number of defects that have been missed).
+#' @export
+#'
+#' @examples
+#' # Example in Sauro & Lewis, p. 155
+#' .ndark(7L, 0.927) #> 7.6
+.ndark <- function(d.obs, p.obs) {
+  total <- d.obs / p.obs
+  black <- total - d.obs
+  return(black)
+}
+
+
+
+#' ndark
+#'
+#' Returns the number of unobserved (usability) defects based on an existing data set.
+#' @details Estimation is done using the binomial model.
+#'
+#' @param dg a problem by participant matrix (e.g. a defect grid object)
+#' for each defect.
+#' @param method Adjustment method used to estimate unobserved defects
+#' (@seealso{estimatePOcc()}).
+#'
+#' @references Lewis (2001). Evaluation of Procedures for Adjusting Problem-Discovery Rates
+#' Estimated From Small Samples. International Journal of Human–Computer Interaction, 13 (4), 445–479
+#' @export
+ndark <- function(dg, method = c("none", "GT", "defl", "both") ) {
+  method <- match.arg(method)
+
+  n <- nrow(dg)
+  p.occ <- estimatePOcc(dg, adj=method)
+  p.obs <- getPObs(p.occ, n)
+  d.obs <- ndefects(dg) # get number of defects
+
+  # compute hidden defects
+  return(.ndark(d.obs, p.obs))
+}

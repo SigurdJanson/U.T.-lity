@@ -16,3 +16,8 @@ A scalar with the number of found defects.
 \description{
 Gets the number of defects found in a test given the problem-by-participant matrix
 }
+\details{
+Defects are not counted if there are no observations (i.e. all
+values in the column are zero) because defects that have not been observed
+are only theoretical.
+}
