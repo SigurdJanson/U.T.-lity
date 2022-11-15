@@ -29,3 +29,22 @@ getPObs <- function(p.occ = 0.31, n) {
   (1 - (1 - p.occ)^n)
 }
 
+
+#' ndefects
+#'
+#' Gets the number of defects found in a test given the problem-by-participant matrix
+#'
+#' @param dg a problem by participant matrix (e.g. a defect grid object).
+#' for each defect.
+#' @details Defects are not counted if there are no observations (i.e. all
+#' values in the column are zero) because defects that have not been observed
+#' are only theoretical.
+#' @return A scalar with the number of found defects.
+#' @export
+ndefects <- function(dg) sum(marginSums(dg, 2L) > 0L)
+
+#'
+#' @return A scalar with the number of found defects.
+#' @export
+ndefects <- function(dg) {sum(marginSums(dg, 2L) > 0L)}
+

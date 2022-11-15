@@ -4,26 +4,15 @@
 \alias{ndefects}
 \title{ndefects}
 \usage{
-ndefects(p.occ = 0.31, n)
+ndefects(dg)
 }
 \arguments{
-\item{p.occ}{Probability of Occurrence: how big is the probability of
-the problems that shall be detected when testing a single user
-(Nielsen, 2000, assumes p.occ = L = 31\%). Numeric scalar between 0 and 1.}
-
-\item{n}{Number of participants of the sample.}
+\item{dg}{a problem by participant matrix (e.g. a defect grid object).
+for each defect.}
 }
 \value{
-Returns the "chance of observing" each defect at least once in the study.
-
-That is not the number of defects you will find. It is merely an estimate
-and the exact number of found defects is a random result.
+A scalar with the number of found defects.
 }
 \description{
-Get the probability to see each defect in a sample at least once.
-}
-\details{
-Number of defects that can be found in a usability test given
-the visibility \code{p.occ} (probability of occurrence) and
-the sample size \code{n}.
+Gets the number of defects found in a test given the problem-by-participant matrix
 }
