@@ -1,176 +1,235 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: U.T.lity 0.0.0.9000\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-09-11 21:54\n"
-"PO-Revision-Date: 2022-09-11 21:55+0200\n"
+"Report-Msgid-Bugs-To: https://github.com/SigurdJanson/U.T.-lity/issues\n"
+"POT-Creation-Date: 2022-11-17 21:34+0100\n"
+"PO-Revision-Date: 2022-11-17 21:55+0100\n"
 "Last-Translator: Jan Seifert <github@sigurdjanson.anonaddy.com>\n"
 "Language-Team: en_GB\n"
 "Language: en_GB\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.1.1\n"
+"X-Generator: Poedit 3.2\n"
 
+#: ci.R:41
 msgid "Confidence intervals require an estimate, a lower and an upper boundary"
 msgstr "Confidence intervals require an estimate, a lower and an upper boundary"
 
+#: ci.R:43
 msgid "Lower boundaries of an interval must be less than upper boundaries"
 msgstr "Lower boundaries of an interval must be less than upper boundaries"
 
+#: ci.R:96
 msgid "x is not a ci-object from U.T.lity"
 msgstr "x is not a ci-object from U.T.lity"
 
+#: ci.R:135
 msgid "Call:"
 msgstr "Call:"
 
+#: ci.R:166
 msgid "Unknown format of argument 'x'"
 msgstr "Unknown format of argument 'x'"
 
+#: ciplot.R:17
 msgid "Not able to determine the type of 'x'"
 msgstr "Not able to determine the type of 'x'"
 
+#: ciplot.R:23
 msgid "not yet implemented"
 msgstr "not yet implemented"
 
+#: ciplot.R:77 ciplot.R:109
 msgid "Upper limits must be greater than the lower ones"
 msgstr "Upper limits must be greater than the lower ones"
 
+#: ciplot.R:126
 msgid "Value"
 msgstr "Value"
 
+#: ciplot.R:127
 msgid "Category"
 msgstr "Category"
 
+#: ciplot.R:128
 msgid "Compare Confidence Intervals"
 msgstr "Compare Confidence Intervals"
 
+#: defectci.R:27
 msgid "Provide a frequency with which the defect occurred"
 msgstr "Provide a frequency with which the defect occurred"
 
+#: defectci.R:29
 msgid "Provide a sample size"
 msgstr "Provide a sample size"
 
+#: defectgrid.R:26
 msgid "Objects must bei either numeric or logical to become a defect grid"
 msgstr "Objects must bei either numeric or logical to become a defect grid"
 
+#: estimatePOcc.R:26
 msgid "Other methods than binomial have not been implemented"
 msgstr "Other methods than binomial have not been implemented"
 
+#: estimatePOcc.R:29
+msgid "Argument 'dg' must be a defect grid or matrix object"
+msgstr "Argument 'dg' must be a defect grid or matrix object"
+
+#: nDefectsPlot.R:50 nDefectsPlot.R:123
 msgid "Number of Subjects"
 msgstr "Number of Participants"
 
+#: nDefectsPlot.R:52 nDefectsPlot.R:124
 msgid "Chance of Observing"
 msgstr "Chance of Observing"
 
+#: nDefectsPlot.R:59
 msgid "Number of colors does not match number of lines"
 msgstr "Number of colors does not match number of lines"
 
+#: nDefectsPlot.R:83 nDefectsPlot.R:125
 msgid "Detection Rate for Usability Problems"
 msgstr "Detection Rate for Usability Problems"
 
+#: nDefectsPlot.R:85 nDefectsPlot.R:126
 msgid "as outlined by Nielsen & Landauer (1993)"
 msgstr "as outlined by Nielsen & Landauer (1993)"
 
+#: nDefectsPlot.R:92
 msgid "Probability"
 msgstr "Probability"
 
+#: nSample_binom.R:21
 msgid "Visibility must be 0 <= p.occ <= 1"
 msgstr "Visibility must be 0 <= p.occ <= 1"
 
-msgid "Visibility must be 0 <= p.obs <= 1"
-msgstr "Visibility must be 0 <= p.obs <= 1"
+#: nSample_binom.R:23
+msgid "Chance of observing must be 0 <= p.obs <= 1"
+msgstr "Chance of observing must be 0 <= p.obs <= 1"
 
+#: nSample_sim_binom.R:56
 msgid "Recommended sample size:"
 msgstr "Provide a sample size"
 
+#: nSample_sim_binom.R:63
 msgid "Smallest sample size meeting the conf. level:"
 msgstr "Smallest sample size meeting the conf. level:"
 
+#: nSample_sim_binom.R:64
 msgid "Lowest before saturation:"
 msgstr "Lowest before saturation:"
 
+#: nSample_sim_binom.R:66
 msgid "Summarized simulation results (in runs)"
 msgstr "Summarized simulation results (in runs)"
 
+#: nSample_sim_binom.R:67
 msgid "Count"
 msgstr "Count"
 
+#: nSample_sim_binom.R:68
 msgid "Meets confidence"
 msgstr "Meets confidence"
 
+#: ndefects.R:24
 msgid "Number of test subjects must be specified and >= 0"
 msgstr "Number of test subjects must be specified and >= 0"
 
+#: ndefects.R:26
 msgid "Probability 'p.occ' must be 0 <= p.occ <= 1"
 msgstr "Probability 'p.occ' must be 0 <= p.occ <= 1"
 
+#: plotsamplesize.R:26
 msgid "Sample size simulation has not converged"
 msgstr "Sample size simulation has not converged"
 
+#: plotsamplesize.R:59
 msgid "Sample Size"
 msgstr "Sample Size"
 
+#: plotsamplesize.R:60
 msgid "Confidence"
 msgstr "Confidence"
 
+#: plotsamplesize.R:61
 msgid "Confidence Depending on Sample Size"
 msgstr "Confidence Depending on Sample Size"
 
+#: plotsamplesize.R:63
 msgid "Sample size required to find"
 msgstr "Sample size required to find"
 
+#: plotsamplesize.R:64
 msgid "% of defects with a confidence of"
 msgstr "% of defects with a confidence of"
 
+#: poissonci.R:53
 msgid "'conf.level' has to be of length 1 (confidence level)"
 msgstr "'conf.level' has to be of length 1 (confidence level)"
 
+#: poissonci.R:55
 msgid "'conf.level' has to be in [0.5, 1]"
 msgstr "'conf.level' has to be in [0.5, 1]"
 
+#: pxpplot.R:26
 msgid "Object cannot be shown as Participant X Problem Plot"
 msgstr "Object cannot be shown as Participant X Problem Plot"
 
+#: pxpplot.R:106
 msgid "'m' must be a defect grid"
 msgstr "'m' must be a defect grid"
 
+#: pxpplot.R:114 pxpplot.R:353
 msgid "The dark figure must be a single positive integer"
 msgstr "The dark figure must be a single positive integer"
 
+#: pxpplot.R:236
 msgid "Incorrect number of axis names"
 msgstr "Incorrect number of axis names"
 
-msgid "Matrix Participant 🞪 Defect"
-msgstr "Matrix Participant 🞪 Defect"
+#: pxpplot.R:289 pxpplot.R:386
+msgid "Matrix Participant \\U1F7AA Defect"
+msgstr "Matrix Participant \\U1F7AA Defect"
 
+#: pxpplot.R:291 pxpplot.R:296 pxpplot.R:384
 msgid "Defect"
 msgstr "Defect"
 
+#: pxpplot.R:292
 msgid "User"
 msgstr "Participant"
 
+#: pxpplot.R:295 pxpplot.R:385
 msgid "Participant"
 msgstr "Participant"
 
+#: pxpplot.R:340
 msgid "Missing columns in data frame 'x'"
 msgstr "Missing columns in data frame 'x'"
 
+#: pxpplot.R:342
 msgid "Data frame is empty"
 msgstr "Data frame is empty"
 
+#: pxpplot.R:344
+#, c-format
 msgid "Cannot process object 'x' of class '%s'"
 msgstr "Cannot process object 'x' of class '%s'"
 
+#: pxpplot.R:390
 msgid "Missed"
 msgstr "Missed"
 
+#: pxpplot.R:391
 msgid "Found"
 msgstr "Found"
 
+#: pxpplot.R:393
 msgid "$Found"
 msgstr "Found"
 
+#: pxpplot.R:396
 msgid "Frequency"
 msgstr "Frequency"
 
