@@ -88,8 +88,10 @@ pxpplot.defectgrid <- function(x, darkfigure = 0L, percentage = TRUE,
 #' @importFrom grDevices colors gray palette
 #' @importFrom graphics axis plot.new plot.window rect title
 #' @examples
+#' \dontrun{
 #' x <- defectgrid_new(matrix(c(1,0,1,0, 0,1,0,1, 0,0,1,1), 3, 4))
 #' pxpplot_gr(x, darkfigure = 3, percentage = FALSE)
+#' }
 pxpplot_gr <- function (x, darkfigure = 0L, percentage = TRUE,
                         names.arg = NULL,
                         horiz = FALSE,

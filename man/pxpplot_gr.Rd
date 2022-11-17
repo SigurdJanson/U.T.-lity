@@ -92,8 +92,10 @@ not necessary to call \code{pxpplot_gg} directly. Call \code{pxpplot()} instead.
 code inspired by \code{\link[=barplot.default]{barplot.default()}}.
 }
 \examples{
+\dontrun{
 x <- defectgrid_new(matrix(c(1,0,1,0, 0,1,0,1, 0,0,1,1), 3, 4))
 pxpplot_gr(x, darkfigure = 3, percentage = FALSE)
+}
 }
 \references{
 Sauro, J. (2012) "Report Usability Issues in a User by Problem Matrix" \url{http://www.measuringusability.com/blog/problem-matrix.php}; retrieved at June 23rd, 2012
