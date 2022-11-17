@@ -20,7 +20,7 @@ nSample_binom <- function(p.occ=0.20, p.obs=0.80, exact=FALSE) {
   if (p.occ < 0 || p.occ > 1)
     stop("Visibility must be 0 <= p.occ <= 1")
   if (p.obs < 0 || p.obs > 1)
-    stop("Visibility must be 0 <= p.obs <= 1")
+    stop("Chance of observing must be 0 <= p.obs <= 1")
 
   #
   result <- log(1 - p.obs) / log(1 - p.occ)

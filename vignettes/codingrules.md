@@ -26,7 +26,26 @@ Plotting functions ideally support `ggplot2` and `graphics` plots. If `ggplot` i
 
 Use translatable string with `gettext("id string")`.
 
-
+```R
+# gather the messages from the code
+potdata <- potools::get_message_data()
+# get package description
+desc_data <- read.dcf(system.file('.', 'DESCRIPTION', package='U.T.lity'), c('Package', 'Version'))
+# create object with meta data for the pot-file header
+pometa  <- potools::po_metadata(
+  package = desc_data[, "Package"], 
+  version = desc_data[, "Version"],
+  language = '', 
+  author = 'Jan Seifert', email = 'github@sigurdjanson.anonaddy.com',
+  bugs = 'https://github.com/SigurdJanson/U.T.-lity/issues'
+)
+# write it all as pot file
+potools::write_po_file(
+  potdata, "./po/R-U.T.lity.pot", pometa,
+  width = 79L, wrap_at_newline = TRUE,
+  use_base_rules = FALSE
+)
+```
 
 ## Names
 
