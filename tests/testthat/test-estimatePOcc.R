@@ -3,15 +3,6 @@
 # P Occurrence =====================
 
 test_that("", {
-  # Sauro & Lewis, table 7.4
-  dg <- matrix(c(1, 1, 1, 1,  1, 1, 1, 1,  0, 0, 0, 0,  1, 1, 1, 1,  0, 0, 1, 0,
-                 1, 1, 1, 0,  1, 0, 0, 1,  1, 1, 0, 0,  0, 0, 0, 0,  0, 0, 0, 0),
-               nrow = 4)
-  result <- estimatePOcc(dg, adj = "none")
-  expect_identical(result, 0.5)
-})
-
-test_that("", {
   # Sauro & Lewis, table 7.5
   dg <- matrix(c(1, 1, 1, 1,  1, 1, 1, 1,  1, 1, 1, 1,  0, 0, 1, 0,
                  1, 1, 1, 0,  1, 0, 0, 1,  1, 1, 0, 0),
