@@ -20,7 +20,13 @@ a whole number of participants. Otherwise it will return the exact result.}
 A sample size for a usability study
 }
 \description{
-nSample_binom
+Gives the sample size to reach the desired \emph{chance of observing} \code{p.obs}
+under the assumption of the visibility \code{p.occ}.
+}
+\details{
+Note that the chance to detect a defect with a probability of x\%
+does not guarantee that you can identify x\% of the defects. If you want more
+certainty, use \code{\link[=nSample_sim_binom]{nSample_sim_binom()}}.
 }
 \examples{
 nSample_binom(0.15, 0.8)

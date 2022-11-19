@@ -1,8 +1,8 @@
 
 #' Confidence Plots
 #'
-#' Draws an illustration of the confidence interval as horizontal chart. To easily verify
-#' overlaps.
+#' Draws an illustration of the confidence interval as horizontal chart. 
+#' To easily verify overlaps.
 #'
 #' @param x An object containing the confidence intervals
 #' @param ... arguments to be passed to/from other methods.

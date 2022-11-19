@@ -3,6 +3,9 @@
 
 #' nSample_binom
 #'
+#' Gives the sample size to reach the desired *chance of observing* `p.obs`
+#' under the assumption of the visibility `p.occ`.
+#'
 #' @param p.occ The assumed probability of occurrence (or visibility) of the
 #' defects in a study.
 #' @param p.obs The desired chance of observing (i.e. the chance to see each
@@ -10,6 +13,9 @@
 #' @param exact if `FALSE` (default) the result will be rounded up to get the
 #' a whole number of participants. Otherwise it will return the exact result.
 #'
+#' @details Note that the chance to detect a defect with a probability of x%
+#' does not guarantee that you can identify x% of the defects. If you want more
+#' certainty, use [nSample_sim_binom()].
 #' @return A sample size for a usability study
 #' @export
 #'

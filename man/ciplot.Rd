@@ -48,8 +48,8 @@ A chart visualising confidence intervals
 Returns a \code{ggplot}
 }
 \description{
-Draws an illustration of the confidence interval as horizontal chart. To easily verify
-overlaps.
+Draws an illustration of the confidence interval as horizontal chart.
+To easily verify overlaps.
 }
 \section{Methods (by class)}{
 \itemize{

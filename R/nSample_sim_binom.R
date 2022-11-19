@@ -73,17 +73,38 @@ print.samplesize <- function(x, ...) {
 
 #' nSample_sim
 #'
+#' Determines the sample size for a usability test. The criterion for this function
+#' is a minimum rate of detection. It will determine the sample size that
+#' "guarantees" the desired rate of detection with the given confidence.
+#'
 #' @param p.occ the visibility of each event.
 #' @param threshold the desired number of events (defects) to find with the
 #' given confidence (`conf.level`).
 #' @param conf.level the confidence level (default 0.95).
 #' @param search.range limit the search to sample sizes in this range
-#' (default `c(3, 99`).
+#' (default `c(3, 99)`).
 #' @param maxiter maximum number of samples to draw.
-#' @param stop reduce the number of iterations
+#' @param stop reduce the number of iterations by using the stop count.
+#' The algorithm will skip further iterations once it received a positive
+#' result for `stop` times in a row.
 #'
-#' @return an object with the classes "samplesize" and "simulation"
-#' (@seealso samplesize).
+#' @details
+#' This function uses a binomial distribution to model the detection of
+#' usability defects. It calculates how many samples from a monte carlo
+#' simulation reach the desired `threshold` for the chance of observing.
+#' If the `threshold` is 85% every simulation sample will marked as
+#' positive if 0.85 (85%) of the defects are found. Then it sums up all samples
+#' and determines if the positive results reach `conf.level` of all samples.
+#'
+#' The function uses a search algorithm to determine the desired sample size.
+#' The arguments `p.occ`, `threshold`, and `conf.level` are requirements to
+#' determine the sample size.
+#' `search.range`, `maxiter`, and `stop` control the search. They affect the
+#' precision of the result. and they only need to be changed when the search
+#' function does not return a valid result.
+#'
+#' @return an object with the classes `samplesize` and `simulation` containing
+#' the simulation result (@seealso samplesize).
 #' It contains the simulation results and recommended sample size.
 #' @export
 #' @importFrom stats rbinom
@@ -92,17 +113,17 @@ print.samplesize <- function(x, ...) {
 nSample_sim_binom <- function(p.occ = 0.31, threshold=0.8, conf.level=0.95,
                               search.range=c(3L, 99L), maxiter=250L, stop=10L) {
   # nmin smallest sample size to start the search
-  nmin <- search.range[1]
+  nmin <- search.range[1L]
   # nmax largest sample size to consider
-  nmax <- search.range[2]
+  nmax <- search.range[2L]
 
   # Create empty vector to contain confidences
   confidence <- double(nmax-nmin)
-  stopcount <- 0
+  stopcount <- 0L
 
   for (s in nmin:nmax) {
     # get iter sample
-    result <- sapply(1:maxiter, \(x) rbinom(n=s, size=1, prob=p.occ))
+    result <- sapply(1:maxiter, \(x) rbinom(n=s, size=1L, prob=p.occ))
     # get percentages of found defects
     percFound <- colSums(result > 0) / nrow(result)
     # get "confidence level" in this sample
@@ -110,9 +131,9 @@ nSample_sim_binom <- function(p.occ = 0.31, threshold=0.8, conf.level=0.95,
     confidence[index] <- mean(percFound > 0)
 
     if (confidence[index] > conf.level)
-      stopcount <- stopcount + 1
+      stopcount <- stopcount + 1L
     else
-      stopcount <- 0
+      stopcount <- 0L
     if (stopcount > stop) {
       confidence <- confidence[1:index]
       break

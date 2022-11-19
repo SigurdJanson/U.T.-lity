@@ -22,19 +22,38 @@ given confidence (\code{conf.level}).}
 \item{conf.level}{the confidence level (default 0.95).}
 
 \item{search.range}{limit the search to sample sizes in this range
-(default \verb{c(3, 99}).}
+(default \code{c(3, 99)}).}
 
 \item{maxiter}{maximum number of samples to draw.}
 
-\item{stop}{reduce the number of iterations}
+\item{stop}{reduce the number of iterations by using the stop count.
+The algorithm will skip further iterations once it received a positive
+result for \code{stop} times in a row.}
 }
 \value{
-an object with the classes "samplesize" and "simulation"
-(@seealso samplesize).
+an object with the classes \code{samplesize} and \code{simulation} containing
+the simulation result (@seealso samplesize).
 It contains the simulation results and recommended sample size.
 }
 \description{
-nSample_sim
+Determines the sample size for a usability test. The criterion for this function
+is a minimum rate of detection. It will determine the sample size that
+"guarantees" the desired rate of detection with the given confidence.
+}
+\details{
+This function uses a binomial distribution to model the detection of
+usability defects. It calculates how many samples from a monte carlo
+simulation reach the desired \code{threshold} for the chance of observing.
+If the \code{threshold} is 85\% every simulation sample will marked as
+positive if 0.85 (85\%) of the defects are found. Then it sums up all samples
+and determines if the positive results reach \code{conf.level} of all samples.
+
+The function uses a search algorithm to determine the desired sample size.
+The arguments \code{p.occ}, \code{threshold}, and \code{conf.level} are requirements to
+determine the sample size.
+\code{search.range}, \code{maxiter}, and \code{stop} control the search. They affect the
+precision of the result. and they only need to be changed when the search
+function does not return a valid result.
 }
 \examples{
 nSample_sim_binom()
