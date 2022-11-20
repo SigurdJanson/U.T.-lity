@@ -44,9 +44,11 @@ The defect discovery rate (DDR) is the **chance of observing** a defect in a stu
 
 ## Found Defects
 
-A common misconception is the confusion of the **chance of observing** with the **percentage of defects found**. Just because we can find each defect with a chance of 80% (at least once) does not necessarily mean that each study will meet that level [@Faulkner2003]. It means that we get 80% across many studies. It means we get 80% *on average*. A single study may yield a lot fewer defects or a lot more.
+A common misconception is the confusion of the **chance of observing** with the **percentage of defects found**. Just because we can find each defect with a chance of 80% (at least once) does not necessarily mean that each study will meet that level [@Faulkner2003]. It means that we get 80% across many many studies. It means we get 80% *on average*. A single study may yield a lot fewer defects or a lot more.
 
 The U.T.-lity package can illustrate how many defects you may really observe. 
+
+> found defects: `n.f`
 
 
 ## Dark Figure
@@ -55,7 +57,7 @@ A researcher can only observe a certain percentage of all the usability defects 
 
 There is a difference between the dark figure before and after the test. Before a test you may plan your sample size to satisfy a desired [defect discovery rate](#ddr). That is not necessarily what you get. The best planning does not nullify a random process. It makes sense to compute your dark figure after the test to get a better understanding of quality.
 
-
+> found defects: `n.h`
 
 
 
@@ -72,13 +74,13 @@ You can investigate that with the `getPObs()` function. Even better is `nDefects
 Note that the visibility of defects differs a lot. @Nielsen1993 reported visibility indices between 16% and 36%. @Sauro2012a [p. 149] reviewed several published papers and found a range from 3% to 46%. The popular rumour that you can find 80% of the problems with 5 users is based on a visibility `p.occ` of 31%. Given the range reported by @Nielsen1993 31% seems rather optimistic. The chart shows the visibilities reported by the authors and how they affect the yield of a study. With a visibility of 16% we do not even find 60% of the defects.
 
 
-```{r}
+```{r DefectsPlot}
 nDefectsPlot(p.occ = c(0.16, 0.28, 0.31, 0.36), subjects = 0:15)
 ```
 
 
 
-### Sample Size to Detect n% of Usability Defects
+### Sample Size to Detect n% of Usability Defects \#\# TODO \#\#
 
 @Sauro2012a: "To use this equation to compute n, we need to have values for p and P(x ≥ 1). The most practical approach is to set p to the lowest value that you realistically expect to be able to find with the available resources (especially the time and money required to run participants in the formative usability study). Set P(x ≥ 1) to the desired goal of the study with respect to p."
 
@@ -95,7 +97,7 @@ I have conducted a test with users. I want to use the frequency of the defects t
 
 Call `defectci()`.
 
-Unfortunately, the confidence intervals are usually extremely wide. In small samples the frequency of a defect is an insufficient measure for severity.
+Unfortunately, in small samples the frequency of a defect is an insufficient measure for severity. The confidence intervals are usually extremely wide. 
 
 
 
@@ -129,6 +131,20 @@ We did several studies in the past. Now we want to identify typical defect visib
 
 # Implementation
 
+@Lewis1992 suggests that the binomial distribution is sufficient to compute the statistics behind usability defects. @Nielsen1993 suggest a poisson distribution. @Schmettow2009 argues that both ignore the variability of the visibility and recommends the logit−normal binomial model with zero−truncation.
+
+For the time being it seems sufficiently adequate to use the binomial distribution [@Sauro2012a]. Yet, this package will try to add further statistical models for everyone to choose their preferred approach, gain more knowledge, and - who knows - maybe someday we are ready for a more complicated and more precise approach. Right now, the binomial model has the advantage of simplicity so that practitioners can easily use it. It yields results that are not as correct than those of other models and we need to be aware of that. 
+
+
+
+
+
+## Defect Grid
+
+The defect grid class (`defectgrid`) is a problem by participant matrix with participants in rows and defects in columns.
+
+
+
 ## ci-Class for Confidence Intervals
 
 All confidence intervals are stored in an S3 class derived from a data frame. See `?ci_new`.
@@ -136,6 +152,22 @@ All confidence intervals are stored in an S3 class derived from a data frame. Se
 
 
 
-# References
+# Appendix
+
+## Variable Names
+
+"Quantifying the user experience" is quite a well-known book. For reference the table below matches the variable names used in this package with the variables in the book. The names in the book cannot be used in code or are not unambiguous enough to be used in the API of a package.
+
+
+| U.T.-lity | QtUX   | Name   |
+|-----------|--------|--------|
+| `nSample` | $n$    | Sample size |
+| `p.occ`   | $p$    | Visibility  |
+| `p.obs`   | $P(x \ge 1)$ | Chance of observing |
+| `n.f`     | $ $ | Found defects |
+| `n.h`     | $ $ | Hidden defects, dark figure |
+
+
+## References
 
 <div id="refs"></div>
