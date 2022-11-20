@@ -3,7 +3,7 @@
 #'
 #' Constructor function to create sample size objects created by simulation.
 #'
-#' @param simresult a vector containing the confidences per sample size.
+#' @param simresult a double vector containing the confidences per sample size.
 #' The length of the vector must match the range of `srange`.
 #' @param conf.level the targeted confidence level.
 #' @param desired.events the targeted proportion of evens/defects that need to
@@ -13,25 +13,42 @@
 #' @param .call the original function call.
 #' @param ... further arguments passed on to other methods.
 #'
+#' @details The function takes the raw simulation results, interprets them and
+#' binds all together to get an object with all information required to replicate
+#' the simulation.
+#'
 #' @return a `samplesize` object.
+#' The object value is an integer with the sample size. The attributes are:
+#' \describe{
+#'   \item{result}{The results vector as provided in `simresult`.}
+#'   \item{conf.level}{The desired confidence to reach.}
+#'   \item{desired}{The targeted proportion of evens/defects that need to
+#' be found with the given confidence.}
+#'   \item{converged}{A logical that is `FALSE` in case the simulation did not converge.}
+#'   \item{search.range}{The search range in which the simulation had been run (`srange`).}
+#'   \item{call}{The function call used to get the simulation result.}
+#' }
 #' @export
 new_samplesim <- function(simresult, conf.level, desired.events, srange, .call, ...) {
+  if (length(simresult) > max(srange) - min(srange) + 1)
+    stop("Result vector 'simresult' does not match the given range 'srange'")
+
   matched <- simresult >= conf.level
 
   runs <- rle(matched)
   lastrun <- length(runs$values)
-  nlowest <- min(srange) + ifelse(runs$values[1L], 0L, runs$lengths[1L])
-  nhigh   <- (length(simresult) + min(srange)) - ifelse(runs$values[lastrun], runs$lengths[lastrun]-1L, -Inf)
+  #-nlowest <- min(srange) + ifelse(runs$values[1L], 0L, runs$lengths[1L])
+  nhigh   <- length(simresult) + min(srange) -
+    ifelse(runs$values[lastrun], runs$lengths[lastrun], -Inf)
 
-  x <- nhigh
-  class(x) <- c("samplesize", "simulation")
-  attr(x, "result") <- simresult
-  attr(x, "conf.level") <- conf.level
-  attr(x, "desired") <- desired.events
-  attr(x, "converged") <- !is.infinite(nhigh)
-  attr(x, "search.range") <- c(min(srange), max(srange))
-  attr(x, "call") <- .call
-
+  x <- structure(nhigh,
+                 class=c("samplesize", "simulation"),
+                 result = simresult,
+                 conf.level = conf.level,
+                 desired = desired.events,
+                 converged = !is.infinite(nhigh),
+                 search.range = c(min(srange), max(srange)),
+                 call = .call)
   return(x)
 }
 
@@ -41,7 +58,7 @@ new_samplesim <- function(simresult, conf.level, desired.events, srange, .call, 
 print.simulation <- function(x, ...) NextMethod("print")
 
 
-#' @describeIn new_samplesim
+#' @describeIn new_samplesim method for sample sizes estimated by simulation
 #'
 #' @param x A `samplesize` object
 #' @param ... further arguments passed on to other methods.
@@ -50,7 +67,7 @@ print.simulation <- function(x, ...) NextMethod("print")
 #' @export
 print.samplesize <- function(x, ...) {
   if (!attr(x, "converged")) {
-    print("Sample size simulation has not converged")
+    cat("Sample size simulation has not converged")
   }
 
   cat(paste0(gettext("Recommended sample size: "), as.integer(x)), "\n") #", quote = FALSE)
