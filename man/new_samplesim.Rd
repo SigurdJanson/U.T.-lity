@@ -13,7 +13,7 @@ new_samplesim(simresult, conf.level, desired.events, srange, .call, ...)
 \method{print}{samplesize}(x, ...)
 }
 \arguments{
-\item{simresult}{a vector containing the confidences per sample size.
+\item{simresult}{a double vector containing the confidences per sample size.
 The length of the vector must match the range of \code{srange}.}
 
 \item{conf.level}{the targeted confidence level.}
@@ -32,16 +32,31 @@ was made.}
 }
 \value{
 a \code{samplesize} object.
+The object value is an integer with the sample size. The attributes are:
+\describe{
+\item{result}{The results vector as provided in \code{simresult}.}
+\item{conf.level}{The desired confidence to reach.}
+\item{desired}{The targeted proportion of evens/defects that need to
+be found with the given confidence.}
+\item{converged}{A logical that is \code{FALSE} in case the simulation did not converge.}
+\item{search.range}{The search range in which the simulation had been run (\code{srange}).}
+\item{call}{The function call used to get the simulation result.}
+}
 
 prints \code{x} and returns it invisibly.
 }
 \description{
 Constructor function to create sample size objects created by simulation.
 }
+\details{
+The function takes the raw simulation results, interprets them and
+binds all together to get an object with all information required to replicate
+the simulation.
+}
 \section{Functions}{
 \itemize{
 \item \code{print(simulation)}: method for sample sizes estimated by simulation
 
-\item \code{print(samplesize)}: 
+\item \code{print(samplesize)}: method for sample sizes estimated by simulation
 
 }}

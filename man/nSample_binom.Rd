@@ -4,7 +4,7 @@
 \alias{nSample_binom}
 \title{nSample_binom}
 \usage{
-nSample_binom(p.occ = 0.2, p.obs = 0.8, exact = FALSE)
+nSample_binom(p.occ = 0.31, p.obs = 0.8, exact = FALSE)
 }
 \arguments{
 \item{p.occ}{The assumed probability of occurrence (or visibility) of the

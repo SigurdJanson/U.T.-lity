@@ -21,7 +21,7 @@
 #'
 #' @examples
 #' nSample_binom(0.15, 0.8)
-nSample_binom <- function(p.occ=0.20, p.obs=0.80, exact=FALSE) {
+nSample_binom <- function(p.occ=0.31, p.obs=0.80, exact=FALSE) {
   # PRECONDITIONS
   if (p.occ < 0 || p.occ > 1)
     stop("Visibility must be 0 <= p.occ <= 1")
