@@ -7,18 +7,17 @@ test_that("", {
   dg <- matrix(c(1, 1, 1, 1,  1, 1, 1, 1,  1, 1, 1, 1,  0, 0, 1, 0,
                  1, 1, 1, 0,  1, 0, 0, 1,  1, 1, 0, 0),
                nrow = 4)
-  result <- estimatePOcc(dg, adj = "none")
+  result <- estPOcc(dg, adj = "none")
   expect_equal(result, 5/7)
 
-  result <- estimatePOcc(dg, adj = "defl")
+  result <- estPOcc(dg, adj = "defl")
   expect_equal(result, 0.345, tolerance=0.01)
 
-  result <- estimatePOcc(dg, adj = "GT")
+  result <- estPOcc(dg, adj = "GT")
   expect_equal(result, 0.621, tolerance=0.01)
 
-  result <- estimatePOcc(dg, adj = "both")
+  result <- estPOcc(dg, adj = "both")
   expect_equal(result, 0.483, tolerance=0.01)
-
 })
 
 

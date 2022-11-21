@@ -11,7 +11,7 @@ estPObs(dg, estp.occ)
 with the same structure.}
 
 \item{estp.occ}{an estimate of the visibility of an event.
-See \code{\link[=estimatePOcc]{estimatePOcc()}}}
+See \code{\link[=estPOcc]{estPOcc()}}}
 }
 \value{
 An estimate of the chance of observing.

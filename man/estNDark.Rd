@@ -18,7 +18,7 @@ estNDark(dg, method = c("none", "GT", "defl", "both"))
 for each defect.}
 
 \item{method}{Adjustment method used to estimate unobserved defects
-(@seealso{estimatePOcc()}).}
+(see also \code{\link[=estPOcc]{estPOcc()}}).}
 }
 \value{
 The dark figure (i.e. the number of defects that have been missed).

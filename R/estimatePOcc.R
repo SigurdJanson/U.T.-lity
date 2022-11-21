@@ -1,15 +1,16 @@
 
 
-#' estimatePOcc
+#' estPOcc
+#' @description Estimate the visibility of usability defects from a data set.
 #'
 #' @param dg A problem by participant matrix. A defect grid object or matrix
 #' with the same structure.
 #' @param method Currently only "binom".
-#' @param adj An adjustment method for small sample sizes. See @seealso{adjustPOcc()}.
+#' @param adj An adjustment method for small sample sizes. See [adjustPOcc()].
 #'
 #' @return An estimate of the visibility.
 #' @details
-#' The function ignores empty columns with only zeroes.
+#' `estPOcc` function ignores empty columns with only zeroes.
 #'
 #' Estimating the visibility `p.occ` from a sample can be tricky. Simply
 #' averaging it from a sample can substantially overestimate it's value
@@ -20,13 +21,13 @@
 #' Hertzum, M., & Jacobsen, N. J. (2001). The evaluator effect: A chilling
 #' fact about usability evaluation methods. International Journal of
 #' Human–Computer Interaction, 13, 421–443.
-estimatePOcc <- function(dg, method = c("binom"), adj = c("none", "GT", "defl", "both")) {
+estPOcc <- function(dg, method = c("binom"), adj = c("none", "GT", "defl", "both")) {
   method <- match.arg(method)
   if(method != "binom")
     stop("Other methods than binomial have not been implemented")
 
   if (!is.matrix(dg))
-    stop("Argument 'dg' must be a defect grid or matrix object") #TODO: need error message
+    stop("Argument 'dg' must be a defect grid or matrix object")
 
   # Determine for subjects across how many defects each subject stumbled
   DefectsPerSubj <- margin.table(dg > 0, 1L)
@@ -50,7 +51,7 @@ estimatePOcc <- function(dg, method = c("binom"), adj = c("none", "GT", "defl", 
 
 
 
-#' @describeIn estimatePOcc Estimating the visibility of events from a
+#' @describeIn estPOcc Estimating the visibility of events from a
 #' sample may considerably overestimate it's value when samples are small.
 #' Small samples 20 participants have a bias that can result in substantial
 #' overestimation of its value.
@@ -94,9 +95,9 @@ adjustPOcc <- function(p, nSample, Ntotal, N1, adj = c("GT", "defl", "both")) {
 #'
 #' Estimate the chance of observing from a sample.
 #'
-#' @inheritParams estimatePOcc
+#' @inheritParams estPOcc
 #' @param estp.occ an estimate of the visibility of an event.
-#' See [estimatePOcc()]
+#' See [estPOcc()]
 #'
 #' @return An estimate of the chance of observing.
 #' @export

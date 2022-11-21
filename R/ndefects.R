@@ -73,7 +73,7 @@ ndefects <- function(dg) sum(marginSums(dg, 2L) > 0L)
 #' @param dg a problem by participant matrix (e.g. a defect grid object)
 #' for each defect.
 #' @param method Adjustment method used to estimate unobserved defects
-#' (@seealso{estimatePOcc()}).
+#' (see also [estPOcc()]).
 #'
 #' @references Lewis (2001). Evaluation of Procedures for Adjusting Problem-Discovery Rates
 #' Estimated From Small Samples. International Journal of Human–Computer Interaction, 13 (4), 445–479
@@ -82,7 +82,7 @@ estNDark <- function(dg, method = c("none", "GT", "defl", "both") ) {
   method <- match.arg(method)
 
   n <- nrow(dg)
-  p.occ <- estimatePOcc(dg, adj=method)
+  p.occ <- estPOcc(dg, adj=method)
   p.obs <- getPObs(p.occ, n)
   d.obs <- ndefects(dg) # get number of defects
 
