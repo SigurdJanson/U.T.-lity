@@ -2,8 +2,8 @@
 % Please edit documentation in R/nDefectsPlot.R
 \name{nDefectsPlot}
 \alias{nDefectsPlot}
-\alias{nDefectsPlot_gr}
 \alias{nDefectsPlot_gg}
+\alias{nDefectsPlot_gr}
 \title{nDefectsPlot}
 \usage{
 nDefectsPlot(
@@ -15,6 +15,8 @@ nDefectsPlot(
   ...
 )
 
+nDefectsPlot_gg(p.occ = 0.31, subjects = 0:15, growth = FALSE, col = NULL, ...)
+
 nDefectsPlot_gr(
   p.occ = 0.31,
   subjects = 0:15,
@@ -23,8 +25,6 @@ nDefectsPlot_gr(
   las = 1,
   ...
 )
-
-nDefectsPlot_gg(p.occ = 0.31, subjects = 0:15, growth = FALSE, col = NULL, ...)
 }
 \arguments{
 \item{p.occ}{Probability of Occurrence: how big is the probability of the
@@ -40,15 +40,16 @@ that shows the growth from one sample size to the next.}
 
 \item{lib}{draws the plot either with \code{ggplot2} or \code{graphics}.}
 
-\item{...}{Further arguments handed over to the plotting function. For \code{plot()} this
+\item{...}{further arguments handed over to the plotting function. For \code{plot()} this
 could be e.g. \code{las = 1}.}
 
 \item{las}{style of axis labels, see \code{\link[graphics:par]{graphics::par()}}.}
 }
 \description{
 Returns a plot that shows the probability to detect each usability
-defect as a function of the number of test participants. This chart
-is well-known from Nielsens AlertBox "Why You Only Need to Test with 5 Users" (2000).
+defect (at least once) as a function of the number of test participants.
+This type of chart is well-known from Nielsens AlertBox "Why You Only
+Need to Test with 5 Users" (2000).
 }
 \details{
 Without any arguments the function provides the chart from Nielsens AlertBox
@@ -56,8 +57,8 @@ Without any arguments the function provides the chart from Nielsens AlertBox
 }
 \section{Functions}{
 \itemize{
-\item \code{nDefectsPlot_gr()}: Variant to plot with the \code{graphics} library.
+\item \code{nDefectsPlot_gg()}: Defects plot with the \code{ggplot2} library.
 
-\item \code{nDefectsPlot_gg()}: Variant to plot with the \code{ggplot2} library.
+\item \code{nDefectsPlot_gr()}: Alternative to plot with the \code{graphics} library.
 
 }}

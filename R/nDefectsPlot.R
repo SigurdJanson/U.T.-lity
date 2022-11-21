@@ -2,8 +2,9 @@
 #' nDefectsPlot
 #'
 #' Returns a plot that shows the probability to detect each usability
-#' defect as a function of the number of test participants. This chart
-#' is well-known from Nielsens AlertBox "Why You Only Need to Test with 5 Users" (2000).
+#' defect (at least once) as a function of the number of test participants.
+#' This type of chart is well-known from Nielsens AlertBox "Why You Only
+#' Need to Test with 5 Users" (2000).
 #'
 #' @param p.occ Probability of Occurrence: how big is the probability of the
 #' problems that can be detected when testing a single user (default: p.occ = L = 31%, as
@@ -13,11 +14,12 @@
 #' that shows the growth from one sample size to the next.
 #' @param col see [graphics::par()]. Must be as long as there are lines to draw.
 #' @param lib draws the plot either with `ggplot2` or `graphics`.
-#' @param ... Further arguments handed over to the plotting function. For `plot()` this
+#' @param ... further arguments handed over to the plotting function. For `plot()` this
 #' could be e.g. `las = 1`.
 #' @details Without any arguments the function provides the chart from Nielsens AlertBox
 #' (Nielsen, 2000).
 #' @export
+#' @order 1
 nDefectsPlot <- function (p.occ = 0.31, subjects = 0:15, growth = FALSE,
                              col = NULL, lib = c("ggplot", "graphics"),
                              ...) {
@@ -31,11 +33,12 @@ nDefectsPlot <- function (p.occ = 0.31, subjects = 0:15, growth = FALSE,
 
 
 
-#' @describeIn nDefectsPlot Variant to plot with the `graphics` library.
+#' @describeIn nDefectsPlot Alternative to plot with the `graphics` library.
 #' @param las style of axis labels, see [graphics::par()].
 #' @export
 #' @importFrom grDevices rainbow
 #' @importFrom graphics grid legend lines mtext
+#' @order 3
 nDefectsPlot_gr <- function (p.occ = 0.31, subjects = 0:15, growth = FALSE,
                                 col = NULL, las = 1, ...) {
   .args <- list(...)
@@ -99,36 +102,34 @@ nDefectsPlot_gr <- function (p.occ = 0.31, subjects = 0:15, growth = FALSE,
 
 
 
-#' @describeIn nDefectsPlot Variant to plot with the `ggplot2` library.
+#' @describeIn nDefectsPlot Defects plot with the `ggplot2` library.
 #' @export
 #' @importFrom ggplot2 scale_colour_manual
 #' @importFrom scales percent
+#' @order 2
 nDefectsPlot_gg <- function(p.occ = 0.31, subjects = 0:15, growth=FALSE,
                             col = NULL, ...) {
   .args <- list(...)
   nlines <- length(p.occ)
 
   dt <- data.frame(
-    subjects = rep(subjects, length(p.occ)),
+    subjects = rep(subjects, nlines),
     p.obs = as.vector(sapply(p.occ, \(x) getPObs(p.occ=x, subjects))),
     p.occ = rep(p.occ, each=length(subjects))
   )
 
-  p <- ggplot(dt, aes(x = .data$subjects, y = .data$p.obs,
-                      group = as.factor(.data$p.occ),
-                      color = as.factor(.data$p.occ))) +
-         geom_line(aes(color=p.occ)) + geom_point(aes(color=p.occ), size=1) +
+  p <- ggplot(dt, aes(x = subjects, y = p.obs,
+                      group = factor(p.occ), color = factor(p.occ))) +
+         geom_point(size=1L) + geom_line() +
          scale_y_continuous(labels = scales::percent) +
          labs(
            x = gettext("Number of Subjects"),
            y = paste(gettext("Chance of Observing"), "(%)"),
+           color = gettext("Visibility"),
            title = gettext("Detection Rate for Usability Problems"),
            caption = gettext("as outlined by Nielsen & Landauer (1993)"))
   if (.isAlive(col))
     p <- p + scale_colour_manual(values=col)
-  # else
-  #   p <- p + scale_color_binned(n.breaks=length(p.occ)) #breaks = as.character(p.occ), values = my.cols)
-  # if (length(p.occ) > 1)
-  #   p +=
+
   return(p)
 }

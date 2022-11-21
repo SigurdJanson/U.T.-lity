@@ -69,7 +69,7 @@ There is a difference between the dark figure before and after the test. Before 
 
 What is a realistic expectation for a "yield rate" of a usability study? How many problems can we find with different sample sizes?
 
-You can investigate that with the `getPObs()` function. Even better is `nDefectsPlot()` that visualises the results in a chart. It shows how many usability defects you may find with a given number of subjects. But first you need to decide on the visibility of usability defects. If you have prior knowledge from previous tests, use these data to estimate typical visibilities of your product.
+You can investigate that with the `getPObs()` function. Even better is `nDefectsPlot()` that visualises the results in a chart. It shows the probability for the usability defects to be found at least once with a given number of subjects. But first you need to decide on the visibility of usability defects. If you have prior knowledge from previous tests, use these data to estimate typical visibilities of your product.
 
 Note that the visibility of defects differs a lot. @Nielsen1993 reported visibility indices between 16% and 36%. @Sauro2012a [p. 149] reviewed several published papers and found a range from 3% to 46%. The popular rumour that you can find 80% of the problems with 5 users is based on a visibility `p.occ` of 31%. Given the range reported by @Nielsen1993 31% seems rather optimistic. The chart shows the visibilities reported by the authors and how they affect the yield of a study. With a visibility of 16% we do not even find 60% of the defects.
 
