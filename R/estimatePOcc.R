@@ -54,9 +54,11 @@ estPOcc <- function(dg, method = c("binom"), adj = c("none", "GT", "defl", "both
 #' @describeIn estPOcc Estimating the visibility of events from a
 #' sample may considerably overestimate it's value when samples are small.
 #' Small samples 20 participants have a bias that can result in substantial
-#' overestimation of its value.
+#' overestimation of its value. If you call `estPOcc` with an argument
+#' `adj` other than `none`, `estPOcc` will adjust already by calling this
+#' function.
 #'
-#' @param p an non-adjusted estimate of the visibility of an event.
+#' @param p.occ a non-adjusted estimate of the visibility of an event.
 #' @param nSample the sample size.
 #' @param Ntotal the total number of events (e.g. usability defects).
 #' @param N1 the number of events occurring only once.
@@ -73,16 +75,16 @@ estPOcc <- function(dg, method = c("binom"), adj = c("none", "GT", "defl", "both
 #' and Human Factors (2 ed., Vol. 3, pp. 3084–3088). CRC Press.
 #' @export
 #' @keywords internal
-adjustPOcc <- function(p, nSample, Ntotal, N1, adj = c("GT", "defl", "both")) {
+adjustPOcc <- function(p.occ, nSample, Ntotal, N1, adj = c("GT", "defl", "both")) {
   .gt <- function(.p, .Ntotal, .N1) .p / (1 + .N1/.Ntotal)
-  .defl <- function(.p, .nSample) (p - 1/nSample) * (1 - 1/nSample)
+  .defl <- function(.p, .nSample) (.p - 1/nSample) * (1 - 1/nSample)
 
   adj <- match.arg(adj)
   if (!.isAlive(adj)) adj <- "both"
   result <- switch(adj,
-        GT = .gt(p, Ntotal, N1),
-        defl = .defl(p, nSample),
-        both = (.gt(p, Ntotal, N1) + .defl(p, nSample)) / 2
+        GT = .gt(p.occ, Ntotal, N1),
+        defl = .defl(p.occ, nSample),
+        both = (.gt(p.occ, Ntotal, N1) + .defl(p.occ, nSample)) / 2
   )
   return(result)
 }
@@ -136,55 +138,5 @@ estPObs <- function(dg, estp.occ) {
 #'     Correct.pDefect(p.obs, n, d.unique = length(defects[defects==1]), d.total = length(defects), method)
 #'   }
 #' }
-
-
-
-#' #' Correct.pDefect
-#' #'
-#' #' Correct pDefect (the probability of a usability defect to become evident)
-#' #' based on uncorrected pDefect. `pDefect` can be corrected for undetected
-#' #' problems using the specified method.
-#' #'
-#' #' @param p.obs Uncorrected probability of a usability defect to become evident
-#' #' @param n Number of independent test sessions
-#' #' @param d.unique Defects that have been observed only once
-#' #' @param d.total Total number of observed defects
-#' #' @param method Method used to estimate unobserved defects
-#' Correct.pDefect <- function( p.obs, n = 0, d.unique = 0, d.total = 0, method = c("mixed", "good-turing", "normal", "none") )
-#' {
-#'   method <- match.arg(method)
-#'
-#'   if(method == "mixed")
-#'   { 	## correction using an average of normalization and good-turing
-#'     if(n == 0) stop("Mixed adjustment requires the number of independent test sessions (n)")
-#'     if(d.unique == 0) stop("Mixed adjustment requires the number of unique usability defects (d.unique)")
-#'     if(d.total == 0) stop("Mixed adjustment requires the total number of usability defects (d.total)")
-#'     if(d.total < d.unique) stop("The total number of defects (d.total) must be greater than the unique ones (d.unique)")
-#'
-#'     p.n <- (p.obs - 1/n) * (1 - 1/n)
-#'     gt <- d.unique / d.total
-#'     p.gt <- p.obs / (1+gt)
-#'     return( (p.n+p.gt)/2 )
-#'   }
-#'   if(method == "good-turing")
-#'   { 	## correction using Good-Turing adjustment (E(N1)/N) (Lewis, 2001)
-#'     if(d.unique == 0) stop("Good-Turing adjustment requires the number of unique usability defects (d.unique)")
-#'     if(d.total == 0) stop("Good-Turing adjustment requires the total number of usability defects (d.total)")
-#'     if(d.total < d.unique) stop("The total number of defects (d.total) must be greater than the unique ones (d.unique)")
-#'
-#'     gt <- d.unique / d.total
-#'     p.gt <- p.obs / (1+gt)
-#'     return( p.gt )
-#'   }
-#'   if(method == "normal")
-#'   { 	## correction using Normalization
-#'     if(n == 0) stop("Normalization requires the number of independent test sessions (n)")
-#'
-#'     p.n <- (p.obs - 1/n) * (1 - 1/n)
-#'     return( p.n )
-#'   }
-#'   if(method == "none") p.obs
-#' }
-
 
 
