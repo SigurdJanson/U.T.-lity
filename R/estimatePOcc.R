@@ -90,6 +90,21 @@ adjustPOcc <- function(p, nSample, Ntotal, N1, adj = c("GT", "defl", "both")) {
 
 
 
+#' estPObs
+#'
+#' Estimate the chance of observing from a sample.
+#'
+#' @inheritParams estimatePOcc
+#' @param estp.occ an estimate of the visibility of an event.
+#' See [estimatePOcc()]
+#'
+#' @return An estimate of the chance of observing.
+#' @export
+estPObs <- function(dg, estp.occ) {
+  getPObs(estp.occ, nrow(dg))
+}
+
+
 # This could be a second method to estimate `p.occ`.
 #' #' pDefect
 #' #'
