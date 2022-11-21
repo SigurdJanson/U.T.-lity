@@ -27,7 +27,7 @@ test_that("example in QTUX works", {
   if (ndef != 7L)
     fail("Input for test is wrong (ndef)")
 
-  result <- ndark(dg, "both")
+  result <- estNDark(dg, "both")
   expected <- 0.52259722271383157732 # 7.6 - ndef # value from the book cannot be used because of rounding errors
   expect_equal(result, expected)
 })
@@ -38,7 +38,7 @@ test_that("case study example 1 in QTUX (p. 156) works", {
                                 0,0,1, 0,0,1, 0,0,1), 3L, 6L, byrow = FALSE))
 
   expected <- 12.23093 # The 13 in the book does not work because of rounding errors
-  result <- ndark(dg, "both")
+  result <- estNDark(dg, "both")
   expect_equal(result, expected, tolerance=1E-6)
 })
 

@@ -45,7 +45,7 @@ ndefects <- function(dg) sum(marginSums(dg, 2L) > 0L)
 
 
 
-#' @describeIn ndark
+#' @describeIn estNDark
 #'
 #' Estimates the number of unobserved (usability) defects.
 #' @param d.obs The observed number of defects.
@@ -65,7 +65,7 @@ ndefects <- function(dg) sum(marginSums(dg, 2L) > 0L)
 
 
 
-#' ndark
+#' estNDark
 #'
 #' Returns the number of unobserved (usability) defects based on an existing data set.
 #' @details Estimation is done using the binomial model.
@@ -78,7 +78,7 @@ ndefects <- function(dg) sum(marginSums(dg, 2L) > 0L)
 #' @references Lewis (2001). Evaluation of Procedures for Adjusting Problem-Discovery Rates
 #' Estimated From Small Samples. International Journal of Human–Computer Interaction, 13 (4), 445–479
 #' @export
-ndark <- function(dg, method = c("none", "GT", "defl", "both") ) {
+estNDark <- function(dg, method = c("none", "GT", "defl", "both") ) {
   method <- match.arg(method)
 
   n <- nrow(dg)

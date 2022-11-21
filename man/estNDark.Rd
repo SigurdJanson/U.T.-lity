@@ -2,12 +2,12 @@
 % Please edit documentation in R/ndefects.R
 \name{.ndark}
 \alias{.ndark}
-\alias{ndark}
-\title{ndark}
+\alias{estNDark}
+\title{estNDark}
 \usage{
 .ndark(d.obs, p.obs)
 
-ndark(dg, method = c("none", "GT", "defl", "both"))
+estNDark(dg, method = c("none", "GT", "defl", "both"))
 }
 \arguments{
 \item{d.obs}{The observed number of defects.}
