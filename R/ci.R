@@ -142,19 +142,23 @@ print.ci <- function(x, dropInf = TRUE, ...) {
 
 #' ci.numeric
 #'
-#' Tests if a value `xi` is inside the confidence interval around the mean of the given
+#' Tests if a value `mu` is inside the confidence interval around the mean of the given
 #' sample `x`.
 #'
-#' @param x a (non-empty) numeric vector of data values or a list of vectors.
+#' @param x a (non-empty) numeric vector of data values or a list
+#' of such vectors.
 #' @param mu an assumed true value µ of the mean to test against.
+#' Values will be replicated if there are more data sets `x` than
+#' elements of `mu`.
 #' @param conf.level confidence level of the interval.
 #' @param plot TRUE if the result should be plotted.
 #' @details
 #' If x is a list of vectors `ci` will use the names of the list to
 #' label the plot.
 #'
-#' This function is a wrapper for [t.test()].
-#' @return A data frame that lists the confidence intervals
+#' This function performs a one-sample [t.test()] and returns the
+#' confidence interval. See [t.test()] for more information.
+#' @return A `ci` object containing the confidence intervals.
 #' @export
 #' @importFrom stats t.test
 #' @examples
