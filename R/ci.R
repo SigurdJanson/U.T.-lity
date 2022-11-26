@@ -151,11 +151,7 @@ print.ci <- function(x, dropInf = TRUE, ...) {
 #' Values will be replicated if there are more data sets `x` than
 #' elements of `mu`.
 #' @param conf.level confidence level of the interval.
-#' @param plot TRUE if the result should be plotted.
 #' @details
-#' If x is a list of vectors `ci` will use the names of the list to
-#' label the plot.
-#'
 #' This function performs a one-sample [t.test()] and returns the
 #' confidence interval. See [t.test()] for more information.
 #' @return A `ci` object containing the confidence intervals.
@@ -164,7 +160,7 @@ print.ci <- function(x, dropInf = TRUE, ...) {
 #' @examples
 #' ci.numeric(rnorm(15, 3.7, 1.8), 4.4)
 #' ci.numeric(list(a=rnorm(15, 3.7, 1.8), f=rnorm(15, 3.7, 1.8)), c(4.4, 4.6), plot=FALSE)
-ci.numeric <- function(x, mu, conf.level = 0.95, plot=TRUE) {
+ci.numeric <- function(x, mu, conf.level = 0.95) {
   if (is.atomic(x))
     x <- list(x)
   if (!is.list(x)) stop("Unknown format of argument 'x'")
@@ -196,11 +192,5 @@ ci.numeric <- function(x, mu, conf.level = 0.95, plot=TRUE) {
                    .mthd = test$method,
                    .call = deparse(match.call()))
   return(result)
-
-  # provide a graphical representation of the intervals
-  if (plot)
-    ciplot_default(result$lower, result$upper, names(means))
-
-  result
 }
 
