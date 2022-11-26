@@ -160,8 +160,8 @@ print.ci <- function(x, dropInf = TRUE, ...) {
 #' @examples
 #' ci.numeric(rnorm(15, 3.7, 1.8), 4.4)
 #' ci.numeric(list(a=rnorm(15, 3.7, 1.8), f=rnorm(15, 3.7, 1.8)), c(4.4, 4.6), plot=FALSE)
-ci.numeric <- function(x, mu, conf.level = 0.95) {
-  if (is.atomic(x))
+ci.numeric <- function(x, mu = 0, conf.level = 0.95) {
+  if (is.numeric(x))
     x <- list(x)
   if (!is.list(x)) stop("Unknown format of argument 'x'")
   # replicate mu when necessary for equal length
