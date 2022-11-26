@@ -84,11 +84,15 @@ is.ci <- function(x)
 #' @param x an object of class `ci`.
 #' @param dropInf drops upper/lower columns with `Inf` values for one-sided
 #' intervals. Ignored when alternative hypothesis is two-sided.
+#' @param scientific Either a logical specifying whether elements of a
+#' real or complex vector should be encoded in scientific format, or an
+#' integer penalty (see [options("scipen")]). Missing values correspond
+#' to the current default penalty.
 #' @param ... further arguments passed on to `print.data.frame()`.
 #'
 #' @return Returns `x` invisibly.
 #' @export
-print.ci <- function(x, dropInf = TRUE, ...) {
+print.ci <- function(x, dropInf = TRUE, scientific = FALSE, ...) {
   .prettyPerc <- function(x)
     paste0(format(x*100, digits=3, drop0trailing=TRUE), "%")
 
@@ -132,8 +136,16 @@ print.ci <- function(x, dropInf = TRUE, ...) {
     }
   }
 
+  if (isFALSE(scientific))
+    oldopt <- options(scipen = 100L)
+  if (is.numeric(scientific))
+    oldopt <- options(scipen = scientific)
+
   cat(gettext("Call:"), attr(x, "call"), "\n")
-  print.data.frame(px, ...)
+  print.data.frame(px, digits, ...)
+
+  if (exists("oldopt"))
+    options(oldopt)
 
   invisible(x)
 }
