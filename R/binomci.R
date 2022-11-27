@@ -7,10 +7,12 @@
 #' @param ... Further arguments passed on to the `ci`-generating function. these are foremost:
 #' `conf.level`, `alternative`, and `method`. See `binom::binom.confint()`.
 #' @note Based on a recommendation by Brown, Cai, and DasGupta (2001)
-#' `binomci` uses the Wilson method (Wilson, 1927) by default (even if Sauro and Lewis, 2005,
-#' recommend the adjusted Wald).
+#' `binomci` uses the Wilson method (Wilson, 1927) by default.
 #' @return A `ci` object containing the observed proportions
 #' and the lower and upper bounds of the confidence interval around them.
+#' @references Wilson, E. B. (1927). Probable Inference, the Law of Succession,
+#' and Statistical Inference. Journal of the American Statistical Association, 22 (158),
+#' 209–212. https://doi.org/10.2307/2276774
 #' @export
 #' @importFrom binom binom.confint
 #' @examples
