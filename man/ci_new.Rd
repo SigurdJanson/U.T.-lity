@@ -10,7 +10,7 @@ ci_new(.est, .lower, .upper, .lvl, .alt, .dstr, .mthd, .call, ...)
 
 is.ci(x)
 
-\method{print}{ci}(x, dropInf = TRUE, ...)
+\method{print}{ci}(x, dropInf = TRUE, scientific = FALSE, ...)
 }
 \arguments{
 \item{.est}{a vector of estimates.}
@@ -35,6 +35,11 @@ is.ci(x)
 
 \item{dropInf}{drops upper/lower columns with \code{Inf} values for one-sided
 intervals. Ignored when alternative hypothesis is two-sided.}
+
+\item{scientific}{Either a logical specifying whether elements of a
+real or complex vector should be encoded in scientific format, or an
+integer penalty (see \link{options("scipen")}). Missing values correspond
+to the current default penalty.}
 }
 \value{
 A \code{ci} object derived from a data frame with the columns \code{est}, \code{lower}, \code{upper},
