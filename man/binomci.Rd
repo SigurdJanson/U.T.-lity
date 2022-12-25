@@ -21,11 +21,19 @@ and the lower and upper bounds of the confidence interval around them.
 \description{
 binomci
 }
+\details{
+The \code{method} argument allows only a single value (though \code{binom.confint()}
+would accept several arguments at the same time).
+}
 \note{
 Based on a recommendation by Brown, Cai, and DasGupta (2001)
-\code{binomci} uses the Wilson method (Wilson, 1927) by default (even if Sauro and Lewis, 2005,
-recommend the adjusted Wald).
+\code{binomci} uses the Wilson method (Wilson, 1927) by default.
 }
 \examples{
 binomci(0:5, 10)
+}
+\references{
+Wilson, E. B. (1927). Probable Inference, the Law of Succession,
+and Statistical Inference. Journal of the American Statistical Association, 22 (158),
+209–212. https://doi.org/10.2307/2276774
 }

@@ -15,8 +15,8 @@ test_that("sample cases work", {
 
   # reliabilityanalyticstoolkit.appspot.com/binomial_confidence_solution
   result <- binomci(4, 20, conf.level=0.99)
-  expect_equal(result$lower[1], 0.03575611114501953125, tolerance=0.05)
-  expect_equal(result$upper[1], 0.50660800933837890625, tolerance=0.05)
+  expect_equal(result$lower[1], 0.03575611114501953125, tolerance=0.0375)
+  expect_equal(result$upper[1], 0.50660800933837890625, tolerance=0.0375)
 
   # stattools.crab.org/Calculators/binomialConfidence.htm
   result <- binomci(758, 10003, conf.level=0.80)
@@ -50,14 +50,16 @@ test_that("one-sided intervals are correct for confidence=95%", {
     # Act
     result <- binomci(x = .x, n = .n, conf.level = .cl, alternative=as.character(.alt))
     # Assert
-    expect_equal(c(result$lower[1], result$upper[1]), .exp, tolerance=0.07234375, label=paste(testrow, " - ", .alt))
+    expect_equal(c(result$lower[1], result$upper[1]), .exp, tolerance=1E-7, label=paste(testrow, " - ", .alt))
+    expect_equal(attr(result, "alternative"), as.character(.alt))
   }
 })
 
 
 
+## ARGUMENT HANDLING ###########
 
-test_that("... confidence width grows with growing 'conf.level'", {
+test_that("confidence width grows with growing 'conf.level'", {
   .levels <- c(0.60, 0.70, 0.80, 0.90, 0.99)
 
   # Act
@@ -73,3 +75,44 @@ test_that("... confidence width grows with growing 'conf.level'", {
 
 
 
+test_that("different methods give different results", {
+  x <- 3
+  n <- 8
+
+  # print(MKinfer::binomCI(3, 8, method="wilson")$conf.int, digits=20)
+  expect_equal(binomci(x, n, method="wilson")$lower, 0.13684428582359736692)
+  expect_equal(binomci(x, n, method="wilson")$upper, 0.69425760539737257915)
+
+  # print(MKinfer::binomCI(3, 8, method="clopper")$conf.int, digits=20)
+  expect_equal(binomci(x, n, method="exact")$lower, 0.085233414137253563081)
+  expect_equal(binomci(x, n, method="exact")$upper, 0.75513678363344838296)
+
+  # print(MKinfer::binomCI(3, 8, method="logit")$conf.int, digits=20)
+  expect_equal(binomci(x, n, method="logit")$lower, 0.12540845310773368615)
+  expect_equal(binomci(x, n, method="logit")$upper, 0.71515002164082153158)
+})
+
+
+
+test_that("multiple methods are not accepted", {
+  # No error
+  expect_error(binomci(5, 10, conf.level=0.9, method=c("asymptotic")),
+               NA)
+  # Error
+  expect_error(binomci(5, 10, conf.level=0.9, method=c("asymptotic", "logit")),
+               "binomci allows only a single method at a time")
+})
+
+
+test_that("changing alternatives changes the result", {
+  result.twosided <- binomci(4, 12)
+  result.less <- binomci(4, 12, alternative="less")
+  expect_identical(result.less$lower, 0)
+  expect_lt(result.less$upper, result.twosided$upper)
+
+
+  result.twosided <- binomci(4, 12)
+  result.greater <- binomci(4, 12, alternative="greater")
+  expect_identical(result.greater$upper, 1)
+  expect_gt(result.greater$lower, result.twosided$lower)
+})

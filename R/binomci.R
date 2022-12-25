@@ -6,6 +6,8 @@
 #' @param n number of independent trials in the test.
 #' @param ... Further arguments passed on to the `ci`-generating function. these are foremost:
 #' `conf.level`, `alternative`, and `method`. See `binom::binom.confint()`.
+#' @details The `method` argument allows only a single value (though `binom.confint()`
+#' would accept several arguments at the same time).
 #' @note Based on a recommendation by Brown, Cai, and DasGupta (2001)
 #' `binomci` uses the Wilson method (Wilson, 1927) by default.
 #' @return A `ci` object containing the observed proportions
@@ -20,9 +22,9 @@
 binomci <- function(x, n, ...) {
   .args <- list(...)
 
-  if ("conf.level" %in% ...names())
+  if ("conf.level" %in% ...names()) {
     conf.level <- .args[["conf.level"]]
-  else
+  } else
     conf.level <- .args[["conf.level"]] <- 0.95
 
   if ("alternative" %in% ...names()) {
@@ -33,15 +35,20 @@ binomci <- function(x, n, ...) {
 
   if ("method" %in% ...names()) {
     method <- .args[["method"]]
+    if (length(method) > 1) stop("binomci allows only a single method at a time")
   } else {
     method <- .args[["method"]] <- "wilson"
   }
+  # correct arg name because `binom.confint` does not comply with API
+  names(.args)[names(.args) == "method"] <- "methods"
 
   # if 1-sided, convert 1-sided confidence to 2-sided by doubling it
-  if (alternative != .alternative["two.sided"])
-    conf.level <- 1 - ((1 - conf.level) * 2)
+  if (alternative != .alternative["two.sided"]) {
+    #conf.level <- 1 - ((1 - conf.level) * 2)
+    .args[["conf.level"]] <- 1 - ((1 - conf.level) * 2)
+  }
 
-  ci <- do.call(binom.confint, args=c(list(x=x, n=n, tol=1e-8), .args))
+  ci <- do.call(binom.confint, args=c(list(x=x, n=n), .args))
 
   result <- ci_new(x,
                    if (alternative == .alternative["less"]) 0 else ci["lower"],
