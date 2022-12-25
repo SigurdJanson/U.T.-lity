@@ -47,8 +47,6 @@ poissonci <- function(x, n = 1, conf.level = 0.95,
     if(sides != .alternative["two.sided"])
       conf.level <- 1 - 2*(1-conf.level)
 
-    if(missing(method)) method <- "score"
-
     if(length(conf.level) != 1)
       stop("'conf.level' has to be of length 1 (confidence level)")
     if(conf.level < 0.5 | conf.level > 1)
