@@ -4,29 +4,28 @@
 \alias{ci.numeric}
 \title{ci.numeric}
 \usage{
-ci.numeric(x, mu, conf.level = 0.95, plot = TRUE)
+ci.numeric(x, mu = 0, conf.level = 0.95)
 }
 \arguments{
-\item{x}{a (non-empty) numeric vector of data values or a list of vectors.}
+\item{x}{a (non-empty) numeric vector of data values or a list
+of such vectors.}
 
-\item{mu}{an assumed true value µ of the mean to test against.}
+\item{mu}{an assumed true value µ of the mean to test against.
+Values will be replicated if there are more data sets \code{x} than
+elements of \code{mu}.}
 
 \item{conf.level}{confidence level of the interval.}
-
-\item{plot}{TRUE if the result should be plotted.}
 }
 \value{
-A data frame that lists the confidence intervals
+A \code{ci} object containing the confidence intervals.
 }
 \description{
-Tests if a value \code{xi} is inside the confidence interval around the mean of the given
+Tests if a value \code{mu} is inside the confidence interval around the mean of the given
 sample \code{x}.
 }
 \details{
-If x is a list of vectors \code{ci} will use the names of the list to
-label the plot.
-
-This function is a wrapper for \code{\link[=t.test]{t.test()}}.
+This function performs a one-sample \code{\link[=t.test]{t.test()}} and returns the
+confidence interval. See \code{\link[=t.test]{t.test()}} for more information.
 }
 \examples{
 ci.numeric(rnorm(15, 3.7, 1.8), 4.4)

@@ -9,7 +9,11 @@
 
 ## S3 Objects
 
-S3 classes from this package carry the specific class (i.e. `ci` or `defectgrid`) and the extra class `U.T.lity` to identify the class from this package.
+S3 classes from this package carry the specific class (i.e. `ci` or `defectgrid`) and the extra class `U.T.lity` to identify the class from this package. Check inheritance from the package with
+
+```R
+if (!inherits(x, "U.T.lity")) stop("'x' is of type 'ci' but not from package 'U.T.lity'.")
+```
 
 * One code file contains the basic definition with ...
   * a constructor function `*_new()` which also describes the class.
@@ -52,8 +56,8 @@ potools::write_po_file(
 ### Functions
 
 * Computations based on basic theoretical formulas start with `get...()`. Functions calculating sample characteristics also start with `get...()`.
-* Estimating values from data samples start with `estimate...()`.
-* Most functions take a problem-by-participant matrix to compute a result. Sometimes a more basic function is available. It requires that the user can provide specific parameters while the more general function derives those parameters from the problem-by-participant matrix. These specific functions have the same name with a leading `.`. Example: `ndark(dg, ...)` and `.ndark(...)`.
+* Estimating values from data samples start with `est...()` for "estimate".
+* Most functions take a problem-by-participant matrix to compute a result. Sometimes a more basic function is available. It requires that the user can provide specific parameters while the more general function derives those parameters from the problem-by-participant matrix. These specific functions have the same name with a leading `.`. Example: `estNDark(dg, ...)` and `.ndark(...)`.
 
 
 ### Argument Names
