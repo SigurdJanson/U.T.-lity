@@ -38,7 +38,7 @@ poissonci <- function(x, n = 1, conf.level = 0.95,
   if(missing(alternative)) alternative <- .alternative["two.sided"]
 
 
-  iPoissonCI <- function(x, n = 1, conf.level = 0.95, sides = c("two.sided", "less", "greater"),
+  iPoissonCI <- function(x, n = 1L, conf.level = 0.95, sides = c("two.sided", "less", "greater"),
                          method = c("exact", "score", "wald", "byar")) {
 
     # see also: pois.conf.int {epitools}
@@ -47,7 +47,7 @@ poissonci <- function(x, n = 1, conf.level = 0.95,
     if(sides != .alternative["two.sided"])
       conf.level <- 1 - 2*(1-conf.level)
 
-    if(length(conf.level) != 1)
+    if(length(conf.level) != 1L)
       stop("'conf.level' has to be of length 1 (confidence level)")
     if(conf.level < 0.5 | conf.level > 1)
       stop("'conf.level' has to be in [0.5, 1]")
@@ -84,9 +84,9 @@ poissonci <- function(x, n = 1, conf.level = 0.95,
 
     ci <- c( est=lambda, lwr.ci=lwr.ci, upr.ci=upr.ci )
 
-    if(sides=="left")
+    if(sides=="less")
       ci[3] <- Inf # upr.ci
-    else if(sides=="right")
+    else if(sides=="greater")
       ci[2] <- -Inf # lwr.ci
 
     return(ci)
@@ -99,10 +99,10 @@ poissonci <- function(x, n = 1, conf.level = 0.95,
   lgp <- lapply(lst, rep, length.out=maxdim) # recycle all params to maxdim
 
   # Compute
-  res <- sapply(1:maxdim, \(i) iPoissonCI(x=lgp$x[i], n=lgp$n[i],
+  res <- sapply(1L:maxdim, \(i) iPoissonCI(x=lgp$x[i], n=lgp$n[i],
                                           conf.level=conf.level,
                                           sides=alternative,
                                           method=method))
-  ci_new(res[1,], res[2,], res[3,],
+  ci_new(res[1L,], res[2L,], res[3L,],
          conf.level, alternative, "poisson", method, deparse(match.call()))
 }
