@@ -70,7 +70,7 @@ test_that("non-convergion is identified", {
 
   result <- new_samplesim(input, conf.level = 0.95, desired.events = 0.801,
                           srange = c(1L, 5L), .call = "TESTRUN")
-  expect_identical(as.vector(result), -Inf)
+  expect_identical(as.vector(result), Inf)
   expect_false(attr(result, "converged"))
 })
 
