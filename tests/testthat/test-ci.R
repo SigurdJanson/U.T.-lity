@@ -41,7 +41,7 @@ test_that("ci.numeric works with specific example, conf.level=.95", {
   dt <- dataset$set1
 
   # Act
-  result <- ci.numeric(dt, 105, plot=FALSE)
+  result <- ci.numeric(dt, 105)
 
   # Assert
   expect_equal(result$est[1], 102, tolerance = 0.005)
@@ -61,7 +61,7 @@ test_that("ci.numeric works with specific example, conf.level != .95", {
   dt <- dataset$set2
 
   # Act
-  result <- ci.numeric(dt, 105, conf.level = 0.98, plot=FALSE)
+  result <- ci.numeric(dt, 105, conf.level = 0.98)
 
   # Assert
   expect_equal(result$est[1],  64.75, tolerance = 0.005)
@@ -79,13 +79,13 @@ test_that("ci.numeric works with specific example, conf.level != .95", {
 
 test_that("ci.numeric works with two vectors and varying 'mu'", {
   # Act
-  result <- ci.numeric(dataset, 105, conf.level = 0.95, plot=FALSE)
+  result <- ci.numeric(dataset, 105, conf.level = 0.95)
   # Assert
   expect_true(result$inside[1])
   expect_false(result$inside[2])
 
   # Act
-  result <- ci.numeric(dataset, c(110, 60), conf.level = 0.95, plot=FALSE)
+  result <- ci.numeric(dataset, c(110, 60), conf.level = 0.95)
   # Assert
   expect_false(result$inside[1])
   expect_true(result$inside[2])
