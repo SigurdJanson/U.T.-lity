@@ -71,9 +71,9 @@
     return(FALSE)
 
   if (is.atomic(x)) {
-    return(!all(is.na(x) | !nzchar(x) | is.infinite(x)))
+    return(!all(is.na(x) | !nzchar(x))) # | is.infinite(x)
   } else if (is.list(x)) {
-    dead <- is.na(x) | !nzchar(x) | sapply(x, .is.infinite) | sapply(x, \(y) length(y) == 0)
+    dead <- is.na(x) | !nzchar(x) | sapply(x, \(y) length(y) == 0) #| sapply(x, .is.infinite)
     return(!all(dead))
   }
 
