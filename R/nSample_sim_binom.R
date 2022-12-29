@@ -37,7 +37,6 @@ new_samplesim <- function(simresult, conf.level, desired.events, srange, .call, 
 
   runs <- rle(matched)
   lastrun <- length(runs$values)
-  #-nlowest <- min(srange) + ifelse(runs$values[1L], 0L, runs$lengths[1L])
   nhigh   <- length(simresult) + min(srange) -
     ifelse(runs$values[lastrun], runs$lengths[lastrun], -Inf)
 
@@ -127,7 +126,7 @@ print.samplesize <- function(x, ...) {
 #' @importFrom stats rbinom
 #' @examples
 #' nSample_sim_binom()
-nSample_sim_binom <- function(p.occ = 0.31, threshold=0.8, conf.level=0.95,
+nSample_sim_binom <- function(p.occ=0.31, threshold=0.8, conf.level=0.95,
                               search.range=c(3L, 99L), maxiter=250L, stop=10L) {
   # nmin smallest sample size to start the search
   nmin <- search.range[1L]
@@ -156,8 +155,6 @@ nSample_sim_binom <- function(p.occ = 0.31, threshold=0.8, conf.level=0.95,
       break
     }
   }
-
-  # plot(nmin:nmax, confidence)
 
   return(
     new_samplesim(confidence, conf.level, threshold, search.range, .call=deparse(match.call()))
