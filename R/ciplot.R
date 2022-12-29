@@ -1,7 +1,7 @@
 
 #' Confidence Plots
 #'
-#' Draws an illustration of the confidence interval as horizontal chart. 
+#' Draws an illustration of the confidence interval as horizontal chart.
 #' To easily verify overlaps.
 #'
 #' @param x An object containing the confidence intervals
@@ -12,15 +12,23 @@ ciplot <- function(x, ...) UseMethod("ciplot")
 
 
 
-#' @describeIn ciplot ...
+#' @describeIn ciplot merely throws an exception when there is no
+#' specific implementation for the class of `x`.
 #' @export
 ciplot.default <- function(x, ...) stop("Not able to determine the type of 'x'")
 
 
 
-#' @describeIn ciplot ...
+#' @describeIn ciplot plot the confidence intervals given by the `ci` object `x`
+#' (as provided by the U.T.lity package).
 #' @export
-ciplot.ci <- function(x, ...) stop("not yet implemented") #TODO
+ciplot.ci <- function(x, ...) {
+  if (!inherits(x, "U.T.lity")) stop("'x' is of type 'ci' but not from package 'U.T.lity'.")
+  ciplot_default(
+    lower=x$lower,
+    upper=x$upper, ...
+  )
+}
 
 
 
@@ -85,7 +93,7 @@ ciplot_gr <- function(lower, upper, names=NA, ...) {
   bottom <- lower - (width * 0.05)
   h <- rbind(lower, width, top)
 
-  # TODO: make sure that users can overwrite thos arguments below
+  # TODO: make sure that users can overwrite those arguments below
   #  by using `...`
 
   barplot(h, width = 1,

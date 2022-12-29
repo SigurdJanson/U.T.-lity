@@ -53,9 +53,11 @@ To easily verify overlaps.
 }
 \section{Methods (by class)}{
 \itemize{
-\item \code{ciplot(default)}: ...
+\item \code{ciplot(default)}: merely throws an exception when there is no
+specific implementation for the class of \code{x}.
 
-\item \code{ciplot(ci)}: ...
+\item \code{ciplot(ci)}: plot the confidence intervals given by the \code{ci} object \code{x}
+(as provided by the U.T.lity package).
 
 \item \code{ciplot(htest)}: Plot the result of a call to \code{\link[=t.test]{t.test()}}.
 

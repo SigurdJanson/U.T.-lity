@@ -1,3 +1,14 @@
+
+# INHERITANCE =======================
+test_that("ggplot is generated and is printable", {
+  ci_input <- t.test(1:10, y = c(7:20))
+  result <- ciplot(ci_input, lib = "ggplot")
+  #expect_s3_class(result, c("gg", "ggplot"))
+  expect_true(ggplot2::is.ggplot(result))
+  #expect_error(print(result), NA)
+})
+
+
 # PLOT CONFIDENCE ===================
 
 test_that("Base CI plot works for lib=graphics", {
