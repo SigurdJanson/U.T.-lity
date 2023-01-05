@@ -1,3 +1,5 @@
+# tests for 'defectgrid.R'
+
 # defectgrid_new =============
 
 test_that("'defectgrid_new()' creates an object that is still recognised as matrix", {
@@ -69,35 +71,3 @@ test_that("matrix is not denied by 'is.defectgrid()'", {
 })
 
 
-#
-# pxpplot_gr ===========
-
-test_that("4 regular columns work", {
-
-  # Act
-  dg <- defectgrid_new(matrix(c(1,0,1,0, 0,1,0,1, 0,0,1,1), 3, 4))
-  result <- pxpplot_gr(dg, percentage=TRUE )
-
-  # Assert
-  expect_identical(
-    result,
-    matrix(c(21,1,21, 21,21,1, 12,1,1, 1,12,1),
-           nrow=3L, dimnames = list(NULL, c(1, 4, 2, 3)))
-  )
-})
-
-
-
-test_that("...adding 3 columns of darkfigures works", {
-
-  # Act
-  dg <- defectgrid_new(matrix(c(1,0,1,0, 0,1,0,1, 0,0,1,1), 3, 4))
-  result <- pxpplot_gr( dg, darkfigure=3, percentage=TRUE )
-
-  # Assert
-  expect_identical(
-    result,
-    matrix(c(21,1,21, 21,21,1, 11,1,1, 1,11,1, 1,1,1, 1,1,1, 1,1,1),
-           nrow=3L, dimnames = list(NULL, c(1, 4, 2, 3, 5, 6, 7)))
-  )
-})
